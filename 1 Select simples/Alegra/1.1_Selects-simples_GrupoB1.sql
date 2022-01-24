@@ -125,7 +125,13 @@ Nombres de espacios y volumen
 pero como volumen una etiqueta que indique 
 'BAJO' si es menor a 10, 'ALTO' si es mayor a 1000
 y 'MEDIO' si está entre medias
-*/
+*/select
+    name,   
+    case    when volume<10 then 'BAJO'
+            when volume >1000 then 'ALTO'
+            else 'MEDIO'
+    end "VOLUMEN"
+from spaces;
 
 /* 26
 Nombre, fecha de instalación, fecha de garantia
