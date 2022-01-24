@@ -4,11 +4,11 @@
 /* 1
 Describir la tabla floors
 */
-
+desc floors;
 /* 2
 Describir la tabla spaces
 */
-
+desc spaces;
 /* 3
 Datos de la tabla components
 */
@@ -63,7 +63,8 @@ ordenados por id de espacio descendentemente.
 /* 15
 Id, código de activo, GUID, número de serie y nombre de los componentes del facility 1 
 ordenados por código de activo descendentemente.
-*/SELECT 
+*/
+SELECT 
     id, 
     assetidentifier "codigo", 
     externalidentifier "GUID",
@@ -83,6 +84,11 @@ Las distintas fechas de instalación de los componentes
 de los espacios con id 10, 12, 16, 19 
 ordenadas descendentemente.
 */
+SELECT distinct
+    to_char(installatedon,'yyyy-mm-dd')
+    from components
+    where spaceid in (10,12,16,19)
+order by 1 desc;
 
 /* 18
 Nombre, volumen, de los espacios
