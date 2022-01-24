@@ -135,7 +135,14 @@ Nombre, fecha de instalación, fecha de garantia
 de los componentes del facility 1
 que tienen fecha de garantia
 */
-
+select
+    name,
+    installatedon,
+    warrantystarton,
+    facilityid
+from components
+where facilityid = 1
+    and warrantystarton is not null;
 /* 27
 Lista de nombres de espacio que su id no es 4, 9, ni 19
 del floorid 1
