@@ -8,17 +8,15 @@ desc floors;
 /* 2
 Describir la tabla spaces
 */
-fxdhdbzvfxbzvf
-
+CAROLINA ESPABILA CARAJO 
 /* 3
 Datos de la tabla components
 */
 CAROLINA ESPABILA CARAJO 
-
 /* 4
 Datos de la tabla component_types
 */
-
+CAROLINA ESPABILA CARAJO 
 /* 5
 Id, nombre de los facilities
 */
