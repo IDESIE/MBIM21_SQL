@@ -13,6 +13,7 @@ fxdhdbzvfxbzvf
 /* 3
 Datos de la tabla components
 */
+CAROLINA ESPABILA CARAJO 
 
 /* 4
 Datos de la tabla component_types
