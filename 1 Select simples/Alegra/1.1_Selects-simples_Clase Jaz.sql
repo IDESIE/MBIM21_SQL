@@ -132,7 +132,14 @@ pero como volumen una etiqueta que indique
 'BAJO' si es menor a 10, 'ALTO' si es mayor a 1000
 y 'MEDIO' si está entre medias
 */
-
+SELECT
+    name,
+    case
+        when volume<10 then 'BAJO'
+        when volume >1000 then 'ALTO'
+        else 'MEDIO'
+    end "Volumen"
+from spaces;
 /* 26
 Nombre, fecha de instalación, fecha de garantia
 de los componentes del facility 1
@@ -169,6 +176,9 @@ del facility 1
 Lista de los tipos de componentes que tienen en el nombre un guión bajo
 del facility 1
 */
-
+SELECT
+    name
+from component_types
+where name like '%\_%' escape '\';
 --
 ------------------------------------------------------------------------------------------------
