@@ -160,6 +160,9 @@ del facility 1
 Lista de los tipos de componentes que tienen en el nombre un guión bajo
 del facility 1
 */
-
+SELECT 
+   lower(name) 
+from component_types 
+where name LIKE '%m_%' escape'm'
 --
 ------------------------------------------------------------------------------------------------
