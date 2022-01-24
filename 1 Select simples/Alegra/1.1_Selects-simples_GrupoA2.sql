@@ -8,6 +8,7 @@ desc floors;
 /* 2
 Describir la tabla spaces
 */
+fxdhdbzvfxbzvf
 
 /* 3
 Datos de la tabla components
