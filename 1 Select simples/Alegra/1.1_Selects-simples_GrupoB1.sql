@@ -173,6 +173,10 @@ del facility 1
 Lista de los tipos de componentes que tienen en el nombre un guión bajo
 del facility 1
 */
-
+select
+    name
+from component_types
+where name like '%\_%' escape '\'; /* escape hace que el caracter que colocas, sirve para decir en el name like 
+que el carater que colocamos es literal, no un comodin*/ 
 --
 ------------------------------------------------------------------------------------------------
