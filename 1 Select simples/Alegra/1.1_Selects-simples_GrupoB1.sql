@@ -83,7 +83,10 @@ Las distintas fechas de instalación de los componentes
 de los espacios con id 10, 12, 16, 19 
 ordenadas descendentemente.
 */
-
+select distinct /*selecciona solo las columnas que son diferentes*/ to_char(installatedon,'yyyy-mm-dd')
+from components
+where spaceid in (10,12,16,19)
+order by 1 desc;
 /* 18
 Nombre, volumen, de los espacios
 cuyo volumen es mayor a 90 de floorid = 1
