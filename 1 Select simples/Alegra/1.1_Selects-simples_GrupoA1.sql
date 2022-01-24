@@ -4,7 +4,7 @@
 /* 1
 Describir la tabla floors
 */
-holahola
+desc floors; HOLAHOLAf
 /* 2
 Describir la tabla spaces
 */
