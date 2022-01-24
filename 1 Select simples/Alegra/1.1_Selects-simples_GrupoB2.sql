@@ -30,10 +30,7 @@ level facility floorid;
 
 /* 7
 Nombre, area bruta, volumen de los espacios
-*/name,
-grossarea,
-
-
+*/
 
 /* 8
 Nombre, vida útil de los tipos de componentes del facility 1
@@ -47,10 +44,7 @@ listando los */
 
 /* 10
 Nombre, número de modelo del tipo de componente con id = 60
-*/Name,
-Serialnumber
-FROM Components
-where ID = 60;
+*/
 
 /* 11
 Nombre y fecha de instalación de los componentes del espacio 60 ordenados descendentemente por la fecha de instalación
@@ -73,6 +67,11 @@ ordenados por id de espacio descendentemente.
 Id, código de activo, GUID, número de serie y nombre de los componentes del facility 1 
 ordenados por código de activo descendentemente.
 */
+select id, ASSETIDENTIFIER "codigo", EXTERNALIDENTIFIER "GUID",
+    serialnumber, name
+from components
+where FACILITYID = 1
+order by ASSETIDENTIFIER desc;
 
 /* 16
 Códigos de activo de los componentes del espacio con id 21
@@ -84,6 +83,11 @@ Las distintas fechas de instalación de los componentes
 de los espacios con id 10, 12, 16, 19 
 ordenadas descendentemente.
 */
+select distinct /*comentario*/
+to_char(INSTALLATEDON,'yyyy-mm-dd')
+from components
+where spaceid in (10,12,16,19)
+order by 1 desc;
 
 /* 18
 Nombre, volumen, de los espacios
@@ -127,12 +131,23 @@ pero como volumen una etiqueta que indique
 'BAJO' si es menor a 10, 'ALTO' si es mayor a 1000
 y 'MEDIO' si está entre medias
 */
-
+select 
+    name,
+    case 
+        when volume <10 then 'BAJO'
+        when volume > 1000 then 'ALTO'
+        else 'MEDIO'
+    end "volumen"
+from spaces;
 /* 26
 Nombre, fecha de instalación, fecha de garantia
 de los componentes del facility 1
 que tienen fecha de garantia
 */
+select name, INSTALLATEDON, WARRANTYSTARTON, facilityid
+from components
+where facilityid = 1
+and WARRANTYSTARTON in not null;
 
 /* 27
 Lista de nombres de espacio que su id no es 4, 9, ni 19
