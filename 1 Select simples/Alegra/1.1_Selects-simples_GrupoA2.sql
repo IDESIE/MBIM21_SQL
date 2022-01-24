@@ -64,6 +64,11 @@ ordenados por id de espacio descendentemente.
 Id, código de activo, GUID, número de serie y nombre de los componentes del facility 1 
 ordenados por código de activo descendentemente.
 */
+select id, ASSETIDENTIFIER "CODIGO", EXTERNALIDENTIFIER "GUID",
+ SERIALNUMBER, NAME
+from components
+where FACILITYID = 1
+ORDER BY ASSETIDENTIFIER DESC;
 
 /* 16
 Códigos de activo de los componentes del espacio con id 21
@@ -75,6 +80,10 @@ Las distintas fechas de instalación de los componentes
 de los espacios con id 10, 12, 16, 19 
 ordenadas descendentemente.
 */
+select to_char (installatedon,'yyyy-mm-dd'), spaceid
+from components
+where spaceid in (10, 12, 16, 19)
+order by 1 desc;
 
 /* 18
 Nombre, volumen, de los espacios
