@@ -7,27 +7,33 @@ Describir la tabla floors
 DESC FLOORS;
 /* 2
 Describir la tabla spaces
-*/
-DESC SPACES;
+*/id,
+name,
+level,
+grossarea,
+spaces;
 /* 3
 Datos de la tabla components
-*/
+*/table data components;
 
 /* 4
 Datos de la tabla component_types
-*/
+*/table data component_types;
 
 /* 5
 Id, nombre de los facilities
-*/
-
+*/name facilities;
 /* 6
 Nombre, elevación e id del facility de las plantas
-*/
+*/name facility floorid;
+level facility floorid;
 
 /* 7
 Nombre, area bruta, volumen de los espacios
-*/
+*/name,
+grossarea,
+
+
 
 /* 8
 Nombre, vida útil de los tipos de componentes del facility 1
