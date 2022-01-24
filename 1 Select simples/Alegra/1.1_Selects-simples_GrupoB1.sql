@@ -72,6 +72,7 @@ select
 from components
 where facilityid = 1
 order by assetidentifier desc;
+
 /* 16
 Códigos de activo de los componentes del espacio con id 21
 ordenados por código de activo descendentemente.
