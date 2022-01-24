@@ -63,7 +63,15 @@ ordenados por id de espacio descendentemente.
 Id, código de activo, GUID, número de serie y nombre de los componentes del facility 1 
 ordenados por código de activo descendentemente.
 */
-
+select 
+    id,
+    assetidentifier "Codigo",
+    externalidentifier "GUID",
+    serialnumber,
+    name
+from components
+where facilityid = 1
+order by assetidentifier desc;
 /* 16
 Códigos de activo de los componentes del espacio con id 21
 ordenados por código de activo descendentemente.
