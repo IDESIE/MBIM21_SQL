@@ -4,38 +4,56 @@
 /* 1
 Describir la tabla floors
 */
-DESC FLOORS;
+ SELECT id, name, 
+ CATEGORY, DESCRIPTION, 
+ ELEVATION, HEIGHT, 
+ CREATEDAT, CREATORID, 
+ FACILITYID 
+ from floors;
+
 /* 2
 Describir la tabla spaces
-*/id,
-name,
-level,
-grossarea,
-spaces;
+*/
+ SELECT ID, NAME,
+CATEGORY, DESCRIPTION,
+ROOMTAG, USABLEHEIGHT,
+GROSSAREA, NETAREA,
+VOLUME,CREATEDAT,
+CREATORID,FLOORID
+ from spaces;
+
 /* 3
 Datos de la tabla components
-*/table data components;
+*/
 
 /* 4
 Datos de la tabla component_types
-*/table data component_types;
+*/
 
 /* 5
 Id, nombre de los facilities
-*/name facilities;
+*/
+SELECT name
+from facilities;
+
 /* 6
 Nombre, elevación e id del facility de las plantas
-*/name facility floorid;
-level facility floorid;
+*/
+SELECT ID, NAME, ELEVATION
+from floors;
 
 /* 7
 Nombre, area bruta, volumen de los espacios
 */
+SELECT name, GROSSAREA, VOLUME
+from spaces;
 
 /* 8
 Nombre, vida útil de los tipos de componentes del facility 1
 */
-
+select name, phase
+from facilities
+where lower (name) like '%colegio alegra%';
 /* 9
 Nombre de los espacios de la Planta 1 del facility 1
 */
@@ -45,7 +63,9 @@ listando los */
 /* 10
 Nombre, número de modelo del tipo de componente con id = 60
 */
-
+select name
+from component_types
+where id = 60;
 /* 11
 Nombre y fecha de instalación de los componentes del espacio 60 ordenados descendentemente por la fecha de instalación
 */
