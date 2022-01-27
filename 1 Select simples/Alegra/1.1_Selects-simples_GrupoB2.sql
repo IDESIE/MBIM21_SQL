@@ -117,7 +117,10 @@ Listar los distintos GUIDs de los componentes del facility 1 ordenados ascendent
 Id, código de activo, GUID, número de serie y nombre de los componentes cuyo spaceid está entre 10 y 27 inclusive
 ordenados por id de espacio descendentemente.
 */
-
+select ID, spaceid, assetidentifier "CODIGO DE ACTIVO", externalidentifier "GUID", serialnumber, name
+from components
+where spaceid between 10 and 27
+order by spaceid desc;
 /* 15
 Id, código de activo, GUID, número de serie y nombre de los componentes del facility 1 
 ordenados por código de activo descendentemente.
