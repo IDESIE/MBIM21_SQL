@@ -157,7 +157,10 @@ AND FLOORID= 1;
 /* 23
 Lista de espacios que su segunda letra es una 's' donde floorid = 1
 */
-
+SELECT NAME, FLOORID
+FROM SPACES
+WHERE NAME LIKE '_s%'
+AND FLOORID= 1;
 /* 24
 Lista de tipos de componente del facility 1 
 donde el nombre contiene el texto 'con'
