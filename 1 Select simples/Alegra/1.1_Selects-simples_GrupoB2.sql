@@ -135,7 +135,10 @@ order by ASSETIDENTIFIER desc;
 Códigos de activo de los componentes del espacio con id 21
 ordenados por código de activo descendentemente.
 */
-
+select assetidentifier "CODIGO DE ACTIVO"
+from components
+where spaceid= 21
+order by 1 desc;
 /* 17
 Las distintas fechas de instalación de los componentes 
 de los espacios con id 10, 12, 16, 19 
