@@ -69,6 +69,10 @@ where id = 60;
 /* 11
 Nombre y fecha de instalación de los componentes del espacio 60 ordenados descendentemente por la fecha de instalación
 */
+select name, installatedon
+from components
+where spaceid= 60
+order by installatedon desc;
 
 /* 12
 Listar las distintas fechas de instalación de los componentes del facility 1 ordenados descendentemente.
