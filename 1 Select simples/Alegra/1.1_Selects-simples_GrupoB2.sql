@@ -216,7 +216,10 @@ del floorid 1
 /* 28
 Lista de espacios que no son Aula del floorid = 1
 */
-
+SELECT NAME, FLOORID
+FROM SPACES
+WHERE NAME not like 'Aula%'
+AND FLOORID= 1;
 /* 29
 Lista de los tipos de componentes que tienen duracion de la garantia de las partes
 del facility 1
