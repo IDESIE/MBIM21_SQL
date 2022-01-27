@@ -155,18 +155,29 @@ Nombre, volumen, de los espacios
 cuyo volumen es mayor a 90 de floorid = 1
 ordenados por volumen descendentemente
 */
-
+select name, volume, floorid
+from spaces
+where volume >90
+and floorid=1
+order by volume desc;
 /* 19
 Nombre, volumen de los espacios
 cuyo volumen es mayor a 6 y menor a 9 de la planta con id = 1
 */
-
+select name, volume, floorid
+from spaces
+where volume >6 and volume <9
+and floorid=1;
 /* 20
 Nombre, código de activo, número de serie de los componentes
 que no tengan espacio del facility 1
 ordenados descendentemente por código de activo
 */
-
+select name, assetidentifier "CODIGO DE ACTIVO", serialnumber, spaceid, facilityid
+from components
+where spaceid is NULL 
+and facilityid=1
+order by assetidentifier desc;
 /* 21
 Nombre, código de activo, número de serie de los componentes
 que tengan número de serie del facility 1
