@@ -92,6 +92,7 @@ Nombre, número de modelo del tipo de componente con id = 60
 select name
 from component_types
 where id = 60;
+
 /* 11
 Nombre y fecha de instalación de los componentes del espacio 60 ordenados descendentemente por la fecha de instalación
 */
@@ -107,6 +108,7 @@ SELECT INSTALLATEDON,FACILITYID
 FROM COMPONENTS
 WHERE FACILITYID= 1
 ORDER BY INSTALLATEDON DESC;
+
 /* 13
 Listar los distintos GUIDs de los componentes del facility 1 ordenados ascendentemente por fecha de garantía.
 */
@@ -171,6 +173,7 @@ SELECT NAME, FLOORID
 FROM SPACES
 WHERE NAME LIKE '%A%'
 AND FLOORID= 1;
+
 /* 23
 Lista de espacios que su segunda letra es una 's' donde floorid = 1
 */
@@ -178,6 +181,7 @@ SELECT NAME, FLOORID
 FROM SPACES
 WHERE NAME LIKE '_s%'
 AND FLOORID= 1;
+
 /* 24
 Lista de tipos de componente del facility 1 
 donde el nombre contiene el texto 'con'
