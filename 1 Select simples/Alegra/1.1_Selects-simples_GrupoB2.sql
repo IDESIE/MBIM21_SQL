@@ -169,7 +169,7 @@ Nombre de los espacios que empiezan por la letra A donde floorid = 1
 */
 SELECT NAME, FLOORID
 FROM SPACES
-WHERE NAME LIKE 'A%'
+WHERE NAME LIKE '%A%'
 AND FLOORID= 1;
 /* 23
 Lista de espacios que su segunda letra es una 's' donde floorid = 1
