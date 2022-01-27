@@ -216,7 +216,10 @@ and WARRANTYSTARTON in not null;
 Lista de nombres de espacio que su id no es 4, 9, ni 19
 del floorid 1
 */
-
+select name,id, floorid
+from spaces
+where not ID in (4,9,19)
+and floorid= 1;
 /* 28
 Lista de espacios que no son Aula del floorid = 1
 */
