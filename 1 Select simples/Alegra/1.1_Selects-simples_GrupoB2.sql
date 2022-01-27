@@ -86,7 +86,10 @@ order by installatedon desc;
 /* 12
 Listar las distintas fechas de instalación de los componentes del facility 1 ordenados descendentemente.
 */
-
+SELECT INSTALLATEDON,FACILITYID 
+FROM COMPONENTS
+WHERE FACILITYID= 1
+ORDER BY INSTALLATEDON DESC;
 /* 13
 Listar los distintos GUIDs de los componentes del facility 1 ordenados ascendentemente por fecha de garantía.
 */
