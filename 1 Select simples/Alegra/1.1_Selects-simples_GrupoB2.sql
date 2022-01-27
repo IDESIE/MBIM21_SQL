@@ -85,7 +85,12 @@ Nombre de los espacios de la Planta 1 del facility 1
 */
 /*Previamente se consulta cuál es el floorid
 listando los */
+select id,name
+from floors;
 
+select name, floorid
+from spaces
+where floorid=1;
 /* 10
 Nombre, número de modelo del tipo de componente con id = 60
 */
@@ -112,7 +117,10 @@ ORDER BY INSTALLATEDON DESC;
 /* 13
 Listar los distintos GUIDs de los componentes del facility 1 ordenados ascendentemente por fecha de garantía.
 */
-
+select externalidentifier "GUID",facilityid,warrantystarton
+from components
+where facilityid=1
+order by warrantystarton asc;
 /* 14
 Id, código de activo, GUID, número de serie y nombre de los componentes cuyo spaceid está entre 10 y 27 inclusive
 ordenados por id de espacio descendentemente.
@@ -182,7 +190,10 @@ order by assetidentifier desc;
 Nombre, código de activo, número de serie de los componentes
 que tengan número de serie del facility 1
 */
-
+select name, assetidentifier "CODIGO DE ACTIVO",serialnumber,facilityid
+from components
+where serialnumber is not null
+and facilityid=1;
 /* 22
 Nombre de los espacios que empiezan por la letra A donde floorid = 1
 */
@@ -204,7 +215,11 @@ Lista de tipos de componente del facility 1
 donde el nombre contiene el texto 'con'
 y no tienen vida útil indicada o fecha de garantia 
 */
-
+select name, facilityid, expectedlife
+from component_types
+where facilityid=1
+and name like '%con%'
+and expectedlife is null;
 /* 25
 Nombres de espacios y volumen
 pero como volumen una etiqueta que indique 
