@@ -11,12 +11,13 @@ Describir la tabla spaces
 
 /* 3 DALI
 Datos de la tabla components
-*/
+*/select * from components;
 
 /* 4 BLANCA
 Datos de la tabla component_types
 */
 select * from component_types;
+
 /* 5 RAQUEL
 Id, nombre de los facilities
 */
@@ -28,6 +29,10 @@ Nombre, elevación e id del facility de las plantas
 /* 7 DALI
 Nombre, area bruta, volumen de los espacios
 */
+select 
+    name, 
+    grossarea,
+    volume from spaces;
 
 /* 8 BLANCA
 Nombre, vida útil de los tipos de componentes del facility 1
@@ -77,6 +82,10 @@ order by assetidentifier desc;
 Códigos de activo de los componentes del espacio con id 21
 ordenados por código de activo descendentemente.
 */
+select assetidentifier "Código"
+from components
+where spaceid in (21)
+order by 1 desc;
 
 /* 17
 Las distintas fechas de instalación de los componentes 
