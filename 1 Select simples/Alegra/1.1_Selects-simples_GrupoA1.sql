@@ -202,6 +202,8 @@ del facility 1
 Lista de los tipos de componentes que tienen en el nombre un guión bajo
 del facility 1
 */
-
+Select name
+from component_types
+where name like '%@_%' escape '@';
 --
 ------------------------------------------------------------------------------------------------
