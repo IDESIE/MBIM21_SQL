@@ -43,7 +43,9 @@ listando los */
 /* 10
 Nombre, número de modelo del tipo de componente con id = 60
 */
-
+SELECT NAME, MODELNUMBER
+FROM component_types
+WHERE ID = 60;
 /* 11
 Nombre y fecha de instalación de los componentes del espacio 60 ordenados descendentemente por la fecha de instalación
 */
