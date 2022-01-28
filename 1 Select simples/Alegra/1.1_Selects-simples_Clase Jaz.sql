@@ -4,23 +4,32 @@
 /* 1
 Describir la tabla floors
 */
-
+desc floors
 /* 2
 Describir la tabla spaces
 */
-
+desc spaces
 /* 3
 Datos de la tabla components
 */
-
+SELECT
+    id,
+    name
+from components;
 /* 4
 Datos de la tabla component_types
 */
-
+SELECT
+    id,
+    name
+from component_types;
 /* 5
 Id, nombre de los facilities
 */
-
+SELECT
+    id,
+    name
+from facilities;
 /* 6
 Nombre, elevación e id del facility de las plantas
 */
@@ -50,7 +59,13 @@ Nombre y fecha de instalación de los componentes del espacio 60 ordenados desce
 /* 12
 Listar las distintas fechas de instalación de los componentes del facility 1 ordenados descendentemente.
 */
-
+SELECT
+    id,
+    name,
+    installatedon
+FROM components
+WHERE facilityid = 1
+ORDER BY installatedon desc;
 /* 13
 Listar los distintos GUIDs de los componentes del facility 1 ordenados ascendentemente por fecha de garantía.
 */
