@@ -8,7 +8,7 @@ desc floors;
 /* 2
 Describir la tabla spaces
 */
-
+DESC SPACES;
 /* 3
 Datos de la tabla components
 */
@@ -24,7 +24,8 @@ Id, nombre de los facilities
 /* 6
 Nombre, elevación e id del facility de las plantas
 */
-
+SELECT NAME, ELEVATION, FACILITYID
+FROM FLOORS;
 /* 7
 Nombre, area bruta, volumen de los espacios
 */
@@ -127,22 +128,22 @@ pero como volumen una etiqueta que indique
 'BAJO' si es menor a 10, 'ALTO' si es mayor a 1000
 y 'MEDIO' si está entre medias
 */
-
+select name, 
+ case 
+  when volume<10 then 'BAJO'
+  when volume>1000 then 'ALTO'
+  else 'MEDIO'
+end "Volumen"
+from spaces;
 /* 26
 Nombre, fecha de instalación, fecha de garantia
 de los componentes del facility 1
 que tienen fecha de garantia
 */
-<<<<<<< HEAD
 select name, to_char (installatedon,'yy-mm-dd'), 
  to_char (WARRANTYSTARTON, 'yyyy-mm-dd'), facilityid
 from components
 where facilityid = 1
-=======
-SELECT name,installatedon, warrantystarton, facilityid
-FROM components
-where facilityid=1
->>>>>>> 335b57074a96e83aa129962d50e20b9abd1c50c8
 and warrantystarton is not null;
 /* 27
 Lista de nombres de espacio que su id no es 4, 9, ni 19
@@ -167,9 +168,6 @@ del facility 1
 Lista de los tipos de componentes que tienen en el nombre un guión bajo
 del facility 1
 */
-SELECT 
-   lower(name) 
-from component_types 
-where name LIKE '%m_%' escape'm'
+
 --
 ------------------------------------------------------------------------------------------------
