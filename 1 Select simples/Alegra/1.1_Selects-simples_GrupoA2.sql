@@ -133,10 +133,16 @@ Nombre, fecha de instalación, fecha de garantia
 de los componentes del facility 1
 que tienen fecha de garantia
 */
+<<<<<<< HEAD
 select name, to_char (installatedon,'yy-mm-dd'), 
  to_char (WARRANTYSTARTON, 'yyyy-mm-dd'), facilityid
 from components
 where facilityid = 1
+=======
+SELECT name,installatedon, warrantystarton, facilityid
+FROM components
+where facilityid=1
+>>>>>>> 335b57074a96e83aa129962d50e20b9abd1c50c8
 and warrantystarton is not null;
 /* 27
 Lista de nombres de espacio que su id no es 4, 9, ni 19
@@ -161,6 +167,9 @@ del facility 1
 Lista de los tipos de componentes que tienen en el nombre un guión bajo
 del facility 1
 */
-
+SELECT 
+   lower(name) 
+from component_types 
+where name LIKE '%m_%' escape'm'
 --
 ------------------------------------------------------------------------------------------------
