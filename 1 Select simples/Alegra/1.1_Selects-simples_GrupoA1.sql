@@ -128,6 +128,10 @@ ordenados descendentemente por código de activo
 Nombre, código de activo, número de serie de los componentes
 que tengan número de serie del facility 1
 */
+select name, assetidentifier "Código", serialnumber 
+from components
+where facilityid = 1
+order by serialnumber;
 
 /* 22 B
 Nombre de los espacios que empiezan por la letra A donde floorid = 1
