@@ -21,6 +21,8 @@ select * from component_types;
 /* 5 RAQUEL
 Id, nombre de los facilities
 */
+select facilitiesid 
+from facilities;
 
 /* 6 XU
 Nombre, elevación e id del facility de las plantas
@@ -41,6 +43,7 @@ Nombre, vida útil de los tipos de componentes del facility 1
 /* 9 RAQUEL
 Nombre de los espacios de la Planta 1 del facility 1
 */
+
 /*Previamente se consulta cuál es el floorid
 listando los */
 
@@ -63,6 +66,10 @@ SELECT to_char(installatedon,'dd-mm-yyyy')
 /* 13 R
 Listar los distintos GUIDs de los componentes del facility 1 ordenados ascendentemente por fecha de garantía.
 */
+select externalidentifier "GUID", to_char(warrantystarton, 'yyyy-mm-dd')
+from components
+where facilityid=1
+order by warrantystarton asc;
 
 /* 14 X
 Id, código de activo, GUID, número de serie y nombre de los componentes cuyo spaceid está entre 10 y 27 inclusive
@@ -117,6 +124,9 @@ order by
 Nombre, volumen de los espacios
 cuyo volumen es mayor a 6 y menor a 9 de la planta con id = 1
 */
+select name, volume, 
+from spaces
+where volume >6 and volume<9 and floorid=1;
 
 /* 20 X
 Nombre, código de activo, número de serie de los componentes
@@ -146,6 +156,9 @@ where
 /* 23 R
 Lista de espacios que su segunda letra es una 's' donde floorid = 1
 */
+select  *
+from spaces
+where name like '_s%';
 
 /* 24 X
 Lista de tipos de componente del facility 1 
@@ -196,6 +209,9 @@ where
 Lista de los tipos de componentes que tienen duracion de la garantia de las partes
 del facility 1
 */
+select *
+from component_types
+where warrantydurationparts is not null and facilityid=1;
 
 /* 30 X
 Lista de los tipos de componentes que no tiene el coste de repuesto
