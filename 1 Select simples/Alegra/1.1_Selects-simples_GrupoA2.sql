@@ -16,10 +16,8 @@ Datos de la tabla components
 /* 4
 Datos de la tabla component_types
 */
- SELECT
-    id,
-    name
-from component_types;
+ SELECT *
+FROM component_types;
 /* 5
 Id, nombre de los facilities
 */
@@ -61,7 +59,11 @@ Nombre y fecha de instalación de los componentes del espacio 60 ordenados desce
 /* 12
 Listar las distintas fechas de instalación de los componentes del facility 1 ordenados descendentemente.
 */
-
+SELECT DISTINCT
+    installatedon
+FROM components
+WHERE facilityid = 1
+ORDER BY installatedon desc;
 /* 13
 Listar los distintos GUIDs de los componentes del facility 1 ordenados ascendentemente por fecha de garantía.
 */
