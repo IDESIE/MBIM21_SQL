@@ -7,7 +7,7 @@ Describir la tabla floors
 desc floors;
 /* 2 XU
 Describir la tabla spaces
-*/
+*/DESC SPACES;
 
 /* 3 DALI
 Datos de la tabla components
@@ -25,6 +25,10 @@ Id, nombre de los facilities
 /* 6 XU
 Nombre, elevación e id del facility de las plantas
 */
+select 
+    name, 
+    elevation,
+    facilityid from floors;
 
 /* 7 DALI
 Nombre, area bruta, volumen de los espacios
@@ -47,6 +51,11 @@ listando los */
 /* 10 XU
 Nombre, número de modelo del tipo de componente con id = 60
 */
+select 
+    name, 
+    modelnumber from component_types
+    where id = 60;
+
 
 /* 11 D
 Nombre y fecha de instalación de los componentes del espacio 60 ordenados descendentemente por la fecha de instalación
@@ -68,6 +77,10 @@ Listar los distintos GUIDs de los componentes del facility 1 ordenados ascendent
 Id, código de activo, GUID, número de serie y nombre de los componentes cuyo spaceid está entre 10 y 27 inclusive
 ordenados por id de espacio descendentemente.
 */
+select id, assetidentifier "Código", externalidentifier "GUID", serialnumber, name
+from components
+where spaceid >=10 and spaceid <=27
+order by spaceid desc;
 
 /* 15 
 Id, código de activo, GUID, número de serie y nombre de los componentes del facility 1 
@@ -123,7 +136,10 @@ Nombre, código de activo, número de serie de los componentes
 que no tengan espacio del facility 1
 ordenados descendentemente por código de activo
 */
-
+select name, assetidentifier "Código", serialnumber 
+from components
+where facilityid not like 1
+order by assetidentifier desc;
 /* 21 D
 Nombre, código de activo, número de serie de los componentes
 que tengan número de serie del facility 1
@@ -152,6 +168,15 @@ Lista de tipos de componente del facility 1
 donde el nombre contiene el texto 'con'
 y no tienen vida útil indicada o fecha de garantia 
 */
+select
+name
+id
+from component_types
+where 
+facilityid =1 
+and name like '%con%'
+and expectedlife is null
+and warrantydurationunitid is null;
 
 /* 25 
 Nombres de espacios y volumen
@@ -201,6 +226,14 @@ del facility 1
 Lista de los tipos de componentes que no tiene el coste de repuesto
 del facility 1
 */
+select
+name
+id
+from component_types
+where 
+facilityid =1 
+and replacementcost is null;
+    
 
 /* 31
 Lista de los tipos de componentes que tienen en el nombre un guión bajo
