@@ -107,7 +107,12 @@ Nombre, volumen, de los espacios
 cuyo volumen es mayor a 90 de floorid = 1
 ordenados por volumen descendentemente
 */
-
+SELECT
+    name,
+    volume
+FROM spaces
+WHERE floorid=1 and volume >90
+ORDER BY volume desc;
 /* 19
 Nombre, volumen de los espacios
 cuyo volumen es mayor a 6 y menor a 9 de la planta con id = 1
@@ -131,7 +136,12 @@ que tengan número de serie del facility 1
 /* 22
 Nombre de los espacios que empiezan por la letra A donde floorid = 1
 */
-
+SELECT
+    name
+FROM spaces
+WHERE  
+    floorid=1 and
+    name like 'A%';
 /* 23
 Lista de espacios que su segunda letra es una 's' donde floorid = 1
 */
