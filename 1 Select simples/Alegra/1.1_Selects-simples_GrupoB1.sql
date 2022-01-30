@@ -11,6 +11,7 @@ Describir la tabla spaces
 DESC spaces;
 /* 3
 Datos de la tabla components
+*/
 DESC components;
 /* 4
 Datos de la tabla component_types
