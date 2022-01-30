@@ -43,6 +43,11 @@ select
 /* 8 BLANCA
 Nombre, vida útil de los tipos de componentes del facility 1
 */
+select 
+    name, 
+    expectedlife
+from component_types
+where facilityid = 1;
 
 /* 9 RAQUEL
 Nombre de los espacios de la Planta 1 del facility 1
