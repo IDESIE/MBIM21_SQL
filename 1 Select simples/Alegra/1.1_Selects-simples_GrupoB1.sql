@@ -174,11 +174,20 @@ order by assetidentifier desc;
 Nombre, código de activo, número de serie de los componentes
 que tengan número de serie del facility 1
 */
-
+select
+    name,
+    assetidentifier,
+    serialnumber
+from components
+where facilityid=1 and serialnumber is not null;
 /* 22
 Nombre de los espacios que empiezan por la letra A donde floorid = 1
 */
-
+select
+    lower(name)
+from spaces
+where floorid=1 and 
+    name like 'A%';
 /* 23
 Lista de espacios que su segunda letra es una 's' donde floorid = 1
 */
