@@ -246,7 +246,14 @@ where facilityid = 1
 Lista de nombres de espacio que su id no es 4, 9, ni 19
 del floorid 1
 */
-
+select
+    name,
+    id
+from
+    spaces
+where 
+    floorid=1
+    and id out (4,9,19);
 /* 28
 Lista de espacios que no son Aula del floorid = 1
 */
