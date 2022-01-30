@@ -175,6 +175,8 @@ del facility 1
 */
 select
     name
+*/select 
+    lower(name)  
 from component_types
 where name like '%\_%' escape '\'; /* escape hace que el caracter que colocas, sirve para decir en el name like 
 que el carater que colocamos es literal, no un comodin*/ 
