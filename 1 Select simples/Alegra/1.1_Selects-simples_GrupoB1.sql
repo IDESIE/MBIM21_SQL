@@ -273,7 +273,13 @@ where warrantydurationparts is not null and facilityid=1;
 Lista de los tipos de componentes que no tiene el coste de repuesto
 del facility 1
 */
-
+select
+    name 
+from 
+    component_types
+where 
+    facilityid=1
+    and replacementcost is null;
 /* 31
 Lista de los tipos de componentes que tienen en el nombre un guión bajo
 del facility 1
