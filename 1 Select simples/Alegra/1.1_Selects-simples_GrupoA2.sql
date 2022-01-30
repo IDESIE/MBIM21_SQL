@@ -16,10 +16,8 @@ Datos de la tabla components
 /* 4
 Datos de la tabla component_types
 */
- SELECT
-    id,
-    name
-from component_types;
+ SELECT *
+FROM component_types;
 /* 5
 Id, nombre de los facilities
 */
@@ -61,7 +59,11 @@ Nombre y fecha de instalación de los componentes del espacio 60 ordenados desce
 /* 12
 Listar las distintas fechas de instalación de los componentes del facility 1 ordenados descendentemente.
 */
-
+SELECT DISTINCT
+    installatedon
+FROM components
+WHERE facilityid = 1
+ORDER BY installatedon desc;
 /* 13
 Listar los distintos GUIDs de los componentes del facility 1 ordenados ascendentemente por fecha de garantía.
 */
@@ -105,7 +107,12 @@ Nombre, volumen, de los espacios
 cuyo volumen es mayor a 90 de floorid = 1
 ordenados por volumen descendentemente
 */
-
+SELECT
+    name,
+    volume
+FROM spaces
+WHERE floorid=1 and volume >90
+ORDER BY volume desc;
 /* 19
 Nombre, volumen de los espacios
 cuyo volumen es mayor a 6 y menor a 9 de la planta con id = 1
@@ -129,7 +136,12 @@ que tengan número de serie del facility 1
 /* 22
 Nombre de los espacios que empiezan por la letra A donde floorid = 1
 */
-
+SELECT
+    name
+FROM spaces
+WHERE  
+    floorid=1 and
+    name like 'A%';
 /* 23
 Lista de espacios que su segunda letra es una 's' donde floorid = 1
 */
@@ -177,7 +189,12 @@ del floorid 1
 /* 28
 Lista de espacios que no son Aula del floorid = 1
 */
-
+SELECT
+    name
+FROM spaces
+WHERE  
+    floorid=1 and
+    name not like '%Aula%';
 /* 29
 Lista de los tipos de componentes que tienen duracion de la garantia de las partes
 del facility 1
