@@ -21,7 +21,7 @@ select * from component_types;
 /* 5 RAQUEL
 Id, nombre de los facilities
 */
-select facilitiesid 
+select facilitiesid, name 
 from facilities;
 
 /* 6 XU
@@ -86,7 +86,7 @@ SELECT to_char(installatedon,'dd-mm-yyyy')
 /* 13 R
 Listar los distintos GUIDs de los componentes del facility 1 ordenados ascendentemente por fecha de garantía.
 */
-select externalidentifier "GUID", to_char(warrantystarton, 'yyyy-mm-dd')
+select distinct externalidentifier "GUID", to_char(warrantystarton, 'yyyy-mm-dd')
 from components
 where facilityid=1
 order by warrantystarton asc;
