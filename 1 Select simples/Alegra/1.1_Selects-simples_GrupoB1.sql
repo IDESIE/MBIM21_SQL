@@ -83,10 +83,12 @@ Las distintas fechas de instalación de los componentes
 de los espacios con id 10, 12, 16, 19 
 ordenadas descendentemente.
 */
+
 select distinct /*selecciona solo las columnas que son diferentes*/ to_char(installatedon,'yyyy-mm-dd')
 from components
 where spaceid in (10,12,16,19)
 order by 1 desc;
+
 /* 18
 Nombre, volumen, de los espacios
 cuyo volumen es mayor a 90 de floorid = 1
@@ -129,19 +131,22 @@ pero como volumen una etiqueta que indique
 'BAJO' si es menor a 10, 'ALTO' si es mayor a 1000
 y 'MEDIO' si está entre medias
 */
-select
-    name,
-    case 
-    when volume <10 then 'BAJO'
-    when volume >1000 then 'ALTO'
-    else 'MEDIO'
-    end "VOLUMEN"
-from spaces;
+
+SELECT 
+ NAME, 
+ CASE 
+  WHEN VOLUME<10 THEN 'BAJO'
+  WHEN VOLUME>1000 THEN 'ALTO'
+  ELSE 'MEDIO'
+ END "VOLUMEN"
+FROM SPACES;
+
 /* 26
 Nombre, fecha de instalación, fecha de garantia
 de los componentes del facility 1
 que tienen fecha de garantia
 */
+
 select
     name,
     installatedon,
@@ -150,6 +155,7 @@ select
 from components
 where facilityid = 1
     and warrantystarton is not null;
+
 /* 27
 Lista de nombres de espacio que su id no es 4, 9, ni 19
 del floorid 1
@@ -173,10 +179,9 @@ del facility 1
 Lista de los tipos de componentes que tienen en el nombre un guión bajo
 del facility 1
 */
+
 select
-    name
-*/select 
-    lower(name)  
+  lower(name)
 from component_types
 where name like '%\_%' escape '\'; /* escape hace que el caracter que colocas, sirve para decir en el name like 
 que el carater que colocamos es literal, no un comodin*/ 
