@@ -63,6 +63,11 @@ select
 /* 11 D
 Nombre y fecha de instalación de los componentes del espacio 60 ordenados descendentemente por la fecha de instalación
 */
+select
+name, to_char(installatedon,'dd-mm-yyyy')
+    from components
+    where spaceid = 60
+order by installatedon desc;
 
 /* 12B
 Listar las distintas fechas de instalación de los componentes del facility 1 ordenados descendentemente.
