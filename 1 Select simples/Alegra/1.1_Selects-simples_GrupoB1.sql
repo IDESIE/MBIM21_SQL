@@ -248,12 +248,13 @@ del floorid 1
 */
 select
     name,
-    id
+    id,
+    floorid
 from
     spaces
 where 
     floorid=1
-    and id out (4,9,19);
+    and not id in (4,9,19);
 /* 28
 Lista de espacios que no son Aula del floorid = 1
 */
