@@ -192,7 +192,13 @@ where floorid=1 and
 /* 23
 Lista de espacios que su segunda letra es una 's' donde floorid = 1
 */
-
+select
+    lower(name)
+from
+    spaces
+where
+    floorid=1
+    and name like '_s%';
 /* 24
 Lista de tipos de componente del facility 1 
 donde el nombre contiene el texto 'con'
