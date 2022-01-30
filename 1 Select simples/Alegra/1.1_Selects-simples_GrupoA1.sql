@@ -235,6 +235,11 @@ and warrantystation is not null;
 Lista de nombres de espacio que su id no es 4, 9, ni 19
 del floorid 1
 */
+select     
+name, id
+from spaces 
+where floorid = 1 and     
+id !=4 and id !=9 and id !=19;
 
 /* 28 B
 Lista de espacios que no son Aula del floorid = 1
