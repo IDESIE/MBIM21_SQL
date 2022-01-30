@@ -204,7 +204,15 @@ Lista de tipos de componente del facility 1
 donde el nombre contiene el texto 'con'
 y no tienen vida útil indicada o fecha de garantia 
 */
-
+select
+    lower(name)
+from
+    components
+where 
+    facilityid=1
+    and name like '%con%'
+    and warrantystarton is not null
+    or length is not null;
 /* 25
 Nombres de espacios y volumen
 pero como volumen una etiqueta que indique 
