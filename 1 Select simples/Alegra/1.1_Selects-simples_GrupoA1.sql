@@ -52,6 +52,12 @@ where facilityid = 1;
 /* 9 RAQUEL
 Nombre de los espacios de la Planta 1 del facility 1
 */
+select 
+    spaces.name
+from spaces,floors 
+where spaces.floorid = 1 
+    and floors.facilityid=1 
+    and spaces.floorid = floors.id;
 
 /*Previamente se consulta cuál es el floorid
 listando los */
