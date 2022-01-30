@@ -75,7 +75,7 @@ ordenados por id de espacio descendentemente.
 select id, ASSETIDENTIFIER "CODIGO DE ACTIVO", externalidentifier "GUID",
  SERIALNUMBER "NUMERO DE SERIE",NAME
 FROM COMPONENTS
-WHERE SPACEID>10
+WHERE SPACEID>= 10
  AND SPACEID <= 27;
 /* 15
 Id, código de activo, GUID, número de serie y nombre de los componentes del facility 1 
