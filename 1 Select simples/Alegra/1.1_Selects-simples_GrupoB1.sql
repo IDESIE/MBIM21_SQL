@@ -194,11 +194,9 @@ Lista de espacios que su segunda letra es una 's' donde floorid = 1
 */
 select
     lower(name)
-from
-    spaces
-where
-    floorid=1
-    and name like '_s%';
+from spaces
+where floorid=1 and 
+    name like '_s%' ;
 /* 24
 Lista de tipos de componente del facility 1 
 donde el nombre contiene el texto 'con'
@@ -252,12 +250,18 @@ del floorid 1
 /* 28
 Lista de espacios que no son Aula del floorid = 1
 */
-
+select
+    name
+from spaces
+where floorid=1 and lower(name) not like 'Aula';
 /* 29
 Lista de los tipos de componentes que tienen duracion de la garantia de las partes
 del facility 1
 */
-
+select
+    name
+from component_types
+where warrantydurationparts is not null and facilityid=1;
 /* 30
 Lista de los tipos de componentes que no tiene el coste de repuesto
 del facility 1
