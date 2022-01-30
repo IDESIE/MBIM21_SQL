@@ -168,6 +168,7 @@ que tengan número de serie del facility 1
 select name, assetidentifier "Código", serialnumber 
 from components
 where facilityid = 1
+and serialnumber is not null
 order by serialnumber;
 
 /* 22 B
