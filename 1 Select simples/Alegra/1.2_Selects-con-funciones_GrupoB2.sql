@@ -30,12 +30,13 @@ round(sum(grossarea),2),
 round(min(grossarea),2),
 round(max(grossarea),2),
 round(avg(grossarea),2)
-from spaces
+from spaces 
 where floorid=1;
 /* 4
 Listar el número de componentes que tienen indicado el espacio y el número de componentes total.
 del facility 1
 */
+
 
 /* 5
 Mostrar tres medias que llamaremos:
@@ -50,6 +51,14 @@ Solo la parte entera, sin decimales ni redondeo.
 Cuántos componentes hay, cuántos tienen fecha inicio de garantia, cuántos tienen espacio, y en cuántos espacios hay componentes
 en el facility 1.
 */
+select
+Facilityid,
+Count(*),
+Count(warrantystarton),
+count(spaceid)
+from components
+where facilityid=1 AND warrantystarton is not null
+Group by facilityid
 
 /* 7
 Mostrar cuántos espacios tienen el texto 'Aula' en el nombre
