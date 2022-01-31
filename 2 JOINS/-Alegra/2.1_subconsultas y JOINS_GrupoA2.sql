@@ -87,7 +87,7 @@ WHERE
 ORDER BY 3 DESC)
 WHERE
  ROWNUM <4;
- 
+
 /*
 10
 Tomando en cuenta los cuatro primeros caracteres del nombre de los espacios
@@ -124,7 +124,26 @@ Componentes 70
 Sillas 16
 Mesas 3
 */
+SELECT 'Componentes',count(COMPONENTS.ID)
+FROM 
+SPACES JOIN COMPONENTS ON SPACES.ID = COMPONENTS.SPACEID
+WHERE FACILITYID = 1 and
+ lower(SPACES.NAME) = 'aula 03';
 
+SELECT 'Sillas',count(COMPONENTS.ID)
+FROM 
+SPACES JOIN COMPONENTS ON SPACES.ID = COMPONENTS.SPACEID
+WHERE FACILITYID = 1 and
+ lower(SPACES.NAME) = 'aula 03' and
+ LOWER(COMPONENTS.NAME) LIKE '%silla%';
+ 
+SELECT 'Mesas', count(COMPONENTS.ID)
+FROM 
+SPACES JOIN COMPONENTS ON SPACES.ID = COMPONENTS.SPACEID
+WHERE FACILITYID = 1 and
+ lower(spaces.name) = 'aula 03' and
+ (LOWER(COMPONENTS.NAME) LIKE '%mesa%' or
+ LOWER(COMPONENTS.NAME) LIKE '%escritorio%');
 /*
 14
 Nombre del espacio, y número de grifos del espacio con más grifos del facility 1.
