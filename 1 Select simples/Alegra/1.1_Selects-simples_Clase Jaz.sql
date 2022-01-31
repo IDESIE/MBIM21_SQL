@@ -4,23 +4,32 @@
 /* 1
 Describir la tabla floors
 */
-desc floors;
+desc floors
 /* 2
 Describir la tabla spaces
 */
-
+desc spaces
 /* 3
 Datos de la tabla components
 */
-
+SELECT
+    id,
+    name
+from components;
 /* 4
 Datos de la tabla component_types
 */
-
+SELECT
+    id,
+    name
+from component_types;
 /* 5
 Id, nombre de los facilities
 */
-
+SELECT
+    id,
+    name
+from facilities;
 /* 6
 Nombre, elevación e id del facility de las plantas
 */
@@ -50,7 +59,13 @@ Nombre y fecha de instalación de los componentes del espacio 60 ordenados desce
 /* 12
 Listar las distintas fechas de instalación de los componentes del facility 1 ordenados descendentemente.
 */
-
+SELECT
+    id,
+    name,
+    installatedon
+FROM components
+WHERE facilityid = 1
+ORDER BY installatedon desc;
 /* 13
 Listar los distintos GUIDs de los componentes del facility 1 ordenados ascendentemente por fecha de garantía.
 */
@@ -63,7 +78,15 @@ ordenados por id de espacio descendentemente.
 /* 15
 Id, código de activo, GUID, número de serie y nombre de los componentes del facility 1 
 ordenados por código de activo descendentemente.
-*/
+*/SELECT 
+    id, 
+    assetidentifier "codigo", 
+    externalidentifier "GUID",
+    serialnumber, 
+    name
+from components
+where facilityid = 1
+order by assetidentifier desc;
 
 /* 16
 Códigos de activo de los componentes del espacio con id 21
@@ -118,13 +141,27 @@ pero como volumen una etiqueta que indique
 'BAJO' si es menor a 10, 'ALTO' si es mayor a 1000
 y 'MEDIO' si está entre medias
 */
-
+SELECT
+    name,
+    case
+        when volume<10 then 'BAJO'
+        when volume >1000 then 'ALTO'
+        else 'MEDIO'
+    end "Volumen"
+from spaces;
 /* 26
 Nombre, fecha de instalación, fecha de garantia
 de los componentes del facility 1
 que tienen fecha de garantia
 */
-
+SELECT
+    name,
+    installatedon,
+    warrantystarton,
+    facilityid
+from components
+where facilityid = 1
+and warrantystarton is not null
 /* 27
 Lista de nombres de espacio que su id no es 4, 9, ni 19
 del floorid 1
@@ -148,6 +185,9 @@ del facility 1
 Lista de los tipos de componentes que tienen en el nombre un guión bajo
 del facility 1
 */
-
+SELECT
+    name
+from component_types
+where name like '%\_%' escape '\';
 --
 ------------------------------------------------------------------------------------------------
