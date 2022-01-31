@@ -36,6 +36,12 @@ where floorid=1;
 Listar el número de componentes que tienen indicado el espacio y el número de componentes total.
 del facility 1
 */
+select
+spaceid,
+COUNT(*)
+from components
+where facilityid=1
+group by spaceid
 
 
 /* 5
@@ -65,6 +71,10 @@ Group by facilityid
 Mostrar cuántos espacios tienen el texto 'Aula' en el nombre
 del facility 1.
 */
+select
+Count (name)
+from spaces
+where name like 'Aula%'
 
 /* 8
 Mostrar el porcentaje de componentes que tienen fecha de inicio de garantía
