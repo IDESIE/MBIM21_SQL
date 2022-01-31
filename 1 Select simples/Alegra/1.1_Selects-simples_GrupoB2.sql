@@ -132,19 +132,12 @@ order by spaceid desc;
 /* 15
 Id, código de activo, GUID, número de serie y nombre de los componentes del facility 1 
 ordenados por código de activo descendentemente.
-<<<<<<< Updated upstream
 */
 select id, ASSETIDENTIFIER "codigo", EXTERNALIDENTIFIER "GUID",
     serialnumber, name
 from components
 where FACILITYID = 1
 order by ASSETIDENTIFIER desc;
-=======
-*/to_char(installatedon,'yyy-mm-d'), spaceid, ID
-from components
-where ID in (10,12,16,18)
-order by 1 desc;
->>>>>>> Stashed changes
 
 /* 16
 Códigos de activo de los componentes del espacio con id 21
@@ -232,7 +225,6 @@ Nombres de espacios y volumen
 pero como volumen una etiqueta que indique 
 'BAJO' si es menor a 10, 'ALTO' si es mayor a 1000
 y 'MEDIO' si está entre medias
-<<<<<<< Updated upstream
 */
 select 
     name,
@@ -242,33 +234,15 @@ select
         else 'MEDIO'
     end "volumen"
 from spaces;
-=======
-*/    name,
-    case 
-        when volume<10 then 'BAJO'
-        when volume>1000 then 'ALTO'
-        else 'MEDIO'
-    end "Volumen"
-from spaces;
-
-
->>>>>>> Stashed changes
 /* 26
 Nombre, fecha de instalación, fecha de garantia
 de los componentes del facility 1
 que tienen fecha de garantia
-<<<<<<< Updated upstream
 */
 select name, INSTALLATEDON, WARRANTYSTARTON, facilityid
 from components
 where facilityid = 1
 and WARRANTYSTARTON in not null;
-=======
-*/installatedon, WARRANTYSTARTON, FACILITYID
-FROM COMPONENTS
-WHERE FACILITYID = 1
-AND warrantystarton IS NOT NULL;
->>>>>>> Stashed changes
 
 /* 27
 Lista de nombres de espacio que su id no es 4, 9, ni 19
