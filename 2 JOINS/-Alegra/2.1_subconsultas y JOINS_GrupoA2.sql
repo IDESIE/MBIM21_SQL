@@ -71,6 +71,22 @@ Aula 3  MEDIO
 9
 Listar el nombre de los tres espacios con mayor área del facility 1
 */
+SELECT
+ FILA, NOMBRE, AREA, FACILITYID
+FROM (
+SELECT
+ ROWNUM FILA,
+ SPACES.NAME NOMBRE,
+ SPACES.GROSSAREA AREA,
+ FLOORS.FACILITYID
+FROM
+ SPACES
+ JOIN FLOORS ON SPACES.FLOORID = FLOORS.ID
+WHERE
+ FLOORS.FACILITYID = 1
+ORDER BY 3 DESC)
+WHERE
+ ROWNUM <4;
 
 /*
 10
@@ -108,7 +124,26 @@ Componentes 70
 Sillas 16
 Mesas 3
 */
-
+SELECT 'Componentes',count(COMPONENTS.ID)
+FROM 
+SPACES JOIN COMPONENTS ON SPACES.ID = COMPONENTS.SPACEID
+WHERE FACILITYID = 1 and
+ lower(SPACES.NAME) = 'aula 03'
+union
+SELECT 'Sillas',count(COMPONENTS.ID)
+FROM 
+SPACES JOIN COMPONENTS ON SPACES.ID = COMPONENTS.SPACEID
+WHERE FACILITYID = 1 and
+ lower(SPACES.NAME) = 'aula 03' and
+ LOWER(COMPONENTS.NAME) LIKE '%silla%'
+ union
+SELECT 'Mesas', count(COMPONENTS.ID)
+FROM 
+SPACES JOIN COMPONENTS ON SPACES.ID = COMPONENTS.SPACEID
+WHERE FACILITYID = 1 and
+ lower(spaces.name) = 'aula 03' and
+ (LOWER(COMPONENTS.NAME) LIKE '%mesa%' or
+ LOWER(COMPONENTS.NAME) LIKE '%escritorio%');
 /*
 14
 Nombre del espacio, y número de grifos del espacio con más grifos del facility 1.
