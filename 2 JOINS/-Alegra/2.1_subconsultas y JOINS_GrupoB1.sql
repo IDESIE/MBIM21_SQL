@@ -79,7 +79,22 @@ Aula 3  MEDIO
 9
 Listar el nombre de los tres espacios con mayor área del facility 1
 */
-
+select
+    rownum,fila, nombre, area, facilityid
+from (
+select
+    rownum fila,
+    spaces.name nombre,
+    spaces.grossarea area,
+    floors.facilityid
+from
+    spaces 
+    join floors on spaces.floorid = floors.id
+where
+    floors.facilityid = 1
+order by 3 desc)
+where
+    rownum <4;
 /*
 10
 Tomando en cuenta los cuatro primeros caracteres del nombre de los espacios
