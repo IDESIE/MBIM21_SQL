@@ -12,7 +12,7 @@ DESC SPACES;
 /* 3
 Datos de la tabla components
 */
-
+select * from components;
 /* 4
 Datos de la tabla component_types
 */
@@ -39,7 +39,12 @@ FROM spaces;
 /* 8
 Nombre, vida útil de los tipos de componentes del facility 1
 */
-
+SELECT
+  name,
+  EXPECTEDLIFE,
+  FACILITYID
+FROM COMPONENT_TYPES
+WHERE FACILITYID=1;
 /* 9
 Nombre de los espacios de la Planta 1 del facility 1
 */
@@ -55,7 +60,13 @@ WHERE ID = 60;
 /* 11
 Nombre y fecha de instalación de los componentes del espacio 60 ordenados descendentemente por la fecha de instalación
 */
-
+SELECT
+  NAME,
+  installatedon,
+  SPACEID
+FROM COMPONENTS
+WHERE SPACEID=60
+ORDER BY INSTALLATEDON DESC;
 /* 12
 Listar las distintas fechas de instalación de los componentes del facility 1 ordenados descendentemente.
 */
@@ -91,7 +102,12 @@ ORDER BY ASSETIDENTIFIER DESC;
 Códigos de activo de los componentes del espacio con id 21
 ordenados por código de activo descendentemente.
 */
-
+SELECT
+  ASSETIDENTIFIER "CÓDIGO DE ACTIVO",
+  SPACEID "ID ESPACIO"
+FROM COMPONENTS
+WHERE SPACEID=21
+ORDER BY ASSETIDENTIFIER DESC;
 /* 17
 Las distintas fechas de instalación de los componentes 
 de los espacios con id 10, 12, 16, 19 
@@ -132,7 +148,13 @@ ORDER BY ASSETIDENTIFIER DESC;
 Nombre, código de activo, número de serie de los componentes
 que tengan número de serie del facility 1
 */
-
+SELECT
+  NAME "NOMBRE",
+  ASSETIDENTIFIER "CÓDIGO DE ACTIVO",
+  SERIALNUMBER "NÚMERO DE SERIE",
+  FACILITYID "ID INSTALACIÓN"
+FROM COMPONENTS
+WHERE FACILITYID=1;
 /* 22
 Nombre de los espacios que empiezan por la letra A donde floorid = 1
 */
@@ -185,7 +207,15 @@ and warrantystarton is not null;
 Lista de nombres de espacio que su id no es 4, 9, ni 19
 del floorid 1
 */
-
+SELECT
+  NAME "NOMBRE",
+  ID,
+  FLOORID
+FROM SPACES
+WHERE FLOORID=1
+  AND ID<>4
+  AND ID<>9
+  AND ID<>19;
 /* 28
 Lista de espacios que no son Aula del floorid = 1
 */
@@ -213,6 +243,10 @@ AND REPLACEDON IS NULL;
 Lista de los tipos de componentes que tienen en el nombre un guión bajo
 del facility 1
 */
-
+SELECT*
+FROM COMPONENT_TYPES
+WHERE 
+  FACILITYID=1
+  AND NAME LIKE'%_%';
 --
 ------------------------------------------------------------------------------------------------
