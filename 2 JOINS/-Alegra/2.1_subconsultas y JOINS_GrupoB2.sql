@@ -110,6 +110,12 @@ Aula    18
 Aseo    4
 Hall    2
 */
+Select substr(spaces.name,1,4), count(*)
+from spaces join floors on spaces.floorid = floors.id
+Where facilityid=1
+group by substr(spaces.name,1,4)
+having count(*)>1
+order by COUNT(*) desc;
 
 /*
 11
