@@ -97,7 +97,7 @@ where
 order by 3 desc)
 where
     rownum <4;
-    
+
 /*
 10
 Tomando en cuenta los cuatro primeros caracteres del nombre de los espacios
@@ -134,7 +134,33 @@ Componentes 70
 Sillas 16
 Mesas 3
 */
-
+Select
+    'components' "Etiqueta",
+    count (components.id) "Numero componentes"
+from 
+    spaces join components on spaces.id = components.spaceid
+Where facilityid=1 and lower(spaces.name)='aula 03'
+Union
+Select
+    'Mesas',
+    count (components.id)
+from 
+    spaces join components on spaces.id = components.spaceid
+Where 
+    facilityid=1 and 
+    lower(spaces.name)='aula 03' and 
+    lower(components.name)='%silla%'
+Union        
+Select
+    components.id, 
+    components.name
+from 
+    spaces 
+    join components on spaces.id = components.spaceid
+Where 
+    facilityid=1 and 
+    (lower(compoenents.name) like '%mesa%' or
+    lower(components.name) like '%escritorio%');
 /*
 14
 Nombre del espacio, y número de grifos del espacio con más grifos del facility 1.
@@ -149,6 +175,17 @@ Cuál es el mes en el que más componentes se instalaron del facility 1.
 Nombre del día en el que más componentes se instalaron del facility 1.
 Ejemplo: Jueves
 */
+Select Count(id) numcomp, to_char(installatedon,'Day')dia
+    from components
+    where facilityid = 1
+    group by to_char(installatedon,'Day')
+    having count(id)=(select max(numcomp) maximo
+                from(
+                    select count(id) numcomp,to_char(installatedon,'Day')dia
+                    from components
+                    where facilityid=1
+                    group by to_char(installatedon,'Day')
+                    ));
 
 /*17
 Listar los nombres de componentes que están fuera de garantía del facility 1.
