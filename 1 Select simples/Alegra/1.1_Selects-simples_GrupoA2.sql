@@ -12,7 +12,7 @@ DESC SPACES;
 /* 3
 Datos de la tabla components
 */
-
+select * from components;
 /* 4
 Datos de la tabla component_types
 */
