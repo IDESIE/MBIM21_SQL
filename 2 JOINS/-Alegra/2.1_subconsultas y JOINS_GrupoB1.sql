@@ -24,7 +24,15 @@ Nombre y fecha de instalación (yyyy-mm-dd) de los componentes del espacio con m
 Nombre y código de activo  de los componentes cuyo tipo de componente contenga la palabra 'mesa'
 del facility 1
 */
-
+select
+     components.name,
+     components.assetidentifier    
+from
+    components
+    join component_types on components.typeid = component_types.id
+where
+    components.facilityid = 1
+    and upper(component_types.name) like '%MESA%';
 /*
 5
 Nombre del componente, espacio y planta de los componentes
