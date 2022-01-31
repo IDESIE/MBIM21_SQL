@@ -146,7 +146,24 @@ Cuál es el mes en el que más componentes se instalaron del facility 1.
 Nombre del día en el que más componentes se instalaron del facility 1.
 Ejemplo: Jueves
 */
-
+select
+    dia
+from
+(select max(numcomp)maximo
+from (
+    select count(id) numcomp, to_char(installatedon,'Day')dia
+    from components
+    where facilityid = 1
+    group by to_char(installatedon,'Day')
+)) tabmax
+join
+(
+    select count(id) numcomp, to_char(installatedon,'Day')dia
+    from components
+    where facilityid = 1
+    group by to_char(installatedon,'Day')
+) tabnum on tabmax.maximo = tabnum.numcomp
+;
 /*17
 Listar los nombres de componentes que están fuera de garantía del facility 1.
 */
