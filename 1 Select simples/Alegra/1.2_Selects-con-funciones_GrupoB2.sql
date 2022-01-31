@@ -57,8 +57,9 @@ Count(*),
 Count(warrantystarton),
 count(spaceid)
 from components
-where facilityid=1 AND warrantystarton is not null
+where facilityid=1 AND warrantystarton is not null AND spaceid is not null
 Group by facilityid
+
 
 /* 7
 Mostrar cuántos espacios tienen el texto 'Aula' en el nombre
@@ -82,6 +83,10 @@ Pasi
 Pati
 Serv
 */
+select
+distinct Substr(name,1,4)
+from spaces
+Where floorid=1
 
 /* 10
 Número de componentes por fecha de instalación del facility 1
