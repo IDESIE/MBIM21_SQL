@@ -131,7 +131,55 @@ Componentes 70
 Sillas 16
 Mesas 3
 */
+select 
+    'Componentes' "Etiqueta",count(components.id)
+from 
+    spaces 
+    join 
+    components on spaces.id = components.spaceid
+where
+    facilityid=1
+    and
+    lower (spaces.name) = 'aula 03'
 
+union
+
+select 
+    'Sillas',count(components.id)
+from 
+    spaces 
+    join 
+    components 
+    on 
+    spaces.id = components.spaceid
+where
+    facilityid=1
+    and
+    lower(spaces.name) = 'aula 03'
+    and
+    lower(components.name) like '%silla%'
+    
+union
+
+select 
+    'Mesas',count(components.id)
+from 
+    spaces 
+    join 
+    components 
+    on 
+    spaces.id = components.spaceid
+where
+    facilityid=1
+    and
+    lower(spaces.name) = 'aula 03'
+    and
+    (
+    lower(components.name) like 'mesa%'
+    or
+    lower(components.name) like 'escritorio%'
+    )
+;
 /*
 14
 Nombre del espacio, y número de grifos del espacio con más grifos del facility 1.
