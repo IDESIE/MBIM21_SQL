@@ -21,7 +21,8 @@ FROM component_types;
 /* 5
 Id, nombre de los facilities
 */
-
+SELECT ID, NAME
+FROM FACILITIES;
 /* 6
 Nombre, elevación e id del facility de las plantas
 */
@@ -50,7 +51,9 @@ Nombre de los espacios de la Planta 1 del facility 1
 */
 /*Previamente se consulta cuál es el floorid
 listando los */
-
+SELECT name
+FROM spaces
+where floorid = 1;
 /* 10
 Nombre, número de modelo del tipo de componente con id = 60
 */
@@ -78,7 +81,10 @@ ORDER BY installatedon desc;
 /* 13
 Listar los distintos GUIDs de los componentes del facility 1 ordenados ascendentemente por fecha de garantía.
 */
-
+select EXTERNALIDENTIFIER "GUIDs", WARRANTYSTARTON
+from components
+where facilityid = 1
+order by WARRANTYSTARTON asc;
 /* 14
 Id, código de activo, GUID, número de serie y nombre de los componentes cuyo spaceid está entre 10 y 27 inclusive
 ordenados por id de espacio descendentemente.
@@ -133,7 +139,10 @@ ORDER BY volume desc;
 Nombre, volumen de los espacios
 cuyo volumen es mayor a 6 y menor a 9 de la planta con id = 1
 */
-
+select name, volume
+from spaces
+where floorid = 1 
+and volume BETWEEN 6 AND 9;
 /* 20
 Nombre, código de activo, número de serie de los componentes
 que no tengan espacio del facility 1
@@ -167,7 +176,10 @@ WHERE
 /* 23
 Lista de espacios que su segunda letra es una 's' donde floorid = 1
 */
-
+select name 
+from spaces 
+where floorid = 1 
+and NAME LIKE'_s%';
 /* 24
 Lista de tipos de componente del facility 1 
 donde el nombre contiene el texto 'con'
@@ -229,7 +241,10 @@ WHERE
 Lista de los tipos de componentes que tienen duracion de la garantia de las partes
 del facility 1
 */
-
+select name,WARRANTYDURATIONPARTS 
+from COMPONENT_TYPES
+where facilityid = 1
+and WARRANTYDURATIONPARTS <>0;
 /* 30
 Lista de los tipos de componentes que no tiene el coste de repuesto
 del facility 1
