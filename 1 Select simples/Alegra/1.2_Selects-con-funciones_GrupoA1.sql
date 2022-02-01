@@ -1,7 +1,7 @@
 ------------------------------------------------------------------------------------------------
 -- SELECT CON FUNCIONES
 ------------------------------------------------------------------------------------------------
-/* 1
+/* 1 X
 Mostrar la fecha actual de la siguiente forma:
 Fecha actual
 ------------------------------
@@ -13,22 +13,22 @@ finalizando con un punto. Luego la hora en formato 24h con minutos y segundos.
 Y de etiqueta del campo "Fecha actual".
 */
 
-/* 2
+/* 2 D
 Día en palabras de cuando se instalaron los componentes
 del facility 1
 */
 
-/* 3
+/* 3 B
 De los espacios, obtener la suma de áreas, cuál es el mínimo, el máximo y la media de áreas
 del floorid 1. Redondeado a dos dígitos.
 */
 
-/* 4
+/* 4 R
 Listar el número de componentes que tienen indicado el espacio y el número de componentes total.
 del facility 1
 */
 
-/* 5
+/* 5 X
 Mostrar tres medias que llamaremos:
 -Media a la media del área bruta
 -MediaBaja la media entre el área media y el área mínima
@@ -37,22 +37,22 @@ de los espacios del floorid 1
 Solo la parte entera, sin decimales ni redondeo.
 */
 
-/* 6
+/* 6 D
 Cuántos componentes hay, cuántos tienen fecha inicio de garantia, cuántos tienen espacio, y en cuántos espacios hay componentes
 en el facility 1.
 */
 
-/* 7
+/* 7 B
 Mostrar cuántos espacios tienen el texto 'Aula' en el nombre
 del facility 1.
 */
 
-/* 8
+/* 8 R
 Mostrar el porcentaje de componentes que tienen fecha de inicio de garantía
 del facility 1.
 */
 
-/* 9
+/* 9 X
 Listar las cuatro primeras letras del nombre de los espacios sin repetir
 del facility 1. 
 En orden ascendente.
@@ -65,7 +65,7 @@ Pati
 Serv
 */
 
-/* 10
+/* 10 D
 Número de componentes por fecha de instalación del facility 1
 ordenados descendentemente por la fecha de instalación
 Ejemplo:
@@ -75,7 +75,7 @@ Fecha   Componentes
 2021-03-03 232
 */
 
-/* 11
+/* 11 B
 Un listado por año del número de componentes instalados del facility 1
 ordenados descendentemente por año.
 Ejemplo
@@ -85,7 +85,7 @@ Año Componentes
 2020 2938
 */
 
-/* 12
+/* 12 R
 Nombre del día de instalación y número de componentes del facility 1.
 ordenado de lunes a domingo
 Ejemplo:
@@ -100,7 +100,7 @@ Sábado   	404
 Domingo  	431
 */
 
-/*13
+/*13 X
 Mostrar en base a los cuatro primeros caracteres del nombre cuántos espacios hay
 del floorid 1 ordenados ascendentemente por el nombre.
 Ejemplo.
@@ -109,12 +109,12 @@ Aseo 12
 Pasi 4
 */
 
-/*14
+/*14 D
 Cuántos componentes de instalaron un Jueves
 en el facilityid 1
 */
 
-/*15
+/*15 B
 Listar el id de planta concatenado con un guión
 seguido del id de espacio concatenado con un guión
 y seguido del nombre del espacio.
