@@ -114,6 +114,11 @@ Cuántos componentes de instalaron un Jueves
 en el facilityid 1
 */
 
+SELECT count(id)
+FROM components
+WHERE facilityid=1
+AND rtrim (to_char(installatedon, 'Day')) = 'Jueves';
+
 /*15 B
 Listar el id de planta concatenado con un guión
 seguido del id de espacio concatenado con un guión
