@@ -36,7 +36,22 @@ category
 description
 height
 facilityId
-
+*/
+create table cb_floors(
+    id number,
+    guid varchar2(4000),
+    name varchar2(4000)not null,
+    category varchar2(4000),
+    description varchar2(4000),
+    height number,
+    facilityid number not null,
+constraint pk_cbfloors_id primary key(id),
+constraint uq_cbfloors_guid unique(guid),
+constraint uq_cbfloors_name unique(name),
+constraint fk_cbfloors_facilityid foreign key(facilityid)
+    references cb_facilities(id)
+);
+*/
 SPACES
 id
 guid
