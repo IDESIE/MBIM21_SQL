@@ -87,7 +87,26 @@ installatedOn
 spaceId
 typeId
 */
+<<<<<<< HEAD
 
+=======
+create table cb_components(
+id number,
+guid varchar2 (4000),
+name varchar2 (4000),
+description varchar2 (4000),
+serialNumber number,
+installatedOn date default sysdate,
+spaceId number,
+typeId number not null,
+constraint pk_cbcomp_id primary key (id),
+constraint uq_cbcomp_guid unique (guid),
+constraint uq_cbcomp_name unique (name),
+constraint fk_cbcomp_spaceid foreign key (spaceId),
+constraint fk_cbcomp_typeid foreign key (typeId)
+    references cb_types(id)
+);
+>>>>>>> 606dd1ed4d1f639c25d296daa7dab15c4e7420a0
 /* 
 TYPES
 id
@@ -104,10 +123,17 @@ create table cb_types(
     description varchar2(4000),
     modelNumber varchar2(4000),  
     color varchar2(4000),
+<<<<<<< HEAD
     warrantyYears date >0
 constraint pk_cbtypes_id   
 constraint uq_cbtypes_guid 
 constraint uq_cbtypes_name
+=======
+    warrantyYears varchar2(4000) >0
+constraint pk_cbtypes_id primary key (id),
+constraint uq_cbtypes_guid unique (guid),
+constraint uq_cbtypes_name unique (name),
+>>>>>>> 606dd1ed4d1f639c25d296daa7dab15c4e7420a0
 constraint ck_cbtypes_year check (warrantyyears >0)
 );
 /* 
