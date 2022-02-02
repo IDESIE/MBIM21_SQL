@@ -26,8 +26,7 @@ CREATE TABLE CB_FACILITIES(
   CATEGORY VARCHAR2(4000),
   ADDRESS VARCHAR2(4000),
 CONSTRAINT PK_FACILI_ID PRIMARY KEY(ID),
-CONSTRAINT UQ_FACILI_GUID UNIQUE(GUID),
-CONSTRAINT UQ_FACILI_NAME UNIQUE(NAME)
+CONSTRAINT UQ_FACILI_GUID UNIQUE(GUID)
 );
 
 /*
@@ -39,21 +38,6 @@ category
 description
 height
 facilityId
-/*
-create table cb_floors(
-    id number,
-    guid varchar2 (4000),
-    name varchar2(200) not null,
-    category varchar(200),
-    description varchar2(200),
-    height number,
-    facility_id number not null,
-    constraint pk_floor_id primary key(id),
-    constraint uq_floor_guid unique (guid),
-    constraint uq_floor_name unique (name),
-    constraint fk_floor_id foreign key (facility_id)
-    references cb_facilities(id)
-);
 
 SPACES
 id
@@ -74,28 +58,6 @@ serialNumber
 installatedOn
 spaceId
 typeId
-*/
-
-CREATE TABLE CB_COMPONENTS(
-    ID NUMBER,
-    GUID VARCHAR2(4000),
-    NAME VARCHAR2(4000) NOT NULL,
-    DESCRIPTION VARCHAR2(4000),
-    SERIALNUMBER NUMBER,
-    INSTALLATEDON DATE DEFAULT SYSDATE,
-    SPACEIDTYPEID NUMBER,
-    TYPEID NUMBER,
-CONSTRAINT PK_COMPONENT_ID PRIMARY KEY(ID),
-CONSTRAINT UQ_COMPONENT_GUID UNIQUE(GUID),
-CONSTRAINT UQ_COMPONENT_NAME UNIQUE(NAME),
-CONSTRAINT FK_COMPONENT_SPACEID FOREIGN KEY (SPACEID)
- REFERENCES CB_SPACES(ID),
-CONSTRAINT FK_COMPONENT_TYPESID FOREIGN KEY (TYPESID)
- REFERENCES CB_TYPES(ID)
-);
-
-/*
-
 
 TYPES
 id
