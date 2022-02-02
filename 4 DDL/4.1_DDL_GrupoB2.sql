@@ -45,9 +45,8 @@ create table cb_floors(
     name varchar2(4000) not null,
     category varchar2(4000),
     description varchar2(4000),
-    height 
+    height varchar2(4000),
     facilityId number not null,
-    address varchar2(4000),
 constraint pk_floors_id primary key(id),    
 constraint uq_floors_guid unique(guid),
 constraint uq_floors_gude unique(name)
@@ -75,9 +74,7 @@ create table cb_spaces(
     floorId number not null,
     address varchar2(4000),
 constraint pk_floors_id primary key(id),    
-constraint uq_floors_guid unique(guid),
-constraint uq_floors_name unique(name)
-);
+;
 
 /* 
 COMPONENTS
@@ -90,6 +87,7 @@ installatedOn
 spaceId
 typeId
 */
+
 /* 
 TYPES
 id
@@ -106,7 +104,7 @@ create table cb_types(
     description varchar2(4000),
     modelNumber varchar2(4000),  
     color varchar2(4000),
-    warrantyYears varchar2(4000) >0
+    warrantyYears date >0
 constraint pk_cbtypes_id   
 constraint uq_cbtypes_guid 
 constraint uq_cbtypes_name
