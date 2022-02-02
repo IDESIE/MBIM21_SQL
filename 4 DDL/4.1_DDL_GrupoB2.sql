@@ -90,6 +90,7 @@ installatedOn
 spaceId
 typeId
 */
+
 /* 
 TYPES
 id
@@ -107,9 +108,9 @@ create table cb_types(
     modelNumber varchar2(4000),  
     color varchar2(4000),
     warrantyYears varchar2(4000) >0
-constraint pk_cbtypes_id   
-constraint uq_cbtypes_guid 
-constraint uq_cbtypes_name
+constraint pk_cbtypes_id primary key (id),
+constraint uq_cbtypes_guid unique (guid),
+constraint uq_cbtypes_name unique (name),
 constraint ck_cbtypes_year check (warrantyyears >0)
 );
 /* 
