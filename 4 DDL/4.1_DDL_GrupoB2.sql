@@ -64,6 +64,20 @@ usableHeight
 area
 floorId
 */
+create table cb_spaces(
+    id number,
+    guid varchar2(4000),
+    name varchar2(4000) not null,
+    category varchar2(4000),
+    description varchar2(4000),
+    usableHeight
+    area 
+    floorId number not null,
+    address varchar2(4000),
+constraint pk_floors_id primary key(id),    
+constraint uq_floors_guid unique(guid),
+constraint uq_floors_name unique(name)
+);
 
 /* 
 COMPONENTS
@@ -86,7 +100,19 @@ description
 modelNumber
 color
 warrantyYears */
-
+create table cb_types(
+    id number,
+    guid varchar2(4000),
+    name varchar2(4000) not null,
+    description varchar2(4000),
+    modelNumber varchar2(4000),  
+    color varchar2(4000),
+    warrantyYears varchar2(4000) >0
+constraint pk_cbtypes_id   
+constraint uq_cbtypes_guid 
+constraint uq_cbtypes_name
+constraint ck_cbtypes_year check (warrantyyears >0)
+);
 /* 
 En las definiciones establacer las siguientes restricciones
 -Los guid deben ser únicos.
