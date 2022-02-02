@@ -14,7 +14,31 @@ id del espacio «7»
 id de tipo «78»
 guid «666000»
 */
-
+insert into components(
+    facilityid,
+    name,
+    description,
+    serialNumber,
+    createdat,
+    warrantyYears,
+    assetidentifier,
+    creatorid,
+    spaceId,
+    typeid,
+    externalidentifier
+)
+values(1,
+'Grifo | Grifo | 030303',
+'test insert',
+'666333-eeefff',
+to_date('2021-12-12','yyyy-mm-dd'),
+tp_date('2021-11-11','yyyy-mm-dd'),
+'666000',
+3,
+7,
+78,
+'666000'
+);
 /*
 Comprobar que se ven los datos insertados de forma conjunta con una JOIN
 y no de forma independiente. Con el fin de comprobar las relaciones.
