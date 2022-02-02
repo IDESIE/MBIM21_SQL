@@ -16,7 +16,9 @@ name
 description
 category
 address
+*/
 
+*/
 FLOORS
 id
 guid
@@ -25,7 +27,9 @@ category
 description
 height
 facilityId
+*/
 
+*/
 SPACES
 id
 guid
@@ -35,7 +39,9 @@ description
 usableHeight
 area
 floorId
+*/
 
+*/
 COMPONENTS
 id
 guid
@@ -45,7 +51,9 @@ serialNumber
 installatedOn
 spaceId
 typeId
+*/
 
+*/
 TYPES
 id
 guid
