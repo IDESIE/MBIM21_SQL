@@ -16,21 +16,8 @@ name
 description
 category
 address
-*/
 
-create table cb_facilities(
- id number,
- guid varchar2(4000),
- name varchar2(4000) not null,
- description varchar2(4000),
- category varchar2(4000),
- address varchar2(4000),
-constraint pk_facili_id primary key(id),
-constraint uq_facili_guid unique(guid),
-constraint uq_facili_name unique(name)
-);
 
-*/
 FLOORS
 id
 guid
@@ -39,24 +26,8 @@ category
 description
 height
 facilityId
-*/
 
-create table cb_floors(
- id number,
- guid varchar2(4000),
- name varchar2(4000) not null,
- description varchar2(4000),
- category varchar2(4000),
- height number,
- facilityid number not null,
-constraint pk_floors_id primary key(id),
-constraint uq_floors_guid unique(guid)
-constraint uq_floors_name unique(name)
-constraint fk_floors_faci foreign key (facilityid)
-  references cb_facilities (id)
-);
 
-*/
 SPACES
 id
 guid
@@ -66,7 +37,24 @@ description
 usableHeight
 area
 floorId
+*/
 
+create table cb_spaces(
+    id number,
+    guid varchar2(4000),
+    name varchar2(4000) not null,
+    category varchar2(4000),
+    description varchar2(4000),
+    usableHeight varchar2(4000),
+    area  varchar2(4000),
+    floorId number not null,
+    address varchar2(4000),
+constraint pk_floors_id primary key(id),    
+constraint uq_floors_guid unique(guid),
+constraint uq_floors_name unique(name)
+);
+
+*/
 COMPONENTS
 id
 guid
@@ -76,10 +64,10 @@ serialNumber
 installatedOn
 spaceId
 typeId
-*/ 
+*/
 
 create table cb_components(
-    id number,
+   id number,
     guid varchar2(4000),
     name varchar2(4000)not null,
     description varchar2(4000),
@@ -90,10 +78,10 @@ create table cb_components(
 constraint pk_cbcomp_id primary key(id),
 constraint uq_cbcomp_guid unique(guid),
 constraint uq_cbcomp_name unique(name),
+constraint fk_cbcomp_spaceid foreign key(spaceid)
 constraint fk_cbcomp_typeid foreign key(typeid)
     references cb_types(id)
 );
-*/
 
 TYPES
 id
@@ -103,22 +91,7 @@ description
 modelNumber
 color
 warrantyYears
-*/
 
-create table cb_types(
- id
- guid
- name varchar2(4000) not null,
- description
- modelNumber
- color
- warrantyYears
-constraint pk_cbtypes_id primary key(id)
-constraint uq_cbtypes_guid unique(guid)
-constraint uq_cbtypes_name foreign key(name)
-constraint fk_cbtypes_year check (warrantyYears > 0)
-);
-*/
 
 En las definiciones establacer las siguientes restricciones
 -Los guid deben ser únicos.
