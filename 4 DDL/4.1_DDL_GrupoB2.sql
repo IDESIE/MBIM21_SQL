@@ -85,7 +85,7 @@ description
 serialNumber
 installatedOn date default sysdate,
 spaceId
-typeId
+typeId number not null
 constraint pk_cbcomp_id primary key(id),
 constraint uq_cbcomp_guid Unique(guid),
 constraint uq_cbcomp_name Unique(name),
@@ -102,8 +102,19 @@ modelNumber
 color
 warrantyYears 
 */
-
-
+create table cb_types(
+id
+guid
+name varchar2(4000) not null
+description
+modelNumber
+color
+warrantyYears
+constraint pk_cbtypes_id
+constraint uq_cbtypes_guid
+constraint uq_cbtypes_name
+constraint ck_cbtypes_year check(warrantyYears > 0)
+);
 
 
 En las definiciones establacer las siguientes restricciones
