@@ -71,6 +71,22 @@ Aula 3  MEDIO
 9
 Listar el nombre de los tres espacios con mayor área del facility 1
 */
+Select
+    rownum,fila,nombre,facilityid,fila,area
+from(
+select
+    rownum fila,
+    spaces.name nombre,
+    spaces.grossarea area,
+    floors.facilityid
+from 
+    spaces
+    join floors on spaces.floorid = floors.id
+where
+    floors.facilityid = 1
+order by 3 desc)
+where
+    rownum <4;
 
 /*
 10
@@ -108,6 +124,33 @@ Componentes 70
 Sillas 16
 Mesas 3
 */
+Select
+    'components' "Etiqueta",
+    count (components.id) "Numero componentes"
+from 
+    spaces join components on spaces.id = components.spaceid
+Where facilityid=1 and lower(spaces.name)='aula 03'
+Union
+Select
+    'Mesas',
+    count (components.id)
+from 
+    spaces join components on spaces.id = components.spaceid
+Where 
+    facilityid=1 and 
+    lower(spaces.name)='aula 03' and 
+    lower(components.name)='%silla%'
+Union        
+Select
+    components.id, 
+    components.name
+from 
+    spaces 
+    join components on spaces.id = components.spaceid
+Where 
+    facilityid=1 and 
+    (lower(compoenents.name) like '%mesa%' or
+    lower(components.name) like '%escritorio%');
 
 /*
 14
@@ -123,6 +166,17 @@ Cuál es el mes en el que más componentes se instalaron del facility 1.
 Nombre del día en el que más componentes se instalaron del facility 1.
 Ejemplo: Jueves
 */
+Select Count(id) numcomp, to_char(installatedon,'Day')dia
+    from components
+    where facilityid = 1
+    group by to_char(installatedon,'Day')
+    having count(id)=(select max(numcomp) maximo
+                from(
+                    select count(id) numcomp,to_char(installatedon,'Day')dia
+                    from components
+                    where facilityid=1
+                    group by to_char(installatedon,'Day')
+                    ));
 
 /*17
 Listar los nombres de componentes que están fuera de garantía del facility 1.
