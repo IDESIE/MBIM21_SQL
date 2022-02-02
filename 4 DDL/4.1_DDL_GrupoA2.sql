@@ -40,6 +40,8 @@ description
 height
 facilityId
 /*
+
+*/
 create table cb_floors(
     id number,
     guid varchar2 (4000),
@@ -54,6 +56,7 @@ create table cb_floors(
     constraint fk_floor_id foreign key (facility_id)
     references cb_facilities(id)
 );
+/*
 
 SPACES
 id
