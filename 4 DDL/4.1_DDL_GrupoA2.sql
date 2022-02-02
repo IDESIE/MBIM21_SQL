@@ -109,6 +109,21 @@ modelNumber
 color
 warrantyYears
 
+*/
+create table cb_TYPES(
+    id number, 
+    guid varchar2(4000),
+    name varchar2(4000)not null, 
+    description varchar2(4000),
+    model number varchar2(4000),
+    color varchar2(255char),
+    warrantyyears varchar2(4000),
+    constraint pk_cbtypes_id primary id,
+    constraint uq_cbtypes_guid unique guid,
+    constraint uq_cbtypes_name unique name, 
+    constraint ck_cbtypes_check(warrantyyears > 0)
+);
+/*
 
 En las definiciones establacer las siguientes restricciones
 -Los guid deben ser únicos.
