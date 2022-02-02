@@ -23,9 +23,9 @@ create table cb_facilities(
     name varchar2(4000) not null,
     description varchar2(4000),
     category varchar2(4000),
-    address varchar2(4000)
+    address varchar2(4000),
 constraint pk_facili_id primary key(id),
-constraint uq_facili_guid Unique(guide)     
+constraint uq_facili_guid Unique(guid)     
 );
 
 /* 
