@@ -119,24 +119,12 @@ Las distintas fechas de instalación de los componentes
 de los espacios con id 10, 12, 16, 19 
 ordenadas descendentemente.
 */
-<<<<<<< Updated upstream
+
 select distinct to_char (installatedon,'yyyy-mm-dd'), spaceid
 from components
 where spaceid in (10, 12, 16, 19)
 order by 1 desc;
-=======
-<<<<<<< HEAD
-SELECT to_char(installatedon, 'yyyy-mm-dd'), spaceid
-FROM components
-where spaceid in (10,12,16,19)
-order by 1 DESC;
-=======
-select to_char (installatedon,'yyyy-mm-dd'), spaceid
-from components
-where spaceid in (10, 12, 16, 19)
-order by 1 desc;
->>>>>>> 1a764a29d7d1d19d7199f11bd1ea8545ea27fbf4
->>>>>>> Stashed changes
+
 
 /* 18
 Nombre, volumen, de los espacios
@@ -272,10 +260,12 @@ AND REPLACEDON IS NULL;
 Lista de los tipos de componentes que tienen en el nombre un guión bajo
 del facility 1
 */
+
 SELECT*
 FROM COMPONENT_TYPES
 WHERE 
   FACILITYID=1
   AND NAME LIKE'%_%';
+
 --
 ------------------------------------------------------------------------------------------------
