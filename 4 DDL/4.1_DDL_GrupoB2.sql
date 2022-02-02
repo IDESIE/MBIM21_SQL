@@ -18,12 +18,16 @@ category
 address
 */
 create table cb_facilities(
-    id
-    guid
-    name
-    description
-)
-
+    id number,
+    guid varchar2(4000),
+    name varchar2(4000) not null,
+    description varchar2(4000),
+    category varchar2(4000),
+    address varchar2(4000),
+constraint pk_facili_id primary key(id),    
+constraint uq_facili_guid unique(guid),
+constraint uq_facili_name unique(name)
+);
 /* 
 FLOORS
 id
@@ -33,7 +37,21 @@ category
 description
 height
 facilityId
-/* 
+*/
+
+create table cb_floors(
+    id number,
+    guid varchar2(4000),
+    name varchar2(4000) not null,
+    category varchar2(4000),
+    description varchar2(4000),
+    height 
+    facilityId number not null,
+    address varchar2(4000),
+constraint pk_floors_id primary key(id),    
+constraint uq_floors_guid unique(guid),
+constraint uq_floors_gude unique(name)
+);
 
 /* 
 SPACES
@@ -44,8 +62,8 @@ category
 description
 usableHeight
 area
-floorId */
-/* 
+floorId
+*/
 
 /* 
 COMPONENTS
@@ -57,7 +75,7 @@ serialNumber
 installatedOn
 spaceId
 typeId
-/* 
+*/
 
 /* 
 TYPES
@@ -69,7 +87,7 @@ modelNumber
 color
 warrantyYears */
 
-
+/* 
 En las definiciones establacer las siguientes restricciones
 -Los guid deben ser únicos.
 -No es posible dar de alta un componente sin un tipo.
