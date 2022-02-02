@@ -90,7 +90,22 @@ installatedOn
 spaceId
 typeId
 */
-
+create table cb_components(
+id number,
+guid varchar2 (4000),
+name varchar2 (4000),
+description varchar2 (4000),
+serialNumber number,
+installatedOn date
+spaceId
+typeId
+constraint pk_cbcomp_id primary key (id),
+constraint uq_cbcomp_guid unique (guid),
+constraint uq_cbcomp_name unique (name),
+constraint fk_cbcomp_spaceid foreign key (spaceId),
+constraint fk_cbcomp_typeid foreign key (typeId)
+    references cb_types(id)
+);
 /* 
 TYPES
 id
