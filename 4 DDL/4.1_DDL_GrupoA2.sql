@@ -119,7 +119,7 @@ create table cb_TYPES(
     description varchar2(4000),
     model varchar2(4000),
     color varchar2(255 char),
-    warrantyyears varchar2(4000),
+    warrantyyears number,
     constraint pk_cbtypes_id primary key (id),
     constraint uq_cbtypes_guid unique (guid),
     constraint uq_cbtypes_name unique (name), 
