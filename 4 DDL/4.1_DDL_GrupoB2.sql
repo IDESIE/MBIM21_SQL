@@ -86,10 +86,10 @@ serialNumber
 installatedOn date default sysdate,
 spaceId
 typeId
-constraint pk_comp_id primary key
-constraint uq_comp_guid
-constraint uq_comp_name
-constraint fk_comp_spaceid
+constraint pk_comp_id primary key(id),
+constraint uq_comp_guid Unique(guid),
+constraint uq_comp_name Unique(name),
+constraint fk_comp_spaceid foreign key(spaceId)
 constraint fk_comp_typeid
 );
 /* 
