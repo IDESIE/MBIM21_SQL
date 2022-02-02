@@ -23,7 +23,28 @@ serialNumber
 installatedOn
 spaceId
 typeId
+*/
 
+create table 
+    cb_components
+    (   
+        id number,
+        guid varchar2(4000),
+        name varchar2(4000) not null,
+        description varchar2(4000),
+        serialNumber varchar2(4000),
+        installated date,
+        spaceId number,
+        typeId number,
+        
+    constraint pk_facilityid primary key(id),
+    constraint uq_facility_guid unique(guid),
+    constraint uq_facility_name unique(name),
+    constraint uq_facility_serialNumber unique (serialNumber)
+    )
+;
+/*
+*/
 TICKETS
 id
 subject
@@ -31,17 +52,29 @@ ticketTypeId
 description
 statusId
 
+/*
+*/
+
 TICKET_TYPE
 id
 name
+
+/*
+*/
 
 TICKET_STATUS
 id
 name
 
+/*
+*/
+
 TICKET_COMPONENT
 ticketId
 componentId
+
+/*
+*/
 
 ORDERS
 id
