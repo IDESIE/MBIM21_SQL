@@ -70,8 +70,8 @@ create table cb_spaces(
     name varchar2(4000) not null,
     category varchar2(4000),
     description varchar2(4000),
-    usableHeight
-    area 
+    usableHeight varchar2(4000),
+    area  varchar2(4000),
     floorId number not null,
     address varchar2(4000),
 constraint pk_floors_id primary key(id),    
