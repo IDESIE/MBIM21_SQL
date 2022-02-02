@@ -25,7 +25,8 @@ create table cb_facilities(
     category varchar2(4000),
     address varchar2(4000),
 constraint pk_facili_id primary key(id),
-constraint uq_facili_guid Unique(guid)     
+constraint uq_facili_guid Unique(guid),
+constraint uq_facili_name Unique(name)     
 );
 
 /* 
@@ -39,14 +40,18 @@ height
 facilityId
 */ 
 create table cb_floors(
-    id number,
-    guid varchar2(4000),
+    id,
+    guid,
     name varchar2(4000) not null,
-    description varchar2(4000),
-    category varchar2(4000),
-    address varchar2(4000),
-constraint pk_facili_id primary key(id),
-constraint uq_facili_guid Unique(guid)     
+    category,
+    description,
+    height,
+    facilityId number not null,
+constraint pk_floors_id primary key(id),
+constraint uq_floors_guid Unique (guid),
+constraint uq_floors_name Unique (name),
+constraint fk_floors_faci foreign key(facilityId)
+    references cb_facilities(id)
 );
 
 /* 
@@ -72,8 +77,21 @@ installatedOn
 spaceId
 typeId
 */
-
-
+create table cb_components(
+id
+guid
+name varchar2 (4000) not null,
+description
+serialNumber
+installatedOn date default sysdate,
+spaceId
+typeId
+constraint pk_comp_id primary key
+constraint uq_comp_guid
+constraint uq_comp_name
+constraint fk_comp_spaceid
+constraint fk_comp_typeid
+);
 /* 
 TYPES
 id
