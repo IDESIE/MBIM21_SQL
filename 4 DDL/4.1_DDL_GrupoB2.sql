@@ -24,11 +24,10 @@ create table cb_facilities(
     description varchar2(4000),
     category varchar2(4000),
     address varchar2(4000),
-constraint pk_facili_id primary key(id),
-constraint uq_facili_guid Unique(guid),
-constraint uq_facili_name Unique(name)     
+constraint pk_facili_id primary key(id),    
+constraint uq_facili_guid unique(guid),
+constraint uq_facili_name unique(name)
 );
-
 /* 
 FLOORS
 id
@@ -38,20 +37,20 @@ category
 description
 height
 facilityId
-*/ 
+*/
+
 create table cb_floors(
-    id,
-    guid,
+    id number,
+    guid varchar2(4000),
     name varchar2(4000) not null,
-    category,
-    description,
-    height,
+    category varchar2(4000),
+    description varchar2(4000),
+    height 
     facilityId number not null,
-constraint pk_cbfloors_id primary key(id),
-constraint uq_cbfloors_guid Unique (guid),
-constraint uq_cbfloors_name Unique (name),
-constraint fk_cbfloors_faci foreign key(facilityId)
-    references cb_facilities(id)
+    address varchar2(4000),
+constraint pk_floors_id primary key(id),    
+constraint uq_floors_guid unique(guid),
+constraint uq_floors_gude unique(name)
 );
 
 /* 
@@ -63,8 +62,8 @@ category
 description
 usableHeight
 area
-floorId */
-*/ 
+floorId
+*/
 
 /* 
 COMPONENTS
@@ -77,21 +76,6 @@ installatedOn
 spaceId
 typeId
 */
-create table cb_components(
-id
-guid
-name varchar2 (4000) not null,
-description
-serialNumber
-installatedOn date default sysdate,
-spaceId
-typeId number not null
-constraint pk_cbcomp_id primary key(id),
-constraint uq_cbcomp_guid Unique(guid),
-constraint uq_cbcomp_name Unique(name),
-constraint fk_cbcomp_spaceid foreign key(spaceId),
-constraint fk_cbcomp_typeid foreign key(typeid)
-);
 /* 
 TYPES
 id
@@ -100,23 +84,9 @@ name
 description
 modelNumber
 color
-warrantyYears 
-*/
-create table cb_types(
-id
-guid
-name varchar2(4000) not null
-description
-modelNumber
-color
-warrantyYears
-constraint pk_cbtypes_id
-constraint uq_cbtypes_guid
-constraint uq_cbtypes_name
-constraint ck_cbtypes_year check(warrantyYears > 0)
-);
+warrantyYears */
 
-
+/* 
 En las definiciones establacer las siguientes restricciones
 -Los guid deben ser únicos.
 -No es posible dar de alta un componente sin un tipo.
