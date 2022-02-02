@@ -69,7 +69,20 @@ area
 floorId
 */
 
-
+create table cb_spaces(
+    id number,
+    guid varchar2(4000),
+    name varchar2(4000),
+    category varchar2(4000),
+    description varchar2(4000),
+    usableHeight number,
+    area number,
+    floorId number not null,
+constraint pk_cbspaces_id primary key (id),
+constraint uq_cbspaces_guid unique(guid),
+constraint fk_cbspaces_floorId FOREIGN KEY (floorId)
+ references cb_floors(id)
+);
 
 /*
 
