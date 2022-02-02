@@ -67,6 +67,11 @@ description
 usableHeight
 area
 floorId
+*/
+
+
+
+/*
 
 COMPONENTS
 id
