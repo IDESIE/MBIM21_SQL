@@ -152,10 +152,10 @@ Pasi 4
 Cuántos componentes de instalaron un Jueves
 en el facilityid 1
 */
-select count(id)
- from components 
-where rtrim(to_char(installatedon,'Day'))= 'Jueves'
-and facilityid= 1;
+Select count (id)
+from components
+where facilityid = 1
+     and rtrim(to_char(installatedon,'Day') = 'Jueves%'
 
 /*15
 Listar el id de planta concatenado con un guión
