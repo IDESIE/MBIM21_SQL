@@ -79,19 +79,19 @@ typeId
 */ 
 
 create table cb_components(
- id number,
- guid varchar2 (4000),
- name varchar2(4000) not null,
- description varchar2(4000),
- serialNumber number,
- installatedOn date default sysdate,
- spaceId
- typeId number not null,
-constraint pk_comp_id primary key(id)
-constraint uq_comp_guid unique(guid)
-constraint uq_comp_name unique(name)
-constraint fk_comp_spaceid foreign key(spaceid)
-constraint fk_comp_typeid foreign key(typeid)
+    id number,
+    guid varchar2(4000),
+    name varchar2(4000)not null,
+    description varchar2(4000),
+    serialNumber number,
+    installatedOn date default sysdate,
+    spaceId number,
+    typeId number not null,
+constraint pk_cbcomp_id primary key(id),
+constraint uq_cbcomp_guid unique(guid),
+constraint uq_cbcomp_name unique(name),
+constraint fk_cbcomp_typeid foreign key(typeid)
+    references cb_types(id)
 );
 */
 
