@@ -12,17 +12,31 @@ la palabra "de", el mes en minúscula en palabras, la palabra "de", el año en c
 finalizando con un punto. Luego la hora en formato 24h con minutos y segundos.
 Y de etiqueta del campo "Fecha actual".
 */
-
+select
+    to_char(installatedon,'Day, DD "de" Month "de" yyyy"."hh24:mi:ss') "Fecha Actual"
+from components
+;
 /* 2
 Día en palabras de cuando se instalaron los componentes
 del facility 1
 */
-
+select
+    to_char(installatedon,'Day')
+from components
+where facilityid=1
+;
 /* 3
 De los espacios, obtener la suma de áreas, cuál es el mínimo, el máximo y la media de áreas
 del floorid 1. Redondeado a dos dígitos.
 */
-
+select
+    round(sum(grossarea),2) "Suma",
+    round(min(grossarea),2) "Mínimo",
+    round(max(grossarea),2)"Máximo",
+    round(avg(grossarea),2)"Media"
+from spaces
+where floorid=1
+;
 /* 4
 Listar el número de componentes que tienen indicado el espacio y el número de componentes total.
 del facility 1
