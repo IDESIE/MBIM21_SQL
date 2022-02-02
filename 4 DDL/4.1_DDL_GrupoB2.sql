@@ -96,9 +96,9 @@ guid varchar2 (4000),
 name varchar2 (4000),
 description varchar2 (4000),
 serialNumber number,
-installatedOn date
-spaceId
-typeId
+installatedOn date default sysdate,
+spaceId number,
+typeId number not null,
 constraint pk_cbcomp_id primary key (id),
 constraint uq_cbcomp_guid unique (guid),
 constraint uq_cbcomp_name unique (name),
