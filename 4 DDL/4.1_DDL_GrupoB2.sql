@@ -90,7 +90,6 @@ installatedOn
 spaceId
 typeId
 */
-
 /* 
 TYPES
 id
