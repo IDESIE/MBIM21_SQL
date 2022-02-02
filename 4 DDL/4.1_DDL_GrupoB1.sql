@@ -16,7 +16,18 @@ name
 description
 category
 address
-
+*/
+create table cb_facilities(
+    id number,
+    guid varchar2(4000),
+    name varchar2(4000),
+    description varchar2(4000),
+    category varchar2(4000),
+    address varchar2(4000),
+constraint pk_facili_id primary key(id),
+constraint uq_facili_guid unique(guid)
+);
+*/
 FLOORS
 id
 guid
