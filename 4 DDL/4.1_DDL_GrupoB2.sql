@@ -47,10 +47,10 @@ create table cb_floors(
     description,
     height,
     facilityId number not null,
-constraint pk_floors_id primary key(id),
-constraint uq_floors_guid Unique (guid),
-constraint uq_floors_name Unique (name),
-constraint fk_floors_faci foreign key(facilityId)
+constraint pk_cbfloors_id primary key(id),
+constraint uq_cbfloors_guid Unique (guid),
+constraint uq_cbfloors_name Unique (name),
+constraint fk_cbfloors_faci foreign key(facilityId)
     references cb_facilities(id)
 );
 
@@ -86,11 +86,11 @@ serialNumber
 installatedOn date default sysdate,
 spaceId
 typeId
-constraint pk_comp_id primary key(id),
-constraint uq_comp_guid Unique(guid),
-constraint uq_comp_name Unique(name),
-constraint fk_comp_spaceid foreign key(spaceId)
-constraint fk_comp_typeid
+constraint pk_cbcomp_id primary key(id),
+constraint uq_cbcomp_guid Unique(guid),
+constraint uq_cbcomp_name Unique(name),
+constraint fk_cbcomp_spaceid foreign key(spaceId),
+constraint fk_cbcomp_typeid foreign key(typeid)
 );
 /* 
 TYPES
