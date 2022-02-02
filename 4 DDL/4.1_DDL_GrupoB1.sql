@@ -47,8 +47,8 @@ create table cb_floors(
  height number,
  facilityid number not null,
 constraint pk_floors_id primary key(id),
-constraint uq_floors_guid unique(guid)
-constraint uq_floors_name unique(name)
+constraint uq_floors_guid unique(guid),
+constraint uq_floors_name unique(name),
 constraint fk_floors_faci foreign key (facilityid)
   references cb_facilities (id)
 );
@@ -103,7 +103,8 @@ create table cb_components(
 constraint pk_cbcomp_id primary key(id),
 constraint uq_cbcomp_guid unique(guid),
 constraint uq_cbcomp_name unique(name),
-constraint fk_cbcomp_spaceid foreign key(spaceid)
+constraint fk_cbcomp_spaceid foreign key(spaceid),
+    referemces cb_spaces(id)
 constraint fk_cbcomp_typeid foreign key(typeid)
     references cb_types(id)
 );
