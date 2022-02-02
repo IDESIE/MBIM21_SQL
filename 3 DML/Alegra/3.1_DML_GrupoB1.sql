@@ -21,7 +21,7 @@ insert into components(
     description,
     serialNumber,
     createdat,
-    warrantyYears,
+    WARRANTYSTARTON,
     assetidentifier,
     creatorid,
     spaceId,
@@ -38,8 +38,7 @@ tp_date('2021-11-11','yyyy-mm-dd'),
 3,
 7,
 78,
-'666000'
-);
+'666000');
 
 /*
 Comprobar que se ven los datos insertados de forma conjunta con una JOIN
