@@ -124,7 +124,7 @@ Componentes 70
 Sillas 16
 Mesas 3
 */
-SELECT 'Componentes',count(COMPONENTS.ID)
+SELECT 'Componentes' "Etiqueta",count(COMPONENTS.ID) "Numero Componentes"
 FROM 
 SPACES JOIN COMPONENTS ON SPACES.ID = COMPONENTS.SPACEID
 WHERE FACILITYID = 1 and
