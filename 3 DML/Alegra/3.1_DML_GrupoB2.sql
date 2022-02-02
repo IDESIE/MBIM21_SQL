@@ -53,6 +53,13 @@ Eliminar el componente creado.
 Colocar como código de barras los 6 últimos caracteres del GUID 
 a todo componente de la planta 1 y 2 del facility 1.
 */
+update components
+    set barcode = substr(externalidentifier, -6)
+    where facilityId = 1
+    and spaceId in (select id 
+            from sapces 
+            where floorid in (
+                    select id from floors where name in ('Planta +1','Planta +2')))
 
 /* 4
 Modificar la fecha de garantia para que sea igual a la fecha de instalación
