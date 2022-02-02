@@ -16,7 +16,15 @@ name
 description
 category
 address
+*/
+create table cb_facilities(
+    id
+    guid
+    name
+    description
+)
 
+/* 
 FLOORS
 id
 guid
@@ -25,7 +33,9 @@ category
 description
 height
 facilityId
+/* 
 
+/* 
 SPACES
 id
 guid
@@ -34,8 +44,10 @@ category
 description
 usableHeight
 area
-floorId
+floorId */
+/* 
 
+/* 
 COMPONENTS
 id
 guid
@@ -45,7 +57,9 @@ serialNumber
 installatedOn
 spaceId
 typeId
+/* 
 
+/* 
 TYPES
 id
 guid
@@ -53,7 +67,7 @@ name
 description
 modelNumber
 color
-warrantyYears
+warrantyYears */
 
 
 En las definiciones establacer las siguientes restricciones
