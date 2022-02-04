@@ -16,6 +16,7 @@ name
 description
 category
 address
+*/ 
 
 create table cb_facilities(
  id number,
@@ -29,6 +30,7 @@ constraint uq_facili_guid unique(guid),
 constraint uq_facili_name unique(name)
 );
 
+/* 
 FLOORS
 id
 guid
@@ -37,6 +39,8 @@ category
 description
 height
 facilityId
+
+*/ 
 
 create table cb_floors(
  id number,
@@ -53,6 +57,7 @@ constraint fk_floors_faci foreign key (facilityid)
   references cb_facilities (id)
 );
 
+/* 
 SPACES
 id
 guid
@@ -79,7 +84,7 @@ constraint uq_floors_guid unique(guid),
 constraint uq_floors_name unique(name)
 );
 
-*/
+/* 
 COMPONENTS
 id
 guid
@@ -109,6 +114,7 @@ constraint fk_cbcomp_typeid foreign key(typeid)
     references cb_types(id)
 );
 
+/* 
 TYPES
 id
 guid
@@ -117,7 +123,11 @@ description
 modelNumber
 color
 warrantyYears
+*/
 
+
+
+/* 
 
 En las definiciones establacer las siguientes restricciones
 -Los guid deben ser únicos.
@@ -129,6 +139,7 @@ En las definiciones establacer las siguientes restricciones
 -Los nombres no pueden estar vacíos en todas las entidades.
 -Los años de garantia no pueden ser cero ni negativos.
 -Se debe mantener la integridad referencial.
+
 
 NOTA: Algunos ejercicios provocan errores que deben probar (para ver el error) y corregir.
 */
