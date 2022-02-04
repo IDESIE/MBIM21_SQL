@@ -73,8 +73,8 @@ create table cb_spaces(
     area  varchar2(4000),
     floorId number not null,
     address varchar2(4000),
-constraint pk_floors_id primary key(id),    
-;
+constraint pk_floors_id primary key(id)    
+);
 
 /* 
 COMPONENTS
