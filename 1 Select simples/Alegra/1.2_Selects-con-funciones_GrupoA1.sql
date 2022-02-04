@@ -17,6 +17,10 @@ Y de etiqueta del campo "Fecha actual".
 Día en palabras de cuando se instalaron los componentes
 del facility 1
 */
+select name,
+to_char(installatedon,'Day') "Día de instalación"
+from components
+where facilityid=1;
 
 /* 3 B
 De los espacios, obtener la suma de áreas, cuál es el mínimo, el máximo y la media de áreas
@@ -74,6 +78,14 @@ Fecha   Componentes
 2021-03-23 34
 2021-03-03 232
 */
+Select
+to_char(installatedon,'dd-mm-yyyy')"Fecha de instalación",
+Count(installatedon) "Número de componente"
+from components
+where facilityid=1
+and installatedon is not null
+group by installatedon
+order by installatedon desc;
 
 /* 11 B
 Un listado por año del número de componentes instalados del facility 1
