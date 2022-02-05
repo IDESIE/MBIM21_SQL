@@ -26,7 +26,18 @@ where facilityid=1;
 De los espacios, obtener la suma de áreas, cuál es el mínimo, el máximo y la media de áreas
 del floorid 1. Redondeado a dos dígitos.
 */
-
+SELECT 
+    ROUND (sum(spaces.grossarea),2) as "Suma Gross",
+    ROUND (sum(spaces.netarea),2) as "Suma Net",
+    ROUND (min(spaces.grossarea),2) as "Mínimo Gross",
+    ROUND (min(spaces.netarea),2) as "Mínimo Net",
+    ROUND (max(spaces.grossarea),2) as "Máximo Gross",
+    ROUND (max(spaces.netarea),2) as "Máximo Net",
+    ROUND (avg(spaces.grossarea),2) as "Average Gross",
+    ROUND (avg(spaces.netarea),2) as "Average Net"
+    
+FROM spaces
+WHERE floorid = 1;
 /* 4 R
 Listar el número de componentes que tienen indicado el espacio y el número de componentes total.
 del facility 1
@@ -50,7 +61,9 @@ en el facility 1.
 Mostrar cuántos espacios tienen el texto 'Aula' en el nombre
 del facility 1.
 */
-
+SELECT count (spaces.name) as "Cuantas Aulas"
+FROM spaces join floors on floorid = floors.id
+WHERE floors.facilityid = 1 and spaces.name like 'Aula%';
 /* 8 R
 Mostrar el porcentaje de componentes que tienen fecha de inicio de garantía
 del facility 1.
@@ -96,7 +109,12 @@ Año Componentes
 2021 344
 2020 2938
 */
-
+SELECT to_char(installatedon,'yyyy')"fecha",
+    count (installatedon)
+FROM components
+WHERE facilityid = 1 and installatedon is not null
+    group by to_char(installatedon,'yyyy')
+    order by to_char(installatedon,'yyyy') desc;
 /* 12 R
 Nombre del día de instalación y número de componentes del facility 1.
 ordenado de lunes a domingo
@@ -138,5 +156,6 @@ y seguido del nombre del espacio.
 el id del espacio debe tener una longitud de 3 caracteres
 Ej. 3-004-Nombre
 */
- 
+SELECT floors.id ||  '-' || '00' ||spaces.id ||  '-' || spaces.name as "order"
+FROM spaces join floors on floorid = floors.id;
 ------------------------------------------------------------------------------------------------
