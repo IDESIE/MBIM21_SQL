@@ -20,7 +20,7 @@ insert into components(
     description,
     serialNumber,
     createdat,
-    warrantyYears,
+    warrantystarton,
     assetidentifier,
     creatorid,
     spaceId,
