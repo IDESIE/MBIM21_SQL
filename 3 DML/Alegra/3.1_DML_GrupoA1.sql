@@ -38,14 +38,14 @@ values( 1,
     7,
     78,
     666000);
-/*
+/* X
 Comprobar que se ven los datos insertados de forma conjunta con una JOIN
 y no de forma independiente. Con el fin de comprobar las relaciones.
 Mostrar todos los datos indicados en el punto anterior 
 y además el nombre del espacio, nombre de la planta, nombre del tipo de componente
 */
 
-/* 2
+/* 2 D
 Eliminar el componente creado.
 */
 
@@ -61,11 +61,11 @@ update components
                     where floorid in (
                             select id from floors where name in('Planta +1','Planta +2')));
 
-/* 4
+/* 4 B
 Modificar la fecha de garantia para que sea igual a la fecha de instalación
 para todo componente que sea un grifo o lavabo del facility 1.
 */
 
-/* 5
+/* 5 R
 Anonimizar los datos personales: nombre, apellido, email, teléfono de los contactos
 */
