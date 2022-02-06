@@ -47,6 +47,20 @@ de los espacios del floorid 1
 Solo la parte entera, sin decimales ni redondeo.
 */
 
+SELECT
+ FLOORID,
+ TRUNC(AVG(grossarea),0) Media,
+ TRUNC((AVG(grossarea)+MIN(GROSSAREA))/2,0) MediaBaja,
+ TRUNC((AVG(grossarea)+MAX(GROSSAREA))/2,0) MediaAlta
+FROM 
+SPACES
+WHERE
+FLOORID=1
+GROUP BY FLOORID;
+
+
+
+
 /* 6
 Cuántos componentes hay, cuántos tienen fecha inicio de garantia, cuántos tienen espacio, y en cuántos espacios hay componentes
 en el facility 1.
