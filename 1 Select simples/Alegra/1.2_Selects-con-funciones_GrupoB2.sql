@@ -97,6 +97,7 @@ select
 distinct Substr(name,1,4)
 from spaces
 Where floorid=1
+order by Substr(name,1,4) asc;
 
 /* 10
 Número de componentes por fecha de instalación del facility 1
