@@ -50,7 +50,8 @@ create table cb_floors(
 constraint pk_floors_id primary key(id),    
 constraint uq_floors_guid unique(guid),
 constraint uq_floors_name unique(name),
-constraint fk_floors_facili foreign key (facility)
+constraint fk_floors_facili foreign key (facilityid) 
+references cb_facilities (id)
 );
 
 /* 
@@ -72,9 +73,12 @@ create table cb_spaces(
     description varchar2(4000),
     usableHeight varchar2(4000),
     area  varchar2(4000),
-    floorId number not null,
-    address varchar2(4000),
-constraint pk_floors_id primary key(id)    
+    floorId number not null
+constraint pk_spaces_id primary key(id) 
+constraint uq_cbspacesname unique (name)
+constraint uq_cbspacesguid unique(guid)
+constraint fk_cbspacesfloor foreign key(floorid)
+references cb_floors(id)
 );
 
 /* 
@@ -91,7 +95,7 @@ typeId
 create table cb_components(
 id number,
 guid varchar2 (4000),
-name varchar2 (4000),
+name varchar2 (4000) not null,
 description varchar2 (4000),
 serialNumber number,
 installatedOn date default sysdate,
@@ -120,7 +124,7 @@ create table cb_types(
     description varchar2(4000),
     modelNumber varchar2(4000),  
     color varchar2(4000),
-      warrantyYears varchar2(4000) >0
+    warrantyYears number
 constraint pk_cbtypes_id primary key (id),
 constraint uq_cbtypes_guid unique (guid),
 constraint uq_cbtypes_name unique (name),
