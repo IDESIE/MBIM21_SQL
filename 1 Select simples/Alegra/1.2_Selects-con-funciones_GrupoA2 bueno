@@ -22,6 +22,13 @@ del facility 1
 De los espacios, obtener la suma de áreas, cuál es el mínimo, el máximo y la media de áreas
 del floorid 1. Redondeado a dos dígitos.
 */
+SELECT
+ROUND(SUM(grossarea),2),
+ROUND(MIN(grossarea),2),
+ROUND(MAX(grossarea),2),
+ROUND(AVG(grossarea),2)
+FROM spaces 
+WHERE floorid=1;
 
 
 
@@ -53,6 +60,12 @@ where warrantystarton is not null;
 Mostrar cuántos espacios tienen el texto 'Aula' en el nombre
 del facility 1.
 */
+select
+ Count (*)
+from 
+ spaces
+where 
+ name like '%Aula%';
 
 /* 8
 Mostrar el porcentaje de componentes que tienen fecha de inicio de garantía
@@ -106,6 +119,17 @@ Viernes  	468
 Sábado   	404
 Domingo  	431
 */
+PENDIENTE DE REVISION DE ORDEN DE AGRUPACIÓN
+
+SELECT
+ TO_CHAR(INSTALLATEDON,'Day')Día,
+ COUNT(*)COMPONENTES
+
+FROM COMPONENTS
+WHERE
+ FACILITYID=1
+GROUP BY TO_CHAR(INSTALLATEDON,'Day')
+ORDER BY TO_CHAR(INSTALLATEDON,'Day')ASC;
 
 /*13
 Mostrar en base a los cuatro primeros caracteres del nombre cuántos espacios hay
