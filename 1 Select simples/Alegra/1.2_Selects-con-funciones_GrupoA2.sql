@@ -48,6 +48,16 @@ Mostrar tres medias que llamaremos:
 de los espacios del floorid 1
 Solo la parte entera, sin decimales ni redondeo.
 */
+SELECT
+ FLOORID,
+ TRUNC(AVG(grossarea),0) Media,
+ TRUNC((AVG(grossarea)+MIN(GROSSAREA))/2,0) MediaBaja,
+ TRUNC((AVG(grossarea)+MAX(GROSSAREA))/2,0) MediaAlta
+FROM 
+SPACES
+WHERE
+FLOORID=1
+GROUP BY FLOORID;
 
 
 
@@ -139,16 +149,14 @@ Domingo  	431
 
 PENDIENTE DE REVISION
 SELECT
- Día,
- Count(Día)
-
-FROM(
-SELECT
- TO_CHAR(INSTALATEDON,'Day')'Día',
+ TO_CHAR(INSTALLATEDON,'Day')Día,
+ COUNT(*)COMPONENTES
 
 FROM COMPONENTS
 WHERE
- FACILITYID=1);
+ FACILITYID=1
+GROUP BY TO_CHAR(INSTALLATEDON,'Day')
+ORDER BY TO_CHAR(INSTALLATEDON,'Day')ASC
 
 
 
@@ -184,5 +192,10 @@ y seguido del nombre del espacio.
 el id del espacio debe tener una longitud de 3 caracteres
 Ej. 3-004-Nombre
 */
+SELECT
+ (FLOORS.ID||'-'||SUBSTR(SPACES.ID,0,3)||'-'||SPACES.NAME) AS IDPL_IDESP_NOMBRES
+
+FROM 
+FLOORS  JOIN SPACES  ON FLOORS.ID=SPACES.FLOORID;
  
 ------------------------------------------------------------------------------------------------
