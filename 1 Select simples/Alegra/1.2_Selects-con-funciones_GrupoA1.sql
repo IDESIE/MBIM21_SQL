@@ -161,11 +161,13 @@ Pasi 4
 Cuántos componentes de instalaron un Jueves
 en el facilityid 1
 */
-
-SELECT count(id)
-FROM components
-WHERE facilityid=1
-AND rtrim (to_char(installatedon, 'Day')) = 'Jueves';
+select 
+ count(id), to_char(installatedon,'Day')
+ from components 
+where facilityid = 1 
+and rtrim(to_char(installatedon,'Day'))= 'Jueves'
+and facilityid= 1
+group by to_char(installatedon,'Day');
 
 /*15 B
 Listar el id de planta concatenado con un guión
