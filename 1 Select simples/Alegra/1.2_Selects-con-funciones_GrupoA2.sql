@@ -98,7 +98,12 @@ Fecha   Componentes
 2021-03-23 34
 2021-03-03 232
 */
-
+select count(id), to_char(installatedon,'yyyy-mm-dd')
+from components
+where facilityid = 1
+and installatedon is not null
+group by to_char(installatedon,'yyyy-mm-dd')
+order by 2 desc;
 /* 11
 Un listado por año del número de componentes instalados del facility 1
 ordenados descendentemente por año.
@@ -108,7 +113,15 @@ Año Componentes
 2021 344
 2020 2938
 */
-
+SELECT DISTINCT
+    TO_CHAR (INSTALLATEDON,'YYYY'),
+    count(id)
+FROM
+    COMPONENTS
+WHERE
+    FACILITYID=1
+GROUP BY INSTALLATEDON
+ORDER BY 1 DESC;
 /* 12
 Nombre del día de instalación y número de componentes del facility 1.
 ordenado de lunes a domingo
@@ -152,6 +165,12 @@ Aula 23
 Aseo 12
 Pasi 4
 */
+select substr(spaces.name,1,4), count(*)
+from spaces join floors on spaces.floorid = floors.id
+where floorid = 1
+group by substr(spaces.name,1,4)
+having count(*) > 0
+order by 1 asc;
 
 /*14
 Cuántos componentes de instalaron un Jueves
