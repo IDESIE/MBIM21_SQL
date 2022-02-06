@@ -55,7 +55,14 @@ Solo la parte entera, sin decimales ni redondeo.
 /* 6 D
 Cuántos componentes hay, cuántos tienen fecha inicio de garantia, cuántos tienen espacio, y en cuántos espacios hay componentes
 en el facility 1.
-*/
+*/select
+    count(*),
+    count(warrantystarton),
+    count(spaceid)
+from components
+where facilityid=1 
+    and warrantystarton is not null 
+    and spaceid is not null;
 
 /* 7 B
 Mostrar cuántos espacios tienen el texto 'Aula' en el nombre
