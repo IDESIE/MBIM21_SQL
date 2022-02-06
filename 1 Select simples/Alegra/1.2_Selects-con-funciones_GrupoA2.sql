@@ -108,7 +108,15 @@ Año Componentes
 2021 344
 2020 2938
 */
-
+SELECT DISTINCT
+    TO_CHAR (INSTALLATEDON,'YYYY'),
+    count(id)
+FROM
+    COMPONENTS
+WHERE
+    FACILITYID=1
+GROUP BY INSTALLATEDON
+ORDER BY 1 DESC;
 /* 12
 Nombre del día de instalación y número de componentes del facility 1.
 ordenado de lunes a domingo
