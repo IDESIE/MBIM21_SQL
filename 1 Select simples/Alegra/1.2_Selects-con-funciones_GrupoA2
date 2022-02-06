@@ -49,6 +49,8 @@ de los espacios del floorid 1
 Solo la parte entera, sin decimales ni redondeo.
 */
 
+
+
 /* 6
 Cuántos componentes hay, cuántos tienen fecha inicio de garantia, cuántos tienen espacio, y en cuántos espacios hay componentes
 en el facility 1.
@@ -62,6 +64,12 @@ where warrantystarton is not null;
 Mostrar cuántos espacios tienen el texto 'Aula' en el nombre
 del facility 1.
 */
+select
+ Count (*)
+from 
+ spaces
+where 
+ name like '%Aula%';
 
 /* 8
 Mostrar el porcentaje de componentes que tienen fecha de inicio de garantía
