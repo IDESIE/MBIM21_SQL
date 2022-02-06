@@ -124,6 +124,26 @@ Sábado   	404
 Domingo  	431
 */
 
+PENDIENTE DE REVISION
+SELECT
+ Día,
+ Count(Día)
+
+FROM(
+SELECT
+ TO_CHAR(INSTALATEDON,'Day')'Día',
+
+FROM COMPONENTS
+WHERE
+ FACILITYID=1);
+
+
+
+
+
+
+
+
 /*13
 Mostrar en base a los cuatro primeros caracteres del nombre cuántos espacios hay
 del floorid 1 ordenados ascendentemente por el nombre.
