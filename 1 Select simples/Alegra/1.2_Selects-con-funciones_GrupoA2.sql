@@ -98,7 +98,12 @@ Fecha   Componentes
 2021-03-23 34
 2021-03-03 232
 */
-
+select count(id), to_char(installatedon,'yyyy-mm-dd')
+from components
+where facilityid = 1
+and installatedon is not null
+group by to_char(installatedon,'yyyy-mm-dd')
+order by 2 desc;
 /* 11
 Un listado por año del número de componentes instalados del facility 1
 ordenados descendentemente por año.
