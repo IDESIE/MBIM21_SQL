@@ -82,6 +82,11 @@ where name like 'Aula%'
 Mostrar el porcentaje de componentes que tienen fecha de inicio de garantía
 del facility 1.
 */
+select 
+count(warrantystarton)*100/sum(count(*))
+from components
+where facilityid=1
+group by warrantystarton;
 
 /* 9
 Listar las cuatro primeras letras del nombre de los espacios sin repetir
