@@ -48,6 +48,8 @@ y además el nombre del espacio, nombre de la planta, nombre del tipo de compone
 /* 2 D
 Eliminar el componente creado.
 */
+delete from components 
+where name='Grifo | Grifo | 030303';
 
 /* 3
 Colocar como código de barras los 6 últimos caracteres del GUID 
