@@ -49,7 +49,8 @@ create table cb_floors(
     facilityId number not null,
 constraint pk_floors_id primary key(id),    
 constraint uq_floors_guid unique(guid),
-constraint uq_floors_gude unique(name)
+constraint uq_floors_name unique(name),
+constraint fk_floors_facili foreign key (facility)
 );
 
 /* 
