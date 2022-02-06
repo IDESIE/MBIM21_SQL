@@ -41,7 +41,16 @@ where floorid=1
 Listar el número de componentes que tienen indicado el espacio y el número de componentes total.
 del facility 1
 */
-
+select
+    spaceid,
+    count(*)
+from 
+    components
+where 
+    facilityid=1
+group by 
+    spaceid
+;
 /* 5
 Mostrar tres medias que llamaremos:
 -Media a la media del área bruta
@@ -56,9 +65,15 @@ Cuántos componentes hay, cuántos tienen fecha inicio de garantia, cuántos tie
 en el facility 1.
 */
 select
-    count(*), count(id), count(warrantystarton), count(distinct warrantystarton)
-from components
-where warrantystarton is not null;
+    count(*), 
+    count(id), 
+    count(warrantystarton), 
+    count(distinct warrantystarton)
+from 
+    components
+where 
+    warrantystarton is not null
+;
 
 /* 7
 Mostrar cuántos espacios tienen el texto 'Aula' en el nombre
