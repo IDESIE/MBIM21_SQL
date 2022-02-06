@@ -132,6 +132,12 @@ Aula 23
 Aseo 12
 Pasi 4
 */
+select substr(spaces.name,1,4), count(*)
+from spaces join floors on spaces.floorid = floors.id
+where floorid = 1
+group by substr(spaces.name,1,4)
+having count(*) > 0
+order by 1 asc;
 
 /*14
 Cuántos componentes de instalaron un Jueves
