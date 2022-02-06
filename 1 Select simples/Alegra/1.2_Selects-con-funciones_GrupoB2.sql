@@ -124,7 +124,13 @@ Año Componentes
 2021 344
 2020 2938
 */
-
+select
+to_char(installatedon,'yyyy'),
+Count (*)
+from components
+where facilityid = 1
+group by to_char(installatedon,'yyyy')
+ORDER BY to_char(installatedon,'yyyy')desc;
 /* 12
 Nombre del día de instalación y número de componentes del facility 1.
 ordenado de lunes a domingo
@@ -139,6 +145,13 @@ Viernes  	468
 Sábado   	404
 Domingo  	431
 */
+select
+to_char(installatedon,'Day'),
+Count (*)
+from components
+where facilityid = 1
+group by to_char(installatedon,'Day')
+ORDER BY ???;
 
 /*13
 Mostrar en base a los cuatro primeros caracteres del nombre cuántos espacios hay
