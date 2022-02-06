@@ -12,7 +12,9 @@ la palabra "de", el mes en minúscula en palabras, la palabra "de", el año en c
 finalizando con un punto. Luego la hora en formato 24h con minutos y segundos.
 Y de etiqueta del campo "Fecha actual".
 */
-
+select to_char 
+(sysdate,'day, DD "DE" MONTH "DE" YYYY. HH:MM:SS')"Fecha Actual"
+from dual;
 /* 2 D
 Día en palabras de cuando se instalaron los componentes
 del facility 1
@@ -51,6 +53,10 @@ Mostrar tres medias que llamaremos:
 de los espacios del floorid 1
 Solo la parte entera, sin decimales ni redondeo.
 */
+SELECT 
+    ROUND(avg(spaces.grossarea),0)"la media"
+FROM spaces
+WHERE floorid = 1;
 
 /* 6 D
 Cuántos componentes hay, cuántos tienen fecha inicio de garantia, cuántos tienen espacio, y en cuántos espacios hay componentes
@@ -81,6 +87,11 @@ Pasi
 Pati
 Serv
 */
+SELECT
+    distinct Substr(name,1,4)
+from spaces
+Where floorid=1;
+
 
 /* 10 D
 Número de componentes por fecha de instalación del facility 1
