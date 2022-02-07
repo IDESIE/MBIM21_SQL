@@ -74,9 +74,10 @@ Mostrar cuántos espacios tienen el texto 'Aula' en el nombre
 del facility 1.
 */
 select
-Count (name)
-from spaces
-where name like 'Aula%'
+Count (spaceid)
+from components
+where name like 'Aula%' 
+and facilityid=1;
 
 /* 8
 Mostrar el porcentaje de componentes que tienen fecha de inicio de garantía
@@ -158,7 +159,7 @@ Count (*)
 from components
 where facilityid = 1
 group by to_char(installatedon,'Day')
-ORDER BY ???;
+ORDER BY installatedon asc;
 
 /*13
 Mostrar en base a los cuatro primeros caracteres del nombre cuántos espacios hay
