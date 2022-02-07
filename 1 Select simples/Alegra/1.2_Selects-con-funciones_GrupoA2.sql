@@ -13,6 +13,9 @@ finalizando con un punto. Luego la hora en formato 24h con minutos y segundos.
 Y de etiqueta del campo "Fecha actual".
 */
 
+select to_char(SYSDATE,'Day,dd "de" month "de" yyyy. hh:mi:ss')
+from dual;
+
 /* 2
 Día en palabras de cuando se instalaron los componentes
 del facility 1
@@ -33,12 +36,15 @@ WHERE floorid=1;
 
 
 
-
-
 /* 4
 Listar el número de componentes que tienen indicado el espacio y el número de componentes total.
 del facility 1
 */
+
+SELECT SPACEID, COUNT (*)
+FROM COMPONENTS
+WHERE FACILITYID=1
+GROUP BY SPACEID; 
 
 /* 5
 Mostrar tres medias que llamaremos:
@@ -49,7 +55,16 @@ de los espacios del floorid 1
 Solo la parte entera, sin decimales ni redondeo.
 */
 
-
+SELECT
+ FLOORID,
+ TRUNC(AVG(grossarea),0) Media,
+ TRUNC((AVG(grossarea)+MIN(GROSSAREA))/2,0) MediaBaja,
+ TRUNC((AVG(grossarea)+MAX(GROSSAREA))/2,0) MediaAlta
+FROM 
+SPACES
+WHERE
+FLOORID=1
+GROUP BY FLOORID;
 
 /* 6
 Cuántos componentes hay, cuántos tienen fecha inicio de garantia, cuántos tienen espacio, y en cuántos espacios hay componentes
@@ -91,6 +106,10 @@ Pati
 Serv
 */
 
+SELECT DISTINCT SUBSTR(NAME,1,4) 
+FROM SPACES 
+WHERE FLOORID=1;
+
 /* 10
 Número de componentes por fecha de instalación del facility 1
 ordenados descendentemente por la fecha de instalación
@@ -110,15 +129,7 @@ Año Componentes
 2021 344
 2020 2938
 */
-SELECT DISTINCT
-    TO_CHAR (INSTALLATEDON,'YYYY'),
-    count(id)
-FROM
-    COMPONENTS
-WHERE
-    FACILITYID=1
-GROUP BY INSTALLATEDON
-ORDER BY 1 DESC;
+
 /* 12
 Nombre del día de instalación y número de componentes del facility 1.
 ordenado de lunes a domingo
@@ -133,7 +144,15 @@ Viernes  	468
 Sábado   	404
 Domingo  	431
 */
+SELECT
+ TO_CHAR(INSTALLATEDON,'Day')Día,
+ COUNT(*)COMPONENTES
 
+FROM COMPONENTS
+WHERE
+ FACILITYID=1
+GROUP BY TO_CHAR(INSTALLATEDON,'Day')
+ORDER BY TO_CHAR(INSTALLATEDON,'Day')ASC;
 /*13
 Mostrar en base a los cuatro primeros caracteres del nombre cuántos espacios hay
 del floorid 1 ordenados ascendentemente por el nombre.
@@ -142,17 +161,16 @@ Aula 23
 Aseo 12
 Pasi 4
 */
-select substr(spaces.name,1,4), count(*)
-from spaces join floors on spaces.floorid = floors.id
-where floorid = 1
-group by substr(spaces.name,1,4)
-having count(*) > 0
-order by 1 asc;
 
 /*14
 Cuántos componentes de instalaron un Jueves
 en el facilityid 1
 */
+
+SELECT NAME, TO_CHAR(INSTALLATEDON, 'DAY')
+FROM COMPONENTS
+WHERE RTRIM(TO_CHAR(INSTALLATEDON, 'DAY'))= 'JUEVES'
+AND FACILITYID=1;
 
 /*15
 Listar el id de planta concatenado con un guión
@@ -161,5 +179,10 @@ y seguido del nombre del espacio.
 el id del espacio debe tener una longitud de 3 caracteres
 Ej. 3-004-Nombre
 */
+ SELECT
+ (FLOORS.ID||'-'||SUBSTR(SPACES.ID,0,3)||'-'||SPACES.NAME) AS IDPL_IDESP_NOMBRES
+
+FROM 
+FLOORS  JOIN SPACES  ON FLOORS.ID=SPACES.FLOORID;
  
 ------------------------------------------------------------------------------------------------
