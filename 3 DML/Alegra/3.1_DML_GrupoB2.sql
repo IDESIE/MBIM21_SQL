@@ -20,7 +20,7 @@ insert into components(
     description,
     serialNumber,
     createdat,
-    warrantystarton,
+    warrantyYears,
     assetidentifier,
     creatorid,
     spaceId,
@@ -48,6 +48,19 @@ y además el nombre del espacio, nombre de la planta, nombre del tipo de compone
 /* 2
 Eliminar el componente creado.
 */
+delete from components(
+    facilityid,
+    name,
+    description,
+    serialNumber,
+    createdat,
+    warrantyYears,
+    assetidentifier,
+    creatorid,
+    spaceId,
+    typeid,
+    externalidentifier
+)
 
 /* 3
 Colocar como código de barras los 6 últimos caracteres del GUID 
@@ -57,13 +70,16 @@ update components
     set barcode = substr(externalidentifier, -6)
     where facilityId = 1
     and spaceId in (select id 
-            from sapces 
+            from spaces 
             where floorid in (
                     select id from floors where name in ('Planta +1','Planta +2')));
+
 /* 4
 Modificar la fecha de garantia para que sea igual a la fecha de instalación
 para todo componente que sea un grifo o lavabo del facility 1.
 */
+
+
 
 /* 5
 Anonimizar los datos personales: nombre, apellido, email, teléfono de los contactos
