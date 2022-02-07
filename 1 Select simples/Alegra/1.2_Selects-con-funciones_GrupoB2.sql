@@ -117,11 +117,12 @@ Fecha   Componentes
 2021-03-03 232
 */
 select
-Createdat,
-Count(createdat)
+to_char (installatedon,'yyyy-mm-dd'),
+Count(installatedon)
 from components
-group by createdat
-order by createdat desc
+where facilityid=1
+group by installatedon
+order by installatedon desc;
 
 /* 11
 Un listado por año del número de componentes instalados del facility 1
