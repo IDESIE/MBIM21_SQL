@@ -95,3 +95,9 @@ para todo componente que sea un grifo o lavabo del facility 1.
 /* 5
 Anonimizar los datos personales: nombre, apellido, email, teléfono de los contactos
 */
+update contacts 
+      set 
+            givenname = null, 
+            familyname = null,
+            phone = null,
+            email = CONCAT('ANONIMO', ID);
