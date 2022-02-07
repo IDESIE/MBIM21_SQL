@@ -40,6 +40,29 @@ to_date('2021-11-11','yyyy-mm-dd'),
 78,
 '666000');
 
+Select 
+    components.name,
+    spaces.name,
+    floors.name,
+    component_types.name,
+    components.facilityid,
+    components.description,
+    components.serialNumber,
+    components.createdat,
+    components.WARRANTYSTARTON,
+    components.assetidentifier,
+    components.creatorid,
+    components.spaceId,
+    components.typeid,
+    components.externalidentifier
+from components
+    join spaces on components.spaceid = spaces.id
+    join floors on floors.id = spaces.floorid
+    join component_types on component_types.id = components.typeid
+where
+    components.name like 'Grifo | Grifo | 030303';
+
+
 /*
 Comprobar que se ven los datos insertados de forma conjunta con una JOIN
 y no de forma independiente. Con el fin de comprobar las relaciones.
@@ -73,3 +96,9 @@ para todo componente que sea un grifo o lavabo del facility 1.
 /* 5
 Anonimizar los datos personales: nombre, apellido, email, teléfono de los contactos
 */
+update contacts
+    set
+        givenname = null,
+        familyname = null,
+        phone = null,
+        email = CONCAT('ANONIMO',ID);
