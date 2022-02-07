@@ -13,8 +13,9 @@ finalizando con un punto. Luego la hora en formato 24h con minutos y segundos.
 Y de etiqueta del campo "Fecha actual".
 */
 select
-    to_char(installatedon,'Day, DD "de" Month "de" yyyy"."hh24:mi:ss') "Fecha Actual"
+    to_char(installatedon,'Day')
 from components
+where facilityid=1
 ;
 /* 2
 Día en palabras de cuando se instalaron los componentes
@@ -60,15 +61,16 @@ de los espacios del floorid 1
 Solo la parte entera, sin decimales ni redondeo.
 */
 select
-    floorid,
-    trunc(avg(grossarea),0) Media,
-    trunc((avg(grossarea)+min(grossarea))/2,0) Mediabaja,
-    trunc((avg(grossarea)+max(grossarea))/2,0) Mediaalta
+    count(*), 
+    count(id), 
+    count(warrantystarton), 
+    count(distinct warrantystarton)
 from 
-    spaces
-where
-    floorid = 1
-group by floorid
+    components
+where 
+    warrantystarton is not null
+;
+
 /* 6
 Cuántos componentes hay, cuántos tienen fecha inicio de garantia, cuántos tienen espacio, y en cuántos espacios hay componentes
 en el facility 1.
@@ -83,23 +85,23 @@ from
 where 
     warrantystarton is not null
 ;
-
 /* 7
 Mostrar cuántos espacios tienen el texto 'Aula' en el nombre
 del facility 1.
 */
 select
-Count (name)
+   count (name)
 from spaces
-where name like 'Aula%';
-
+where name like 'Aula%'
+;
 /* 8
 Mostrar el porcentaje de componentes que tienen fecha de inicio de garantía
 del facility 1.
 */
-select round(count(warrantystarton)/count(*)*100,4)
+select round (count (warrantystarton) / count (*) *100 , 4)
 from components
-where facilityid = 1;
+where facilityid = 1
+;
 /* 9
 Listar las cuatro primeras letras del nombre de los espacios sin repetir
 del facility 1. 
@@ -116,8 +118,8 @@ select
     distinct substr(name,1,4)
 from spaces
 where floorid = 1
-order by substr(name,1,4) asc;
-
+order by substr(name,1,4) asc
+;
 /* 10
 Número de componentes por fecha de instalación del facility 1
 ordenados descendentemente por la fecha de instalación
