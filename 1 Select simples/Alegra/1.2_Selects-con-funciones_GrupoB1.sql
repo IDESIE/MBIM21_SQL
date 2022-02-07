@@ -116,6 +116,13 @@ Fecha   Componentes
 2021-03-23 34
 2021-03-03 232
 */
+select
+    createdat,
+    count(createdat)
+from 
+    components
+group by createdat
+order by createdat desc
 
 /* 11
 Un listado por año del número de componentes instalados del facility 1
