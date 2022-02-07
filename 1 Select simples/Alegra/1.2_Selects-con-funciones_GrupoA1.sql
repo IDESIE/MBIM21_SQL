@@ -87,6 +87,9 @@ WHERE floors.facilityid = 1 and spaces.name like 'Aula%';
 Mostrar el porcentaje de componentes que tienen fecha de inicio de garantía
 del facility 1.
 */
+SELECT ROUND (count(warrantystarton)/count(*) *100,4)
+FROM components
+WHERE facilityid=1;
 
 /* 9 X
 Listar las cuatro primeras letras del nombre de los espacios sin repetir

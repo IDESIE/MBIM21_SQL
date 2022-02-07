@@ -44,28 +44,27 @@ y no de forma independiente. Con el fin de comprobar las relaciones.
 Mostrar todos los datos indicados en el punto anterior 
 y además el nombre del espacio, nombre de la planta, nombre del tipo de componente
 */
-SELECT
-    COMPONENTS.NAME,
-    SPACES.NAME,
-    FLOORS.NAME,
-    COMPONENT_TYPES.NAME,
+SELECT 
     components.facilityid,
     components.name,
     components.description,
-    components.serialNumber,
+    components.serialnumber,
     components.createdat,
     components.warrantystarton,
     components.assetidentifier,
     components.creatorid,
-    components.spaceId,
+    components.spaceid,
     components.typeid,
-    components.externalidentifier
-FROM COMPONENTS
-    join SPACES on components.spaceid=spaces.id 
-    join floors on FLOORS.id =spaces.floorid
-    join COMPONENT_TYPES on component_types.id=components.typeid
-WHERE
-COMPONENTS.name='Grifo | Grifo | 030303';
+    components.externalidentifier,
+    spaces.name,
+    floors.name,
+    component_types.name
+FROM COMPONENTS;
+JOIN spaces ON components.spaceid = spaces.id
+JOIN floors ON floors.facilityid = facilities.id
+JOIN component_types ON components.typeid = component_types.id
+WHERE 
+    components.name like 'Grifo | Grifo | 030303';
 /* 2 D
 Eliminar el componente creado.
 */
@@ -93,9 +92,12 @@ update components
     where components.facilityid=1 
     and (name like '%Grifo%' or name like '%Lavabo%');
 
+
 /* 5 R
 Anonimizar los datos personales: nombre, apellido, email, teléfono de los contactos
 */
-SELECT givenname,familyname, email, phone 
-FROM contacts
-random (000000,999999) as id_cliente;
+UPDATE contacts
+SET givenname=null,
+    familyname=null,
+    phone=null,
+    email=CONCAT('ANÓNIMO',id);
