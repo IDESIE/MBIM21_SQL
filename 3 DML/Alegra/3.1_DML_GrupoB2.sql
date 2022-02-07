@@ -31,9 +31,9 @@ select
      components.typeid,
      components.externalidentifier
 from components
- join spaces on components.spaceid = spaceid.id
- join floors on floors.id = spaces.floorid
- join component_types on component_types.id = components.typeid
+    join spaces on components.spaceid = spaceid.id
+    join floors on floors.id = spaces.floorid
+    join component_types on component_types.id = components.typeid
 where
   components.name like 'Grifo | Grifo | 030303'
 /*
