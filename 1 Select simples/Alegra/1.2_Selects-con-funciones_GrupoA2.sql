@@ -7,11 +7,14 @@ Fecha actual
 ------------------------------
 Sábado, 11 de febrero de 2027. 16:06:06
 
+
 El día en palabras con la primera letra en mayúsculas, seguida de una coma, el día en números,
 la palabra "de", el mes en minúscula en palabras, la palabra "de", el año en cuatro dígitos
 finalizando con un punto. Luego la hora en formato 24h con minutos y segundos.
 Y de etiqueta del campo "Fecha actual".
 */
+select to_char(SYSDATE,'Day,dd "de" month "de" yyyy. hh:mi:ss')
+from dual;
 
 /* 2
 Día en palabras de cuando se instalaron los componentes
@@ -49,7 +52,16 @@ Mostrar tres medias que llamaremos:
 de los espacios del floorid 1
 Solo la parte entera, sin decimales ni redondeo.
 */
-
+SELECT
+ FLOORID,
+ TRUNC(AVG(grossarea),0) Media,
+ TRUNC((AVG(grossarea)+MIN(GROSSAREA))/2,0) MediaBaja,
+ TRUNC((AVG(grossarea)+MAX(GROSSAREA))/2,0) MediaAlta
+FROM 
+SPACES
+WHERE
+FLOORID=1
+GROUP BY FLOORID;
 
 
 /* 6
@@ -131,7 +143,15 @@ Viernes  	468
 Sábado   	404
 Domingo  	431
 */
+SELECT
+ TO_CHAR(INSTALLATEDON,'Day')Día,
+ COUNT(*)COMPONENTES
 
+FROM COMPONENTS
+WHERE
+ FACILITYID=1
+GROUP BY TO_CHAR(INSTALLATEDON,'Day')
+ORDER BY TO_CHAR(INSTALLATEDON,'Day')ASC;
 /*13
 Mostrar en base a los cuatro primeros caracteres del nombre cuántos espacios hay
 del floorid 1 ordenados ascendentemente por el nombre.
@@ -162,5 +182,9 @@ y seguido del nombre del espacio.
 el id del espacio debe tener una longitud de 3 caracteres
 Ej. 3-004-Nombre
 */
- 
+ SELECT
+ (FLOORS.ID||'-'||SUBSTR(SPACES.ID,0,3)||'-'||SPACES.NAME) AS IDPL_IDESP_NOMBRES
+
+FROM 
+FLOORS  JOIN SPACES  ON FLOORS.ID=SPACES.FLOORID;
 ------------------------------------------------------------------------------------------------
