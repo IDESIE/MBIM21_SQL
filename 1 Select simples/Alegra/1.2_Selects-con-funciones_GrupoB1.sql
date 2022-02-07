@@ -209,5 +209,9 @@ y seguido del nombre del espacio.
 el id del espacio debe tener una longitud de 3 caracteres
 Ej. 3-004-Nombre
 */
- 
+select
+    (floors.id||'-'||substr (spaces.id,0,3)||'-'||spaces.name) as Idpl_Idesp_Nombres
+from
+    floors 
+    join spaces on floors.id = spaces.floorid;
 ------------------------------------------------------------------------------------------------
