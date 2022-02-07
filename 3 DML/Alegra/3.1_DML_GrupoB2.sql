@@ -35,7 +35,7 @@ from components
     join floors on floors.id = spaces.floorid
     join component_types on component_types.id = components.typeid
 where
-  components.name like 'Grifo | Grifo | 030303'
+  components.name like 'Grifo | Grifo | 030303';
 /*
 Comprobar que se ven los datos insertados de forma conjunta con una JOIN
 y no de forma independiente. Con el fin de comprobar las relaciones.
