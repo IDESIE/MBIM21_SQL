@@ -89,9 +89,7 @@ and facilityid=1;
 Mostrar el porcentaje de componentes que tienen fecha de inicio de garantía
 del facility 1.
 */
-select  round(count(warrantystarton)/count(*)*100,4)
-from components
-where facilityid=1 ;
+
 
 /* 9
 Listar las cuatro primeras letras del nombre de los espacios sin repetir
