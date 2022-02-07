@@ -78,7 +78,10 @@ update components
 Modificar la fecha de garantia para que sea igual a la fecha de instalación
 para todo componente que sea un grifo o lavabo del facility 1.
 */
-
+Update components
+set warrantystarton = installatedon
+from components
+where facilityid=1 and lower name in ('grifo','lavabo');
 
 
 /* 5
