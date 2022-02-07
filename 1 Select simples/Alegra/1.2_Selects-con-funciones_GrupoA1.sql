@@ -44,7 +44,13 @@ WHERE floorid = 1;
 Listar el número de componentes que tienen indicado el espacio y el número de componentes total.
 del facility 1
 */
-
+SELECT 'Número de componentes con espacio' ETIQUETA,count (components.id)
+FROM components
+where spaceid is not null
+AND facilityid=1
+UNION
+SELECT 'Número de componentes total' ETIQUETA, count (components.id)
+FROM components;
 /* 5 X
 Mostrar tres medias que llamaremos:
 -Media a la media del área bruta
@@ -147,6 +153,12 @@ Viernes  	468
 Sábado   	404
 Domingo  	431
 */
+
+SELECT count(components.id), to_char(installatedon,'Day')
+FROM components
+WHERE facilityid=1
+AND to_char(installatedon,'Day') is not null
+GROUP BY to_char(installatedon, 'Day') ;
 
 /*13 X
 Mostrar en base a los cuatro primeros caracteres del nombre cuántos espacios hay
