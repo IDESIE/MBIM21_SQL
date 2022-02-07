@@ -85,3 +85,10 @@ where facilityid=1 and lower name in ('grifo','lavabo');
 /* 5
 Anonimizar los datos personales: nombre, apellido, email, teléfono de los contactos
 */
+update contacts
+   set 
+   givenname= null,
+   familyname =null,
+   phone= null,
+   email= concat('anonimo',id);
+    
