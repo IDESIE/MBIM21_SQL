@@ -195,5 +195,14 @@ y seguido del nombre del espacio.
 el id del espacio debe tener una longitud de 3 caracteres
 Ej. 3-004-Nombre
 */
+Select
+  CONCAT(
+    CONCAT(
+      CONCAT(
+        CONCAT(floorid, '-'), 
+        Substr(id,1,3)), 
+        '-'),
+    name)
+from spaces;
  
 ------------------------------------------------------------------------------------------------
