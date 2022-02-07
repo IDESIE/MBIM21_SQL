@@ -75,3 +75,6 @@ update components
 /* 5 R
 Anonimizar los datos personales: nombre, apellido, email, teléfono de los contactos
 */
+SELECT givenname,familyname, email, phone 
+FROM contacts
+random (000000,999999) as id_cliente;
