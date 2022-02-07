@@ -60,7 +60,7 @@ delete from components(
     spaceId,
     typeid,
     externalidentifier
-)
+);
 
 /* 3
 Colocar como código de barras los 6 últimos caracteres del GUID 
