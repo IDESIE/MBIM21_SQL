@@ -69,7 +69,27 @@ y no de forma independiente. Con el fin de comprobar las relaciones.
 Mostrar todos los datos indicados en el punto anterior 
 y además el nombre del espacio, nombre de la planta, nombre del tipo de componente
 */
-
+select
+    components.name,
+    spaces.name,
+    floors.name,
+    component_types.name,
+    components.facilityid,
+    components.description,
+    components.serialNumber,
+    components.createdat,
+    components.WARRANTYSTARTON,
+    components.assetidentifier,
+    components.creatorid,
+    components.spaceId,
+    components.typeid,
+    components.externalidentifier
+from components
+    join spaces on components.spaceid = spaces.id
+    join floors on floors.id = spaces.floorid
+    join component_types on component_types.id = components.typeid
+where 
+    components.name = 'Grifo | Grifo | 030303';
 /* 2
 Eliminar el componente creado.
 */
@@ -101,4 +121,8 @@ update contacts
         givenname = null,
         familyname = null,
         phone = null,
+<<<<<<< HEAD
         email = CONCAT('ANONIMO',ID);
+=======
+        email = concat('ANONIMO',ID);
+>>>>>>> aee2d6ff9e25830fe39f69af7957b37de5cc6185
