@@ -90,5 +90,5 @@ update contacts
    givenname= null,
    familyname =null,
    phone= null,
-   email= concat('anonimo',id);
-    
+   email= concat('anonimo',id); 
+     
