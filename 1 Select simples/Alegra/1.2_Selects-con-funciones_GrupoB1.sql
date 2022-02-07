@@ -68,7 +68,7 @@ from
     spaces
 where
     floorid = 1
-group by floorid;
+group by floorid
 /* 6
 Cuántos componentes hay, cuántos tienen fecha inicio de garantia, cuántos tienen espacio, y en cuántos espacios hay componentes
 en el facility 1.
@@ -157,7 +157,15 @@ Viernes  	468
 Sábado   	404
 Domingo  	431
 */
-
+select
+    to_char (installatedon,'day') Día,
+    count(*)componentes
+from 
+    components
+where
+    facilityid = 1
+group by to_char(installatedon,'day')
+order by to_char (installatedon,'day')desc;
 /*13
 Mostrar en base a los cuatro primeros caracteres del nombre cuántos espacios hay
 del floorid 1 ordenados ascendentemente por el nombre.
