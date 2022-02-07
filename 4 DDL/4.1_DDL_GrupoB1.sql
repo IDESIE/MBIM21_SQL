@@ -49,11 +49,11 @@ create table cb_floors(
  description varchar2(4000),
  category varchar2(4000),
  height number,
- facilityid number not null,
-constraint pk_floors_id primary key(id),
-constraint uq_floors_guid unique(guid),
-constraint uq_floors_name unique(name),
-constraint fk_floors_faci foreign key (facilityid)
+ facility_id number not null,
+constraint pk_cbfloors_id primary key(id),
+constraint uq_cbfloors_guid unique(guid),
+constraint uq_cbfloors_name unique(name),
+constraint fk_cbfloors_faci foreign key (facility_id)
   references cb_facilities (id)
 );
 
@@ -79,9 +79,9 @@ create table cb_spaces(
     area  varchar2(4000),
     floorId number not null,
     address varchar2(4000),
-constraint pk_floors_id primary key(id),    
-constraint uq_floors_guid unique(guid),
-constraint uq_floors_name unique(name)
+constraint pk_cbspaces_id primary key(id),    
+constraint uq_cbspaces_guid unique(guid),
+constraint uq_cbspaces_name unique(name)
 );
 
 /* 
@@ -124,6 +124,19 @@ modelNumber
 color
 warrantyYears
 */
+Create table cb_types(
+    id number, 
+    guid varchar2(4000),
+    name varchar2(4000) not null,
+    description varchar2(4000),
+    modelNumber varchar2(4000),
+    color varchar2(4000),
+    warrantyyears number,
+constraint pk_cbtypes_id primary key(id),
+constraint uq_cbtypes_guid unique(guid),
+constraint uq_cbtypes_name unique(name),
+constraint ck_cbtypes_year check(warrantyyears > 0)
+);
 
 
 

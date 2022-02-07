@@ -79,6 +79,10 @@ where
 Mostrar cuántos espacios tienen el texto 'Aula' en el nombre
 del facility 1.
 */
+select
+Count (name)
+from spaces
+where name like 'Aula%';
 
 /* 8
 Mostrar el porcentaje de componentes que tienen fecha de inicio de garantía
@@ -97,6 +101,11 @@ Pasi
 Pati
 Serv
 */
+select
+    distinct substr(name,1,4)
+from spaces
+where floorid = 1
+order by substr(name,1,4) asc;
 
 /* 10
 Número de componentes por fecha de instalación del facility 1
@@ -141,6 +150,13 @@ Aula 23
 Aseo 12
 Pasi 4
 */
+select
+    distinct substr(name,1,4),
+    count(*)
+from spaces
+where floorid = 1
+group by name
+order by substr(name,1,4) asc;
 
 /*14
 Cuántos componentes de instalaron un Jueves
