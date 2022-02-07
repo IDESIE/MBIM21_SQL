@@ -54,6 +54,12 @@ Mostrar tres medias que llamaremos:
 de los espacios del floorid 1
 Solo la parte entera, sin decimales ni redondeo.
 */
+Select
+round (avg(grossarea),0) Media,
+trunc((avg(grossarea)+min(grossarea))/2,0) Mediabaja,
+trunc((avg(grossarea)+max(grossarea))/2,0) Mediaalta
+from spaces
+where floorid = 1;
 
 /* 6
 Cuántos componentes hay, cuántos tienen fecha inicio de garantia, cuántos tienen espacio, y en cuántos espacios hay componentes
