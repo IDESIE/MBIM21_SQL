@@ -142,7 +142,15 @@ Año Componentes
 2021 344
 2020 2938
 */
-
+select
+    to_char (installatedon,'year') Año,
+    count(*)componentes
+from 
+    components
+where
+    facilityid = 1
+group by to_char(installatedon,'year')
+order by to_char (installatedon,'year')desc;
 /* 12
 Nombre del día de instalación y número de componentes del facility 1.
 ordenado de lunes a domingo
