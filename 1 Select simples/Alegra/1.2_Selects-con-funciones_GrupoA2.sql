@@ -55,7 +55,16 @@ de los espacios del floorid 1
 Solo la parte entera, sin decimales ni redondeo.
 */
 
-
+SELECT
+ FLOORID,
+ TRUNC(AVG(grossarea),0) Media,
+ TRUNC((AVG(grossarea)+MIN(GROSSAREA))/2,0) MediaBaja,
+ TRUNC((AVG(grossarea)+MAX(GROSSAREA))/2,0) MediaAlta
+FROM 
+SPACES
+WHERE
+FLOORID=1
+GROUP BY FLOORID;
 
 /* 6
 Cuántos componentes hay, cuántos tienen fecha inicio de garantia, cuántos tienen espacio, y en cuántos espacios hay componentes
@@ -133,7 +142,15 @@ Viernes  	468
 Sábado   	404
 Domingo  	431
 */
+SELECT
+ TO_CHAR(INSTALLATEDON,'Day')Día,
+ COUNT(*)COMPONENTES
 
+FROM COMPONENTS
+WHERE
+ FACILITYID=1
+GROUP BY TO_CHAR(INSTALLATEDON,'Day')
+ORDER BY TO_CHAR(INSTALLATEDON,'Day')ASC;
 /*13
 Mostrar en base a los cuatro primeros caracteres del nombre cuántos espacios hay
 del floorid 1 ordenados ascendentemente por el nombre.
@@ -160,5 +177,10 @@ y seguido del nombre del espacio.
 el id del espacio debe tener una longitud de 3 caracteres
 Ej. 3-004-Nombre
 */
+ SELECT
+ (FLOORS.ID||'-'||SUBSTR(SPACES.ID,0,3)||'-'||SPACES.NAME) AS IDPL_IDESP_NOMBRES
+
+FROM 
+FLOORS  JOIN SPACES  ON FLOORS.ID=SPACES.FLOORID;
  
 ------------------------------------------------------------------------------------------------
