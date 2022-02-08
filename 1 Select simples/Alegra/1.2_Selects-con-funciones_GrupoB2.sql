@@ -12,7 +12,9 @@ la palabra "de", el mes en minúscula en palabras, la palabra "de", el año en c
 finalizando con un punto. Luego la hora en formato 24h con minutos y segundos.
 Y de etiqueta del campo "Fecha actual".
 */
-
+select 
+to_char(sysdate,'Day, dd "de" month "de" yyyy.  hh24:mi:ss')"Fecha actual"
+from components;
 /* 2
 Día en palabras de cuando se instalaron los componentes
 del facility 1
@@ -52,6 +54,12 @@ Mostrar tres medias que llamaremos:
 de los espacios del floorid 1
 Solo la parte entera, sin decimales ni redondeo.
 */
+Select
+round (avg(grossarea),0) Media,
+trunc((avg(grossarea)+min(grossarea))/2,0) Mediabaja,
+trunc((avg(grossarea)+max(grossarea))/2,0) Mediaalta
+from spaces
+where floorid = 1;
 
 /* 6
 Cuántos componentes hay, cuántos tienen fecha inicio de garantia, cuántos tienen espacio, y en cuántos espacios hay componentes
@@ -72,14 +80,18 @@ Mostrar cuántos espacios tienen el texto 'Aula' en el nombre
 del facility 1.
 */
 select
-Count (name)
-from spaces
-where name like 'Aula%'
+Count (spaceid)
+from components
+where name like 'Aula%' 
+and facilityid=1;
 
 /* 8
 Mostrar el porcentaje de componentes que tienen fecha de inicio de garantía
 del facility 1.
 */
+select  round(count(warrantystarton)/count(*)*100,4)
+from components
+where facilityid=1 ;
 
 /* 9
 Listar las cuatro primeras letras del nombre de los espacios sin repetir
@@ -97,6 +109,7 @@ select
 distinct Substr(name,1,4)
 from spaces
 Where floorid=1
+order by Substr(name,1,4) asc;
 
 /* 10
 Número de componentes por fecha de instalación del facility 1
@@ -108,11 +121,12 @@ Fecha   Componentes
 2021-03-03 232
 */
 select
-Createdat,
-Count(createdat)
+to_char (installatedon,'yyyy-mm-dd'),
+Count(installatedon)
 from components
-group by createdat
-order by createdat desc
+where facilityid=1
+group by installatedon
+order by installatedon desc;
 
 /* 11
 Un listado por año del número de componentes instalados del facility 1
@@ -123,7 +137,13 @@ Año Componentes
 2021 344
 2020 2938
 */
-
+select
+to_char(installatedon,'yyyy'),
+Count (*)
+from components
+where facilityid = 1
+group by to_char(installatedon,'yyyy')
+ORDER BY to_char(installatedon,'yyyy')desc;
 /* 12
 Nombre del día de instalación y número de componentes del facility 1.
 ordenado de lunes a domingo
@@ -138,6 +158,13 @@ Viernes  	468
 Sábado   	404
 Domingo  	431
 */
+select
+to_char(installatedon,'Day'),
+Count (*)
+from components
+where facilityid = 1
+group by to_char(installatedon,'Day')
+ORDER BY installatedon asc;
 
 /*13
 Mostrar en base a los cuatro primeros caracteres del nombre cuántos espacios hay
@@ -147,16 +174,25 @@ Aula 23
 Aseo 12
 Pasi 4
 */
+Select
+distinct Substr(name,1,4),
+count(*)
+from spaces
+Where floorid=1
+group by name
+order by Substr(name,1,4) asc;
 
 /*14
 Cuántos componentes de instalaron un Jueves
 en el facilityid 1
 */
 select 
-count (id)
- from components 
-where rtrim(to_char(installatedon,'Day'))= 'Jueves'
-and facilityid= 1;
+  count(id)
+ from components
+where facilityid= 1 and
+rtrim(to_char(installatedon,'Day'))= 'Jueves'
+order by to_char(installatedon,'Day');
+
 
 /*15
 Listar el id de planta concatenado con un guión
@@ -165,5 +201,14 @@ y seguido del nombre del espacio.
 el id del espacio debe tener una longitud de 3 caracteres
 Ej. 3-004-Nombre
 */
+Select
+  CONCAT(
+    CONCAT(
+      CONCAT(
+        CONCAT(floorid, '-'), 
+        Substr(id,1,3)), 
+        '-'),
+    name)
+from spaces;
  
 ------------------------------------------------------------------------------------------------
