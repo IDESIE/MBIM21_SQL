@@ -24,6 +24,15 @@ Nombre y fecha de instalación (yyyy-mm-dd) de los componentes del espacio con m
 Nombre y código de activo  de los componentes cuyo tipo de componente contenga la palabra 'mesa'
 del facility 1
 */
+Select components.name,
+    components.assetidentifier,
+    component_types.name
+from 
+    components
+    join component_types on components.typeid = component_types.id
+where 
+    components.facilityid = 1
+    and lower(component_types.name) like '%mesa%';
 
 /*
 5
@@ -71,6 +80,22 @@ Aula 3  MEDIO
 9
 Listar el nombre de los tres espacios con mayor área del facility 1
 */
+select 
+    rownum, fila, nombre, área, facilityid
+from (
+select 
+    rownum fila,
+    spaces.name nombre,
+    spaces.grossarea área,
+    floors.facilityid
+from
+    spaces
+    join floors on spaces.floorid = floors.id
+where
+    floors.facilityid = 1
+    order by 3 desc)
+where
+    rownum < 4;
 
 /*
 10
@@ -84,6 +109,12 @@ Aula    18
 Aseo    4
 Hall    2
 */
+Select substr (spaces.name,1,4), count(*)
+from spaces join floors on spaces.floorid = floors.id
+where facilityid = 1
+group by substr (spaces.name,1,4) 
+having count (*) > 1
+order by 2 desc;
 
 /*
 11
@@ -108,6 +139,31 @@ Componentes 70
 Sillas 16
 Mesas 3
 */
+Select 'componentes' "Etiqueta",
+    count(components.id) "Numero Componentes"
+from 
+    spaces join components on spaces.id = components.spaceid
+where 
+    facilityid = 1 and lower (spaces.name) = 'aula 03'
+union
+Select 'sillas',
+    count(components.id)
+from 
+    spaces join components on spaces.id = components.spaceid
+where 
+    facilityid = 1 and 
+    lower (spaces.name) = 'aula 03' and
+    lower(components.name) like '%silla%'
+union    
+Select 'mesas',
+    count(components.id)
+from 
+    spaces join components on spaces.id = components.spaceid
+where 
+    facilityid = 1 and 
+    lower (spaces.name) = 'aula 03' and
+    (lower(components.name) like '%mesa%' or 
+    lower(components.name) like '%escritorio%');
 
 /*
 14
@@ -123,6 +179,24 @@ Cuál es el mes en el que más componentes se instalaron del facility 1.
 Nombre del día en el que más componentes se instalaron del facility 1.
 Ejemplo: Jueves
 */
+select
+    dia
+from
+(select max(numcomp) maximo
+from
+(Select count(id) numcomp, to_char(installatedon,'Day') dia
+from components
+where facilityid = 1
+group by to_char(installatedon,'Day')
+)) tabmax
+join
+(
+    Select count(id) numcomp, to_char(installatedon,'Day') dia
+    from components
+    where facilityid = 1
+    group by to_char(installatedon,'Day')
+) tabnum on tabmax.maximo = tabnum.numcomp
+;
 
 /*17
 Listar los nombres de componentes que están fuera de garantía del facility 1.
