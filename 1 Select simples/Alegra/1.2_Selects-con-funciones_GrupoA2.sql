@@ -12,45 +12,40 @@ la palabra "de", el mes en minúscula en palabras, la palabra "de", el año en c
 finalizando con un punto. Luego la hora en formato 24h con minutos y segundos.
 Y de etiqueta del campo "Fecha actual".
 */
-select
-    to_char(installatedon,'Day, DD "de" Month "de" yyyy"."hh24:mi:ss') "Fecha Actual"
-from components
-;
+
+select to_char(SYSDATE,'Day,dd "de" month "de" yyyy. hh:mi:ss')
+from dual;
+
 /* 2
 Día en palabras de cuando se instalaron los componentes
 del facility 1
 */
-select
-    to_char(installatedon,'Day')
-from components
-where facilityid=1
-;
+
 /* 3
 De los espacios, obtener la suma de áreas, cuál es el mínimo, el máximo y la media de áreas
 del floorid 1. Redondeado a dos dígitos.
 */
-select
-    round(sum(grossarea),2) "Suma",
-    round(min(grossarea),2) "Mínimo",
-    round(max(grossarea),2)"Máximo",
-    round(avg(grossarea),2)"Media"
-from spaces
-where floorid=1
-;
+SELECT
+ROUND(SUM(grossarea),2),
+ROUND(MIN(grossarea),2),
+ROUND(MAX(grossarea),2),
+ROUND(AVG(grossarea),2)
+FROM spaces 
+WHERE floorid=1;
+
+
+
+
 /* 4
 Listar el número de componentes que tienen indicado el espacio y el número de componentes total.
 del facility 1
 */
-select
-    spaceid,
-    count(*)
-from 
-    components
-where 
-    facilityid=1
-group by 
-    spaceid
-;
+
+SELECT SPACEID, COUNT (*)
+FROM COMPONENTS
+WHERE FACILITYID=1
+GROUP BY SPACEID; 
+
 /* 5
 Mostrar tres medias que llamaremos:
 -Media a la media del área bruta
@@ -59,45 +54,45 @@ Mostrar tres medias que llamaremos:
 de los espacios del floorid 1
 Solo la parte entera, sin decimales ni redondeo.
 */
-select
-    floorid,
-    trunc(avg(grossarea),0) Media,
-    trunc((avg(grossarea)+min(grossarea))/2,0) Mediabaja,
-    trunc((avg(grossarea)+max(grossarea))/2,0) Mediaalta
-from 
-    spaces
-where
-    floorid = 1
-group by floorid;
+
+SELECT
+ FLOORID,
+ TRUNC(AVG(grossarea),0) Media,
+ TRUNC((AVG(grossarea)+MIN(GROSSAREA))/2,0) MediaBaja,
+ TRUNC((AVG(grossarea)+MAX(GROSSAREA))/2,0) MediaAlta
+FROM 
+SPACES
+WHERE
+FLOORID=1
+GROUP BY FLOORID;
+
 /* 6
 Cuántos componentes hay, cuántos tienen fecha inicio de garantia, cuántos tienen espacio, y en cuántos espacios hay componentes
 en el facility 1.
 */
 select
-    count(*), 
-    count(id), 
-    count(warrantystarton), 
-    count(distinct warrantystarton)
-from 
-    components
-where 
-    warrantystarton is not null
-;
+    count(*), count(id), count(warrantystarton), count(distinct warrantystarton)
+from components
+where warrantystarton is not null;
 
 /* 7
 Mostrar cuántos espacios tienen el texto 'Aula' en el nombre
 del facility 1.
 */
 select
-Count (name)
-from spaces
-where name like 'Aula%';
+ Count (*)
+from 
+ spaces
+where 
+ name like '%Aula%';
 
 /* 8
 Mostrar el porcentaje de componentes que tienen fecha de inicio de garantía
 del facility 1.
 */
-
+SELECT ROUND (COUNT(WARRANTYSTARTON)/COUNT(*)*100,2)
+FROM COMPONENTS
+WHERE FACILITYID=1;
 /* 9
 Listar las cuatro primeras letras del nombre de los espacios sin repetir
 del facility 1. 
@@ -110,11 +105,10 @@ Pasi
 Pati
 Serv
 */
-select
-    distinct substr(name,1,4)
-from spaces
-where floorid = 1
-order by substr(name,1,4) asc;
+
+SELECT DISTINCT SUBSTR(NAME,1,4) 
+FROM SPACES 
+WHERE FLOORID=1;
 
 /* 10
 Número de componentes por fecha de instalación del facility 1
@@ -125,13 +119,6 @@ Fecha   Componentes
 2021-03-23 34
 2021-03-03 232
 */
-select
-    createdat,
-    count(createdat)
-from 
-    components
-group by createdat
-order by createdat desc;
 
 /* 11
 Un listado por año del número de componentes instalados del facility 1
@@ -142,6 +129,15 @@ Año Componentes
 2021 344
 2020 2938
 */
+SELECT
+    TO_CHAR (INSTALLATEDON,'YYYY'),
+    COUNT(ID)
+FROM
+    COMPONENTS
+WHERE
+    FACILITYID=1
+GROUP BY TO_CHAR (INSTALLATEDON,'YYYY')
+ORDER BY 1 DESC;
 
 /* 12
 Nombre del día de instalación y número de componentes del facility 1.
@@ -157,7 +153,15 @@ Viernes  	468
 Sábado   	404
 Domingo  	431
 */
+SELECT
+ TO_CHAR(INSTALLATEDON,'Day')Día,
+ COUNT(*)COMPONENTES
 
+FROM COMPONENTS
+WHERE
+ FACILITYID=1
+GROUP BY TO_CHAR(INSTALLATEDON,'Day')
+ORDER BY TO_CHAR(INSTALLATEDON,'Day')ASC;
 /*13
 Mostrar en base a los cuatro primeros caracteres del nombre cuántos espacios hay
 del floorid 1 ordenados ascendentemente por el nombre.
@@ -166,26 +170,17 @@ Aula 23
 Aseo 12
 Pasi 4
 */
-select
-    distinct substr(name,1,4),
-    count(*)
-from spaces
-where floorid = 1
-group by name
-order by substr(name,1,4) asc;
 
 /*14
 Cuántos componentes de instalaron un Jueves
 en el facilityid 1
 */
-select 
-    id,
-    to_char(installatedon,'Day')
-from
-    components
-where
-    facilityid = 1
-    and rtrim(to_char(installatedon,'Day')) = 'Jueves';
+
+SELECT NAME, TO_CHAR(INSTALLATEDON, 'DAY')
+FROM COMPONENTS
+WHERE RTRIM(TO_CHAR(INSTALLATEDON, 'DAY'))= 'JUEVES'
+AND FACILITYID=1;
+
 /*15
 Listar el id de planta concatenado con un guión
 seguido del id de espacio concatenado con un guión
@@ -193,5 +188,10 @@ y seguido del nombre del espacio.
 el id del espacio debe tener una longitud de 3 caracteres
 Ej. 3-004-Nombre
 */
+ SELECT
+ (FLOORS.ID||'-'||SUBSTR(SPACES.ID,0,3)||'-'||SPACES.NAME) AS IDPL_IDESP_NOMBRES
+
+FROM 
+FLOORS  JOIN SPACES  ON FLOORS.ID=SPACES.FLOORID;
  
 ------------------------------------------------------------------------------------------------
