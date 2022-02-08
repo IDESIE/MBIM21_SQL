@@ -83,21 +83,23 @@ from
 where 
     warrantystarton is not null
 ;
-
 /* 7
 Mostrar cuántos espacios tienen el texto 'Aula' en el nombre
 del facility 1.
 */
 select
-Count (name)
+   count (name)
 from spaces
-where name like 'Aula%';
-
+where name like 'Aula%'
+;
 /* 8
 Mostrar el porcentaje de componentes que tienen fecha de inicio de garantía
 del facility 1.
 */
-
+select round (count (warrantystarton) / count (*) *100 , 4)
+from components
+where facilityid = 1
+;
 /* 9
 Listar las cuatro primeras letras del nombre de los espacios sin repetir
 del facility 1. 
@@ -114,8 +116,8 @@ select
     distinct substr(name,1,4)
 from spaces
 where floorid = 1
-order by substr(name,1,4) asc;
-
+order by substr(name,1,4) asc
+;
 /* 10
 Número de componentes por fecha de instalación del facility 1
 ordenados descendentemente por la fecha de instalación
@@ -142,7 +144,15 @@ Año Componentes
 2021 344
 2020 2938
 */
-
+select
+    to_char (installatedon,'year') Año,
+    count(*)componentes
+from 
+    components
+where
+    facilityid = 1
+group by to_char(installatedon,'year')
+order by to_char (installatedon,'year')desc;
 /* 12
 Nombre del día de instalación y número de componentes del facility 1.
 ordenado de lunes a domingo
@@ -157,7 +167,15 @@ Viernes  	468
 Sábado   	404
 Domingo  	431
 */
-
+select
+    to_char (installatedon,'day') Día,
+    count(*)componentes
+from 
+    components
+where
+    facilityid = 1
+group by to_char(installatedon,'day')
+order by to_char (installatedon,'day')desc;
 /*13
 Mostrar en base a los cuatro primeros caracteres del nombre cuántos espacios hay
 del floorid 1 ordenados ascendentemente por el nombre.
@@ -193,5 +211,9 @@ y seguido del nombre del espacio.
 el id del espacio debe tener una longitud de 3 caracteres
 Ej. 3-004-Nombre
 */
- 
+select
+    (floors.id||'-'||substr (spaces.id,0,3)||'-'||spaces.name) as Idpl_Idesp_Nombres
+from
+    floors 
+    join spaces on floors.id = spaces.floorid;
 ------------------------------------------------------------------------------------------------
