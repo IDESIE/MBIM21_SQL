@@ -67,10 +67,13 @@ WHERE floorid = 1;
 /* 6 D
 Cuántos componentes hay, cuántos tienen fecha inicio de garantia, cuántos tienen espacio, y en cuántos espacios hay componentes
 en el facility 1.
-*/select
+*/
+
+select
     count(*),
     count(warrantystarton),
-    count(spaceid)
+    count(spaceid),
+    count(distinct spaceid)
 from components
 where facilityid=1 
     and warrantystarton is not null 
