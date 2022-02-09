@@ -2,7 +2,7 @@
 -- SELECT con subcolsultas y JOINS
 ------------------------------------------------------------------------------------------------
 /*
-1
+1 X
 Listar nombre, código de asset, número de serie, el año de instalación, nombre del espacio,
 de todos los componentes
 del facility 1
@@ -10,12 +10,12 @@ que estén en un aula y no sean tuberias, muros, techos, suelos.
 */
 
 /*
-2
+2 D
 Nombre, área bruta y volumen de los espacios con mayor área que la media de áreas del facility 1.
 */
 
 /*
-3
+3 B
 Nombre y fecha de instalación (yyyy-mm-dd) de los componentes del espacio con mayor área del facility 1
 */
 
@@ -35,19 +35,19 @@ where
     and lower(component_types.name) like '%mesa%';
 
 /*
-5
+5 R
 Nombre del componente, espacio y planta de los componentes
 de los espacios que sean Aula del facility 1
 */
 
 /*
-6
+6 X
 Número de componentes y número de espacios por planta (nombre) del facility 1. 
 Todas las plantas.
 */
 
 /*
-7
+7 D
 Número de componentes por tipo de componente en cada espacio
 de los componentes que sean mesas del facility 1
 ordenados de forma ascendente por el espacio y descentente por el número de componentes.
@@ -61,7 +61,7 @@ Componentes    Tipo   Espacio
 */
 
 /*
-8
+8 B
 Mostrar el nombre de las Aulas y una etiqueda «Sillas» que indique
 'BAJO' si el número de sillas es menor a 6
 'ALTO' si el número de sillas es mayor a 15
@@ -98,7 +98,7 @@ where
     rownum < 4;
 
 /*
-10
+10 
 Tomando en cuenta los cuatro primeros caracteres del nombre de los espacios
 del facility 1
 listar los que se repiten e indicar el número.
@@ -117,18 +117,18 @@ having count (*) > 1
 order by 2 desc;
 
 /*
-11
+11 R
 Nombre y área del espacio que mayor área bruta tiene del facility 1.
 */
 
 /*
-12
+12 X
 Número de componentes instalados entre el 1 de mayo de 2010 y 31 de agosto de 2010
 y que sean grifos, lavabos del facility 1
 */
 
 /*
-13
+13 
 Un listado en el que se indique en líneas separadas
 una etiqueta que describa el valor, y el valor:
 el número de componentes en Aula 03 del facility 1, 
@@ -166,12 +166,12 @@ where
     lower(components.name) like '%escritorio%');
 
 /*
-14
+14 D
 Nombre del espacio, y número de grifos del espacio con más grifos del facility 1.
 */
 
 /*
-15
+15 B
 Cuál es el mes en el que más componentes se instalaron del facility 1.
 */
 
@@ -198,7 +198,7 @@ join
 ) tabnum on tabmax.maximo = tabnum.numcomp
 ;
 
-/*17
+/*17 R
 Listar los nombres de componentes que están fuera de garantía del facility 1.
 */
 
