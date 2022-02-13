@@ -18,7 +18,21 @@ Nombre, área bruta y volumen de los espacios con mayor área que la media de á
 3 B
 Nombre y fecha de instalación (yyyy-mm-dd) de los componentes del espacio con mayor área del facility 1
 */
-
+select 
+    rownum, fila, nombre, área, facilityid
+from (
+select 
+    rownum fila,
+    components.name nombre,
+    components.area área,
+    components.facilityid
+from
+    components
+where
+    components.facilityid = 1
+    order by 3 desc)
+where
+    rownum < 4;
 /*
 4
 Nombre y código de activo  de los componentes cuyo tipo de componente contenga la palabra 'mesa'
@@ -75,7 +89,17 @@ Aula 1  BAJO
 Aula 2  BAJO
 Aula 3  MEDIO
 */
-
+select 
+    spaces.name as Aulas ,count(components.name),
+    case 
+        when count(components.name) < 6 then 'Bajo'
+        when count(components.name) > 15 then 'Alto'
+        when count(components.name) > 6 and count(components.name) <=15 then 'Medio'
+    end Sillas
+    from spaces 
+    join components on components.spaceid = spaces.id
+    where spaces.name like 'Aula%' and components.name like 'Silla%'
+    group by spaces.name
 /*
 9
 Listar el nombre de los tres espacios con mayor área del facility 1
@@ -174,7 +198,19 @@ Nombre del espacio, y número de grifos del espacio con más grifos del facility
 15 B
 Cuál es el mes en el que más componentes se instalaron del facility 1.
 */
-
+SELECT
+    "Número de componentes" , Mes
+FROM
+    (select 
+        count(components.name) as "Número de componentes", 
+        to_char(INSTALLATEDON,'month')as Mes 
+    from 
+        components 
+    group by 
+        to_char(INSTALLATEDON,'month') 
+    order by 
+        count(name) desc)
+where ROWNUM = 1;
 /* 16
 Nombre del día en el que más componentes se instalaron del facility 1.
 Ejemplo: Jueves
