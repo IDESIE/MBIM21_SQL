@@ -145,7 +145,18 @@ Aula    18
 Aseo    4
 Hall    2
 */
-
+select 
+    substr (spaces.name,1,4), 
+    count(*)
+from spaces 
+    join floors 
+    on spaces.floorid = floors.id
+where 
+    facilityid = 1
+group by 
+    substr (spaces.name,1,4) 
+having count (*) > 1
+order by 2 desc;
 /*
 11
 Nombre y área del espacio que mayor área bruta tiene del facility 1.
