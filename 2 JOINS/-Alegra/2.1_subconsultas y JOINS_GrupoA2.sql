@@ -46,7 +46,28 @@ GROUP BY
 3
 Nombre y fecha de instalación (yyyy-mm-dd) de los componentes del espacio con mayor área del facility 1
 */
-
+SELECT
+    COMPONENTS.NAME,
+    TO_CHAR(COMPONENTS.INSTALLATEDON,'YYYY-MM-DD')
+FROM
+    COMPONENTS JOIN SPACES ON COMPONENTS.SPACEID = SPACES.ID
+WHERE
+    FACILITYID=1 AND
+    SPACES.NAME =
+        (SELECT
+            NAME
+        FROM
+            (SELECT
+                SPACES.NAME,
+                SPACES.GROSSAREA
+            FROM
+                SPACES JOIN FLOORS ON SPACES.FLOORID = FLOORS.ID
+            WHERE
+                FACILITYID=1 AND
+                GROSSAREA IS NOT NULL
+            ORDER BY SPACES.GROSSAREA DESC)
+        WHERE
+            ROWNUM=1);
 /*
 4
 Nombre y código de activo  de los componentes cuyo tipo de componente contenga la palabra 'mesa'
