@@ -163,7 +163,6 @@ WHERE
 ORDER BY 3 DESC)
 WHERE
  ROWNUM <4;
-EFSFSA  
 /*
 10
 Tomando en cuenta los cuatro primeros caracteres del nombre de los espacios
@@ -176,7 +175,16 @@ Aula    18
 Aseo    4
 Hall    2
 */
-
+SELECT
+    SUBSTR (SPACES.NAME,1,4)ESPACIO, COUNT (*)OCURRENCIAS
+FROM
+    SPACES JOIN FLOORS ON SPACES.FLOORID = FLOORS.ID
+WHERE
+    FACILITYID = 1
+GROUP BY 
+    SUBSTR (SPACES.NAME,1,4)
+HAVING COUNT (*) > 1
+ORDER BY 2 DESC;
 /*
 11
 Nombre y área del espacio que mayor área bruta tiene del facility 1.
