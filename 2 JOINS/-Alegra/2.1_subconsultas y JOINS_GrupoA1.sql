@@ -54,6 +54,14 @@ Nombre del componente, espacio y planta de los componentes
 de los espacios que sean Aula del facility 1
 */
 
+SELECT components.name NombreComponente,
+spaces.name NombreEspacio,
+floors.name NombrePlanta
+FROM components
+JOIN spaces ON components.spaceid = spaces.id
+JOIN floors ON  spaces.floorid=floors.id
+WHERE UPPER(components.name) LIKE '%AULA%';
+
 /*
 6 X
 Número de componentes y número de espacios por planta (nombre) del facility 1. 
@@ -237,5 +245,10 @@ join
 /*17 R
 Listar los nombres de componentes que están fuera de garantía del facility 1.
 */
-
+SELECT components.name,
+to_char(components.WARRANTYSTARTON,'yyyy-mm-dd')
+FROM components
+JOIN facilities ON facilities.id=components.facilityid
+WHERE facilities.id=1
+AND components.WARRANTYSTARTON<'2022-02-14';
 ------------------------------------------------------------------------------------------------
