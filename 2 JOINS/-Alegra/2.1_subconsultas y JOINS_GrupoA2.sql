@@ -8,7 +8,18 @@ de todos los componentes
 del facility 1
 que estén en un aula y no sean tuberias, muros, techos, suelos.
 */
-
+SELECT
+components.name,
+COMPONENTS.ASSETIDENTIFIER,
+COMPONENTS.SERIALNUMBER,
+COMPONENTS.INSTALLATEDON,
+SPACES.NAME
+FROM COMPONENTS
+ JOIN SPACES ON COMPONENTS.SPACEID = SPACES.ID
+WHERE
+COMPONENTS.FACILITYID = 1
+AND SPACES.NAME LIKE '%Aula%'
+AND COMPONENTS.EXTERNALOBJECT NOT IN('Tuberia', 'Muro', 'Techo', 'Suelo');
 /*
 2
 Nombre, área bruta y volumen de los espacios con mayor área que la media de áreas del facility 1.
