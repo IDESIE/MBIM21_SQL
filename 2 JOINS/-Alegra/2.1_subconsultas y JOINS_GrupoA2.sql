@@ -101,6 +101,7 @@ Número de componentes y número de espacios por planta (nombre) del facility 1.
 Todas las plantas.
 */
 
+
 /*
 7
 Número de componentes por tipo de componente en cada espacio
@@ -219,13 +220,50 @@ Nombre del espacio, y número de grifos del espacio con más grifos del facility
 Cuál es el mes en el que más componentes se instalaron del facility 1.
 */
 
+SELECT
+    "Número de componentes" , Mes
+FROM
+    (select 
+        count(components.name) as "Número de componentes", 
+        to_char(INSTALLATEDON,'month')as Mes 
+    from 
+        components 
+    group by 
+        to_char(INSTALLATEDON,'month') 
+    order by 
+        count(name) desc)
+where ROWNUM = 1;
+
 /* 16
 Nombre del día en el que más componentes se instalaron del facility 1.
 Ejemplo: Jueves
 */
+select dia 
+    from
+(select max(numcomp) maximo
+from
+(Select count(id) numcomp, to_char(installatedon,'Day') dia
+from components
+where facilityid = 1
+group by to_char(installatedon,'Day')
+)) tabmax
+join
+(    Select count(id) numcomp, to_char(installatedon,'Day') dia
+    from components
+    where facilityid = 1
+    group by to_char(installatedon,'Day')
+) tabnum on tabmax.maximo = tabnum.numcomp
+;
 
-/*17
+/*17 
 Listar los nombres de componentes que están fuera de garantía del facility 1.
 */
+SELECT 
+components.name,
+to_char(components.WARRANTYSTARTON,'yyyy-mm-dd')
+FROM components
+JOIN facilities ON facilities.id=components.facilityid
+WHERE facilities.id=1
+AND components.WARRANTYSTARTON<'2022-02-14';
 
 ------------------------------------------------------------------------------------------------
