@@ -24,7 +24,24 @@ And components.externalobject not in('Tuberia', 'Muro', 'Techo', 'Suelo');
 2 
 Nombre, área bruta y volumen de los espacios con mayor área que la media de áreas del facility 1.
 */
-
+Select
+    spaces.name,
+    spaces.grossarea,
+    spaces.volume
+From
+    spaces join floors on spaces.floorid = floors.id
+Where
+    facilityid=1 and
+    spaces.grossarea>(select
+    avg(grossarea)
+From
+    spaces join floors on spaces.floorid = floors.id
+Where
+    facilityid=1)
+Group by 
+    spaces.name,
+    spaces.grossarea,
+    spaces.volume;
 /*
 3 
 Nombre y fecha de instalación (yyyy-mm-dd) de los componentes del espacio con mayor área del facility 1
