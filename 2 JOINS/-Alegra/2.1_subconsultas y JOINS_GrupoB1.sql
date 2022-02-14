@@ -18,7 +18,21 @@ Nombre, área bruta y volumen de los espacios con mayor área que la media de á
 3
 Nombre y fecha de instalación (yyyy-mm-dd) de los componentes del espacio con mayor área del facility 1
 */
-
+select 
+    rownum, fila, nombre, área, facilityid
+from (
+select 
+    rownum fila,
+    components.name nombre,
+    components.area área,
+    components.facilityid
+from
+    components
+where
+    components.facilityid = 1
+    order by 3 desc)
+where
+    rownum < 4;
 /*
 4
 Nombre y código de activo  de los componentes cuyo tipo de componente contenga la palabra 'mesa'
