@@ -73,7 +73,13 @@ WHERE
 Nombre y código de activo  de los componentes cuyo tipo de componente contenga la palabra 'mesa'
 del facility 1
 */
-
+SELECT
+    COMPONENTS.NAME,
+    COMPONENTS.ASSETIDENTIFIER
+FROM
+    COMPONENTS JOIN COMPONENT_TYPES ON COMPONENTS.TYPEID=COMPONENT_TYPES.ID
+WHERE
+    UPPER(COMPONENT_TYPES.NAME) LIKE '%MESA%';
 /*
 5
 Nombre del componente, espacio y planta de los componentes
