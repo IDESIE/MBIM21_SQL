@@ -2,20 +2,31 @@
 -- SELECT con subcolsultas y JOINS
 ------------------------------------------------------------------------------------------------
 /*
-1 X
+1 
 Listar nombre, código de asset, número de serie, el año de instalación, nombre del espacio,
 de todos los componentes
 del facility 1
 que estén en un aula y no sean tuberias, muros, techos, suelos.
 */
-
+Select
+    Components.name,
+    Components.assetidentifier,
+    Components.serialnumber,
+    Components.installatedon,
+Spaces.name
+From components
+ join spaces on components.spaceid = spaces.id
+Where
+Components.facilityid = 1
+And spaces.name like '%Aula%'
+And components.externalobject not in('Tuberia', 'Muro', 'Techo', 'Suelo');
 /*
-2 D
+2 
 Nombre, área bruta y volumen de los espacios con mayor área que la media de áreas del facility 1.
 */
 
 /*
-3 B
+3 
 Nombre y fecha de instalación (yyyy-mm-dd) de los componentes del espacio con mayor área del facility 1
 */
 select 
@@ -49,7 +60,7 @@ where
     and lower(component_types.name) like '%mesa%';
 
 /*
-5 R
+5 
 Nombre del componente, espacio y planta de los componentes
 de los espacios que sean Aula del facility 1
 */
@@ -63,13 +74,13 @@ JOIN floors ON  spaces.floorid=floors.id
 WHERE UPPER(components.name) LIKE '%AULA%';
 
 /*
-6 X
+6 
 Número de componentes y número de espacios por planta (nombre) del facility 1. 
 Todas las plantas.
 */
 
 /*
-7 D
+7 
 Número de componentes por tipo de componente en cada espacio
 de los componentes que sean mesas del facility 1
 ordenados de forma ascendente por el espacio y descentente por el número de componentes.
@@ -83,7 +94,7 @@ Componentes    Tipo   Espacio
 */
 
 /*
-8 B
+8 
 Mostrar el nombre de las Aulas y una etiqueda «Sillas» que indique
 'BAJO' si el número de sillas es menor a 6
 'ALTO' si el número de sillas es mayor a 15
@@ -149,12 +160,12 @@ having count (*) > 1
 order by 2 desc;
 
 /*
-11 R
+11 
 Nombre y área del espacio que mayor área bruta tiene del facility 1.
 */
 
 /*
-12 X
+12 
 Número de componentes instalados entre el 1 de mayo de 2010 y 31 de agosto de 2010
 y que sean grifos, lavabos del facility 1
 */
@@ -198,12 +209,12 @@ where
     lower(components.name) like '%escritorio%');
 
 /*
-14 D
+14 
 Nombre del espacio, y número de grifos del espacio con más grifos del facility 1.
 */
 
 /*
-15 B
+15 
 Cuál es el mes en el que más componentes se instalaron del facility 1.
 */
 SELECT
@@ -242,7 +253,7 @@ join
 ) tabnum on tabmax.maximo = tabnum.numcomp
 ;
 
-/*17 R
+/*17 
 Listar los nombres de componentes que están fuera de garantía del facility 1.
 */
 SELECT components.name,
