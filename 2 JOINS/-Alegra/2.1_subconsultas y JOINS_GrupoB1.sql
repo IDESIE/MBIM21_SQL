@@ -99,7 +99,20 @@ Aula 1  BAJO
 Aula 2  BAJO
 Aula 3  MEDIO
 */
-
+select 
+    spaces.name as Aulas ,count(components.name),
+    case 
+        when count(components.name) < 6 then 'Bajo'
+        when count(components.name) > 6 and count(components.name) <=15 then 'Medio'
+        when count(components.name) > 15 then 'Alto'      
+    end Sillas
+from spaces 
+    join components 
+    on components.spaceid = spaces.id
+where 
+    spaces.name like 'Aula%' and components.name like 'Silla%'
+group by 
+    spaces.name;
 /*
 9
 Listar el nombre de los tres espacios con mayor área del facility 1
