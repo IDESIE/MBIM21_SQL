@@ -52,7 +52,18 @@ where
 Nombre del componente, espacio y planta de los componentes
 de los espacios que sean Aula del facility 1
 */
-
+select
+    components.name NombreComponente,
+    spaces.name NombreEspacio,
+    floors.name NombrePlanta
+from
+    components
+    join spaces 
+    on components.spaceid = spaces.id
+    join floors 
+    on  spaces.floorid=floors.id
+where
+    upper(components.name) like '%AULA%';
 /*
 6
 Número de componentes y número de espacios por planta (nombre) del facility 1. 
