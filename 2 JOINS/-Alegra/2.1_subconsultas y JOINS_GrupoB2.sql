@@ -8,11 +8,41 @@ de todos los componentes
 del facility 1
 que estén en un aula y no sean tuberias, muros, techos, suelos.
 */
+Select
+    Components.name,
+    Components.assetidentifier,
+    Components.serialnumber,
+    Components.installatedon,
+Spaces.name
+From components
+ join spaces on components.spaceid = spaces.id
+Where
+Components.facilityid = 1
+And spaces.name like '%Aula%'
+And components.externalobject not in('Tuberia', 'Muro', 'Techo', 'Suelo');
 
 /*
 2
 Nombre, área bruta y volumen de los espacios con mayor área que la media de áreas del facility 1.
 */
+Select
+    spaces.name,
+    spaces.grossarea,
+    spaces.volume
+From
+    spaces join floors on spaces.floorid = floors.id
+Where
+    facilityid=1 and
+    spaces.grossarea>(select
+    avg(grossarea)
+From
+    spaces join floors on spaces.floorid = floors.id
+Where
+    facilityid=1)
+Group by 
+    spaces.name,
+    spaces.grossarea,
+    spaces.volume;
 
 /*
 3
@@ -55,6 +85,13 @@ where
 Nombre del componente, espacio y planta de los componentes
 de los espacios que sean Aula del facility 1
 */
+SELECT components.name NombreComponente,
+spaces.name NombreEspacio,
+floors.name NombrePlanta
+FROM components
+JOIN spaces ON components.spaceid = spaces.id
+JOIN floors ON  spaces.floorid=floors.id
+WHERE UPPER(components.name) LIKE '%AULA%';
 
 /*
 6
