@@ -238,7 +238,20 @@ Nombre del espacio, y número de grifos del espacio con más grifos del facility
 15
 Cuál es el mes en el que más componentes se instalaron del facility 1.
 */
-
+select
+    "Número de componentes" , Mes
+from
+    (select 
+        count(components.name) as "Número de componentes", 
+        to_char(INSTALLATEDON,'month')as Mes 
+    from 
+        components 
+    group by 
+        to_char(INSTALLATEDON,'month') 
+    order by 
+        count(name) desc)
+where 
+    rownum = 1;
 /* 16
 Nombre del día en el que más componentes se instalaron del facility 1.
 Ejemplo: Jueves
