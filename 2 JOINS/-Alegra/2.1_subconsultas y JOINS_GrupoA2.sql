@@ -85,7 +85,16 @@ WHERE
 Nombre del componente, espacio y planta de los componentes
 de los espacios que sean Aula del facility 1
 */
-
+SELECT
+    COMPONENTS.NAME,
+    SPACES.NAME,
+    FLOORS.NAME
+FROM
+    COMPONENTS JOIN SPACES ON COMPONENTS.SPACEID = SPACES.ID
+    JOIN FLOORS ON SPACES.FLOORID = FLOORS.ID
+WHERE
+    COMPONENTS.FACILITYID = 1 AND
+    LOWER(COMPONENTS.NAME) LIKE '%aula%';
 /*
 6
 Número de componentes y número de espacios por planta (nombre) del facility 1. 
