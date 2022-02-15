@@ -25,24 +25,25 @@ AND COMPONENTS.EXTERNALOBJECT NOT IN('Tuberia', 'Muro', 'Techo', 'Suelo');
 2
 Nombre, área bruta y volumen de los espacios con mayor área que la media de áreas del facility 1.
 */
- SELECT
-    SPACES.NAME,
-    SPACES.GROSSAREA,
-    SPACES.VOLUME
-FROM
-    SPACES JOIN FLOORS ON SPACES.FLOORID = FLOORS.ID
-WHERE
-    FACILITYID=1 AND
-    SPACES.GROSSAREA>(SELECT
-    AVG(GROSSAREA)
-FROM
-    SPACES JOIN FLOORS ON SPACES.FLOORID = FLOORS.ID
-WHERE
-    FACILITYID=1)
-GROUP BY 
-    SPACES.NAME,
-    SPACES.GROSSAREA,
-    SPACES.VOLUME;
+select
+    spaces.name,
+    max(grossarea)
+from
+    spaces join components on spaces.id = components.spaceid
+where
+    facilityid = 1
+group by
+    spaces.name
+having
+    max(grossarea)=(
+    select
+        max(grossarea)
+    from
+        spaces join components on spaces.id = components.spaceid
+    where
+        facilityid = 1
+)
+;
     
 /*
 3
@@ -307,5 +308,23 @@ join
 /*17
 Listar los nombres de componentes que están fuera de garantía del facility 1.
 */
-
+select
+    components.name,
+    components.warrantystarton,
+    component_types.warrantydurationparts,
+    add_months(components.warrantystarton, 
+                component_types.warrantydurationparts * 12)
+from
+    component_types join components
+    on
+    component_types.id = components.typeid
+where
+    components.facilityid = 1 and
+    components.warrantystarton is not null and
+    component_types.warrantydurationparts is not null and
+    add_months(components.warrantystarton, 
+                component_types.warrantydurationparts * 12) < sysdate
+order by
+    2 desc, 3 desc
+;
 ------------------------------------------------------------------------------------------------
