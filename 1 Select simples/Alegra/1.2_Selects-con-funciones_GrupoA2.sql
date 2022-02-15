@@ -1,7 +1,7 @@
 ------------------------------------------------------------------------------------------------
 -- SELECT CON FUNCIONES
 ------------------------------------------------------------------------------------------------
-/* 1
+/* 1 EDU
 Mostrar la fecha actual de la siguiente forma:
 Fecha actual
 ------------------------------
@@ -16,12 +16,12 @@ Y de etiqueta del campo "Fecha actual".
 select to_char(SYSDATE,'Day,dd "de" month "de" yyyy. hh:mi:ss')
 from dual;
 
-/* 2
+/* 2 CARO
 Día en palabras de cuando se instalaron los componentes
 del facility 1
 */
 
-/* 3
+/* 3 JAZ
 De los espacios, obtener la suma de áreas, cuál es el mínimo, el máximo y la media de áreas
 del floorid 1. Redondeado a dos dígitos.
 */
@@ -36,7 +36,7 @@ WHERE floorid=1;
 
 
 
-/* 4
+/* 4 EDU
 Listar el número de componentes que tienen indicado el espacio y el número de componentes total.
 del facility 1
 */
@@ -46,7 +46,7 @@ FROM COMPONENTS
 WHERE FACILITYID=1
 GROUP BY SPACEID; 
 
-/* 5
+/* 5  FELIX
 Mostrar tres medias que llamaremos:
 -Media a la media del área bruta
 -MediaBaja la media entre el área media y el área mínima
@@ -66,7 +66,7 @@ WHERE
 FLOORID=1
 GROUP BY FLOORID;
 
-/* 6
+/* 6 JAZ
 Cuántos componentes hay, cuántos tienen fecha inicio de garantia, cuántos tienen espacio, y en cuántos espacios hay componentes
 en el facility 1.
 */
@@ -75,7 +75,7 @@ select
 from components
 where warrantystarton is not null;
 
-/* 7
+/* 7 FELIX
 Mostrar cuántos espacios tienen el texto 'Aula' en el nombre
 del facility 1.
 */
@@ -86,14 +86,14 @@ from
 where 
  name like '%Aula%';
 
-/* 8
+/* 8 JAZ
 Mostrar el porcentaje de componentes que tienen fecha de inicio de garantía
 del facility 1.
 */
 SELECT ROUND (COUNT(WARRANTYSTARTON)/COUNT(*)*100,2)
 FROM COMPONENTS
 WHERE FACILITYID=1;
-/* 9
+/* 9 EDU
 Listar las cuatro primeras letras del nombre de los espacios sin repetir
 del facility 1. 
 En orden ascendente.
@@ -110,7 +110,7 @@ SELECT DISTINCT SUBSTR(NAME,1,4)
 FROM SPACES 
 WHERE FLOORID=1;
 
-/* 10
+/* 10 CARO
 Número de componentes por fecha de instalación del facility 1
 ordenados descendentemente por la fecha de instalación
 Ejemplo:
@@ -120,7 +120,7 @@ Fecha   Componentes
 2021-03-03 232
 */
 
-/* 11
+/* 11 JAZ
 Un listado por año del número de componentes instalados del facility 1
 ordenados descendentemente por año.
 Ejemplo
@@ -139,7 +139,7 @@ WHERE
 GROUP BY TO_CHAR (INSTALLATEDON,'YYYY')
 ORDER BY 1 DESC;
 
-/* 12
+/* 12 FELIX
 Nombre del día de instalación y número de componentes del facility 1.
 ordenado de lunes a domingo
 Ejemplo:
@@ -162,7 +162,7 @@ WHERE
  FACILITYID=1
 GROUP BY TO_CHAR(INSTALLATEDON,'Day')
 ORDER BY TO_CHAR(INSTALLATEDON,'Day')ASC;
-/*13
+/*13 CARO
 Mostrar en base a los cuatro primeros caracteres del nombre cuántos espacios hay
 del floorid 1 ordenados ascendentemente por el nombre.
 Ejemplo.
@@ -171,7 +171,7 @@ Aseo 12
 Pasi 4
 */
 
-/*14
+/*14 EDU
 Cuántos componentes de instalaron un Jueves
 en el facilityid 1
 */
@@ -181,7 +181,7 @@ FROM COMPONENTS
 WHERE RTRIM(TO_CHAR(INSTALLATEDON, 'DAY'))= 'JUEVES'
 AND FACILITYID=1;
 
-/*15
+/*15 FELIX
 Listar el id de planta concatenado con un guión
 seguido del id de espacio concatenado con un guión
 y seguido del nombre del espacio.
