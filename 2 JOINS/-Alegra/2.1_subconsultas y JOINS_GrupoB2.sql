@@ -255,7 +255,23 @@ order by 2 desc;
 11
 Nombre y área del espacio que mayor área bruta tiene del facility 1.
 */
-
+select
+    spaces.name, max(grossarea)
+from
+    spaces join components on spaces.id = components.spaceid
+where
+    facilityid = 1
+group by
+    spaces.name
+having
+    max(grossarea) = (
+        select
+    max(grossarea)
+        from
+    spaces join components on spaces.id = components.spaceid
+        where
+    facilityid = 1);
+    
 /*
 12
 Número de componentes instalados entre el 1 de mayo de 2010 y 31 de agosto de 2010
