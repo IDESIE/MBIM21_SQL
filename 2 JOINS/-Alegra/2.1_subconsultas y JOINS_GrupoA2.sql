@@ -235,33 +235,26 @@ Sillas 16
 Mesas 3
 */
 
-SELECT
-    'COMPONENTS' "Etiqueta",
-    COUNT(COMPONENTS.ID) "Numero componentes"
+SELECT 'COMPONENTS' "Etiqueta",
+ COUNT(COMPONENTS.ID) "Numero componentes"
 FROM 
-    SPACES JOIN COMPONENTS ON SPACES.ID = COMPONENTS.SPACEID
+ SPACES JOIN COMPONENTS ON SPACES.ID = COMPONENTS.SPACEID
 WHERE FACILITYID=1 AND UPPER(spaces.name)='AULA 03'
 UNION
-Select
-    'Mesas',
-    count (components.id)
-from 
-    spaces join components on spaces.id = components.spaceid
-Where 
-    facilityid=1 and 
-    lower(spaces.name)='aula 03' and 
-    lower(components.name)='%silla%'
+SELECT 'Mesas',
+ count (components.id)
+FROM SPACES JOIN COMPONENTS on spaces.id = components.spaceid
+Where facilityid=1 
+and UPPER(spaces.name)='AULA 03'
+and UPPER(components.name)='%SILLA%'
 Union        
-Select
-    components.id, 
-    components.name
-from 
-    spaces 
-    join components on spaces.id = components.spaceid
-Where 
-    facilityid=1 and 
-    (UPPPER(compoenents.name) like '%MESA%' or
-    UPPER(components.name) like '%ESCRITORIO%');
+Select components.id, 
+ components.name
+from spaces 
+ join components on spaces.id = components.spaceid
+Where facilityid=1 
+and (UPPPER(compoenents.name) like '%MESA%' 
+or UPPER(components.name) like '%ESCRITORIO%');
 
 
 /*
