@@ -14,7 +14,7 @@ COMPONENTS.ASSETIDENTIFIER,
 COMPONENTS.SERIALNUMBER,
 COMPONENTS.INSTALLATEDON,
 SPACES.NAME
-FROM COMPONENTS
+FRrtj<  M COMPONENTS
  JOIN SPACES ON COMPONENTS.SPACEID = SPACES.ID
 WHERE
 COMPONENTS.FACILITYID = 1
@@ -307,5 +307,25 @@ join
 /*17
 Listar los nombres de componentes que están fuera de garantía del facility 1.
 */
+
+select
+    components.name,
+    components.warrantystarton,
+    component_types.warrantydurationparts,
+    add_months(components.warrantystarton, 
+                component_types.warrantydurationparts * 12)
+from
+    component_types join components
+    on
+    component_types.id = components.typeid
+where
+    components.facilityid = 1 and
+    components.warrantystarton is not null and
+    component_types.warrantydurationparts is not null and
+    add_months(components.warrantystarton, 
+                component_types.warrantydurationparts * 12) < sysdate
+order by
+    2 desc, 3 desc
+;
 
 ------------------------------------------------------------------------------------------------
