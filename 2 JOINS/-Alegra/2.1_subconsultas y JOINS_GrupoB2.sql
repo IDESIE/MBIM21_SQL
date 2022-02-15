@@ -176,14 +176,7 @@ Componentes    Tipo   Espacio
 1   Mesa-profesor           Aula 3
 21  Mesa-cristal-redonda    Aula 12
 */
-select 
-name,
-count(*)as num from component_types
-from components
-JOIN component_types ON components.name = component_types.name
-where facilityid=1 and lower(component_types.name) like '%mesa%'
-group by name
-order by count(*) desc;
+Select name, count(*) as cant from components group by id order by count(*) desc;
 
 /*
 8
