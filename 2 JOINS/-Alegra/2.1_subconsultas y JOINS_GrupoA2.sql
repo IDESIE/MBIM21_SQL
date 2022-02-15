@@ -287,12 +287,15 @@ join
 /*17 
 Listar los nombres de componentes que están fuera de garantía del facility 1.
 */
-SELECT 
-components.name,
-to_char(components.WARRANTYSTARTON,'yyyy-mm-dd')
-FROM components
-JOIN facilities ON facilities.id=components.facilityid
-WHERE facilities.id=1
-AND components.WARRANTYSTARTON<'2022-02-14';
+SELECT
+    COMPONENTS.NAME
+FROM
+    COMPONENT_TYPES JOIN COMPONENTS ON COMPONENT_TYPES.ID = COMPONENTS.TYPEID
+WHERE
+    COMPONENTS.FACILITYID = 1 AND
+    COMPONENTS.WARRANTYSTARTON IS NOT NULL AND
+    COMPONENT_TYPES.WARRANTYDURATIONPARTS IS NOT NULL AND
+    ADD_MONTHS (COMPONENTS.WARRANTYSTARTON, COMPONENT_TYPES.WARRANTYDURATIONPARTS * 12) < SYSDATE
+ORDER BY 1 DESC;
 
 ------------------------------------------------------------------------------------------------
