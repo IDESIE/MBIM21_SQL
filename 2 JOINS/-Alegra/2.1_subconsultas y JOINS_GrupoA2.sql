@@ -221,6 +221,14 @@ HAVING
 Número de componentes instalados entre el 1 de mayo de 2010 y 31 de agosto de 2010
 y que sean grifos, lavabos del facility 1
 */
+select count(*)
+from components
+    left join spaces on components.spaceid = spaces.id
+where facilityid = 1
+    and to_char(components.installatedon,'yyyy-mm-dd') between '2010-05-01' and '2020-08-31'
+    and (lower(components.name)  like '%grifo%'
+        or lower(components.name)  like '%lavabo%')
+order by 1 desc;
 
 /*
 13 CARO
