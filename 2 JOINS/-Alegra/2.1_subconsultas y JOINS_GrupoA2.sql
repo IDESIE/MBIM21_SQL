@@ -2,7 +2,7 @@
 -- SELECT con subcolsultas y JOINS
 ------------------------------------------------------------------------------------------------
 /*
-1EDU
+1
 Listar nombre, código de asset, número de serie, el año de instalación, nombre del espacio,
 de todos los componentes
 del facility 1
@@ -21,7 +21,7 @@ WHERE
     UPPER(SPACES.NAME) LIKE '%AULA%' AND
     COMPONENTS.EXTERNALOBJECT NOT IN('Tuberia', 'Muro', 'Techo', 'Suelo');
 /*
-2CARO
+2
 Nombre, área bruta y volumen de los espacios con mayor área que la media de áreas del facility 1.
 */
 SELECT
@@ -43,7 +43,7 @@ GROUP BY
     SPACES.GROSSAREA,
     SPACES.VOLUME;
 /*
-3JAZ
+3
 Nombre y fecha de instalación (yyyy-mm-dd) de los componentes del espacio con mayor área del facility 1
 */
 SELECT
@@ -69,7 +69,7 @@ WHERE
         WHERE
             ROWNUM=1);
 /*
-4FELIX
+4
 Nombre y código de activo  de los componentes cuyo tipo de componente contenga la palabra 'mesa'
 del facility 1
 */
@@ -96,14 +96,14 @@ WHERE
     COMPONENTS.FACILITYID = 1 AND
     LOWER(COMPONENTS.NAME) LIKE '%aula%';
 /*
-6EDU
+6
 Número de componentes y número de espacios por planta (nombre) del facility 1. 
 Todas las plantas.
 */
 
 
 /*
-7CARO
+7
 Número de componentes por tipo de componente en cada espacio
 de los componentes que sean mesas del facility 1
 ordenados de forma ascendente por el espacio y descentente por el número de componentes.
@@ -117,7 +117,7 @@ Componentes    Tipo   Espacio
 */
 
 /*
-8JAZ
+8
 Mostrar el nombre de las Aulas y una etiqueda «Sillas» que indique
 'BAJO' si el número de sillas es menor a 6
 'ALTO' si el número de sillas es mayor a 15
@@ -145,7 +145,7 @@ WHERE
     UPPER (COMPONENTS.NAME) LIKE '%SILLA%'
 GROUP BY SPACES.NAME;
 /*
-9FELIX
+9
 Listar el nombre de los tres espacios con mayor área del facility 1
 */
 SELECT
@@ -165,7 +165,7 @@ ORDER BY 3 DESC)
 WHERE
  ROWNUM <4;
 /*
-10EDU
+10
 Tomando en cuenta los cuatro primeros caracteres del nombre de los espacios
 del facility 1
 listar los que se repiten e indicar el número.
@@ -192,13 +192,13 @@ Nombre y área del espacio que mayor área bruta tiene del facility 1.
 */
 
 /*
-12JAZ
+12
 Número de componentes instalados entre el 1 de mayo de 2010 y 31 de agosto de 2010
 y que sean grifos, lavabos del facility 1
 */
 
 /*
-13FELIX
+13
 Un listado en el que se indique en líneas separadas
 una etiqueta que describa el valor, y el valor:
 el número de componentes en Aula 03 del facility 1, 
@@ -240,12 +240,12 @@ Where
 
 
 /*
-14EDU
+14
 Nombre del espacio, y número de grifos del espacio con más grifos del facility 1.
 */
 
 /*
-15CARO
+15
 Cuál es el mes en el que más componentes se instalaron del facility 1.
 */
 
@@ -263,7 +263,7 @@ FROM
         count(name) desc)
 where ROWNUM = 1;
 
-/* 16JAZ
+/* 16
 Nombre del día en el que más componentes se instalaron del facility 1.
 Ejemplo: Jueves
 */
@@ -284,7 +284,7 @@ join
 ) tabnum on tabmax.maximo = tabnum.numcomp
 ;
 
-/*17 FELIX
+/*17 
 Listar los nombres de componentes que están fuera de garantía del facility 1.
 */
 NAME,
