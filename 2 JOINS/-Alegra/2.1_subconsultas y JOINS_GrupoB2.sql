@@ -98,6 +98,70 @@ WHERE UPPER(components.name) LIKE '%AULA%';
 Número de componentes y número de espacios por planta (nombre) del facility 1. 
 Todas las plantas.
 */
+SELECT 
+Count(*) 
+FROM spaces
+JOIN floors ON  spaces.floorid=floors.id
+Where floors.facilityid=1 
+UNION
+Select
+Count (*) 
+FROM spaces
+JOIN floors ON  spaces.floorid=floors.id
+Where floors.facilityid=1 And  floors.id=1
+UNION
+Select
+Count (*) 
+FROM spaces
+JOIN floors ON  spaces.floorid=floors.id
+Where floors.facilityid=1 And  floors.id=2
+UNION
+Select
+Count (*) 
+FROM spaces
+JOIN floors ON  spaces.floorid=floors.id
+Where floors.facilityid=1 And  floors.id=3
+UNION
+Select
+Count (*) 
+FROM spaces
+JOIN floors ON  spaces.floorid=floors.id
+Where floors.facilityid=1 And  floors.id=4
+Union
+Select
+Count(spaceid) EspaciosPorPlanta
+FROM components
+JOIN spaces ON components.spaceid = spaces.id
+JOIN floors ON  spaces.floorid=floors.id
+Where floors.facilityid=1 
+UNION
+Select
+Count (spaceid) 
+FROM components
+JOIN spaces ON components.spaceid = spaces.id
+JOIN floors ON  spaces.floorid=floors.id
+Where floors.facilityid=1 And  floors.id=1
+UNION
+Select
+Count (spaceid) 
+FROM components
+JOIN spaces ON components.spaceid = spaces.id
+JOIN floors ON  spaces.floorid=floors.id
+Where floors.facilityid=1 And  floors.id=2
+UNION
+Select
+Count (spaceid) 
+FROM components
+JOIN spaces ON components.spaceid = spaces.id
+JOIN floors ON  spaces.floorid=floors.id
+Where floors.facilityid=1 And  floors.id=3
+UNION
+Select
+Count (spaceid) 
+FROM components
+JOIN spaces ON components.spaceid = spaces.id
+JOIN floors ON  spaces.floorid=floors.id
+Where floors.facilityid=1 And  floors.id=4;
 
 /*
 7
