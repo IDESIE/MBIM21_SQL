@@ -2,7 +2,7 @@
 -- SELECT con subcolsultas y JOINS
 ------------------------------------------------------------------------------------------------
 /*
-1
+1CARO
 Listar nombre, código de asset, número de serie, el año de instalación, nombre del espacio,
 de todos los componentes
 del facility 1
@@ -18,10 +18,10 @@ FROM COMPONENTS
     JOIN SPACES ON COMPONENTS.SPACEID = SPACES.ID
 WHERE
     COMPONENTS.FACILITYID = 1 AND
-    UPPER (SPACES.NAME) LIKE '%AULA%' AND
-    COMPONENTS.EXTERNALOBJECT NOT IN('Tuberia', 'Muro', 'Techo', 'Suelo');
+    UPPER(SPACES.NAME) LIKE '%AULA%' AND
+    UPPER(COMPONENTS.EXTERNALOBJECT) NOT IN('TUBERIA', 'MURO', 'TECHO', 'SUELO');
 /*
-2
+2EDU
 Nombre, área bruta y volumen de los espacios con mayor área que la media de áreas del facility 1.
 */
 SELECT
@@ -43,7 +43,7 @@ GROUP BY
     SPACES.GROSSAREA,
     SPACES.VOLUME;
 /*
-3
+3JAZ
 Nombre y fecha de instalación (yyyy-mm-dd) de los componentes del espacio con mayor área del facility 1
 */
 SELECT
@@ -81,7 +81,7 @@ FROM
 WHERE
     UPPER(COMPONENT_TYPES.NAME) LIKE '%MESA%';
 /*
-5
+5FELIX
 Nombre del componente, espacio y planta de los componentes
 de los espacios que sean Aula del facility 1
 */
@@ -96,14 +96,14 @@ WHERE
     COMPONENTS.FACILITYID = 1 AND
     LOWER(COMPONENTS.NAME) LIKE '%aula%';
 /*
-6
+6EDU
 Número de componentes y número de espacios por planta (nombre) del facility 1. 
 Todas las plantas.
 */
 
 
 /*
-7
+7CARO
 Número de componentes por tipo de componente en cada espacio
 de los componentes que sean mesas del facility 1
 ordenados de forma ascendente por el espacio y descentente por el número de componentes.
@@ -117,7 +117,7 @@ Componentes    Tipo   Espacio
 */
 
 /*
-8
+8JAZ
 Mostrar el nombre de las Aulas y una etiqueda «Sillas» que indique
 'BAJO' si el número de sillas es menor a 6
 'ALTO' si el número de sillas es mayor a 15
@@ -165,7 +165,7 @@ ORDER BY 3 DESC)
 WHERE
  ROWNUM <4;
 /*
-10
+10CARO
 Tomando en cuenta los cuatro primeros caracteres del nombre de los espacios
 del facility 1
 listar los que se repiten e indicar el número.
@@ -187,18 +187,33 @@ GROUP BY
 HAVING COUNT (*) > 1
 ORDER BY 2 DESC;
 /*
-11
+11JAZ
 Nombre y área del espacio que mayor área bruta tiene del facility 1.
 */
-
+SELECT 
+    SPACES.NAME, MAX(GROSSAREA)
+FROM SPACES
+    JOIN COMPONENTS ON SPACES.ID = COMPONENTS.SPACEID
+WHERE 
+    FACILITYID = 1
+GROUP BY 
+    SPACES.NAME
+HAVING 
+    MAX(GROSSAREA) = (
+ SELECT 
+    MAX(GROSSAREA)
+ FROM 
+    SPACES JOIN COMPONENTS ON SPACES.ID = COMPONENTS.SPACEID
+ WHERE 
+    FACILITYID = 1);
 /*
-12
+12FELIX
 Número de componentes instalados entre el 1 de mayo de 2010 y 31 de agosto de 2010
 y que sean grifos, lavabos del facility 1
 */
 
 /*
-13
+13 CARO
 Un listado en el que se indique en líneas separadas
 una etiqueta que describa el valor, y el valor:
 el número de componentes en Aula 03 del facility 1, 
@@ -210,13 +225,13 @@ Sillas 16
 Mesas 3
 */
 
-Select
-    'components' "Etiqueta",
-    count (components.id) "Numero componentes"
-from 
-    spaces join components on spaces.id = components.spaceid
-Where facilityid=1 and lower(spaces.name)='aula 03'
-Union
+SELECT
+    'COMPONENTS' "Etiqueta",
+    COUNT(COMPONENTS.ID) "Numero componentes"
+FROM 
+    SPACES JOIN COMPONENTS ON SPACES.ID = COMPONENTS.SPACEID
+WHERE FACILITYID=1 AND UPPER(spaces.name)='AULA 03'
+UNION
 Select
     'Mesas',
     count (components.id)
@@ -235,17 +250,17 @@ from
     join components on spaces.id = components.spaceid
 Where 
     facilityid=1 and 
-    (lower(compoenents.name) like '%mesa%' or
-    lower(components.name) like '%escritorio%');
+    (UPPPER(compoenents.name) like '%MESA%' or
+    UPPER(components.name) like '%ESCRITORIO%');
 
 
 /*
-14
+14EDU
 Nombre del espacio, y número de grifos del espacio con más grifos del facility 1.
 */
 
 /*
-15
+15FELIX
 Cuál es el mes en el que más componentes se instalaron del facility 1.
 */
 
@@ -263,7 +278,7 @@ FROM
         count(name) desc)
 where ROWNUM = 1;
 
-/* 16
+/* 16JAZ
 Nombre del día en el que más componentes se instalaron del facility 1.
 Ejemplo: Jueves
 */
@@ -284,7 +299,7 @@ join
 ) tabnum on tabmax.maximo = tabnum.numcomp
 ;
 
-/*17 
+/*17 EDU
 Listar los nombres de componentes que están fuera de garantía del facility 1.
 */
 SELECT
