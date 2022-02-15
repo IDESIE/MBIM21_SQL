@@ -271,7 +271,7 @@ having
     spaces join components on spaces.id = components.spaceid
         where
     facilityid = 1);
-    
+
 /*
 12
 Número de componentes instalados entre el 1 de mayo de 2010 y 31 de agosto de 2010
@@ -360,21 +360,16 @@ Select Count(id) numcomp, to_char(installatedon,'Day')dia
 Listar los nombres de componentes que están fuera de garantía del facility 1.
 */
 select
-    dia
-from
-(select max(numcomp) maximo
-from
-(Select count(id) numcomp, to_char(installatedon,'Day') dia
-from components
-where facilityid = 1
-group by to_char(installatedon,'Day')
-)) tabmax
-join
-(
-    Select count(id) numcomp, to_char(installatedon,'Day') dia
-    from components
-    where facilityid = 1
-    group by to_char(installatedon,'Day')
-) tabnum on tabmax.maximo = tabnum.numcomp
-;
+ components.name,
+ components.warrantystarton,
+ component_types.warrantydurationparts,
+ add_months(components.warrantystarton, component_types.warrantydurationparts * 12)
+from 
+ component_types join components
+  on component_types.id = components.typeid
+where
+ components.facilityid = 1 and
+ components.warrantystarton is not null and
+ component_types.warrantydurationparts is not null
+order by 2 desc, 3 desc;
 ------------------------------------------------------------------------------------------------
