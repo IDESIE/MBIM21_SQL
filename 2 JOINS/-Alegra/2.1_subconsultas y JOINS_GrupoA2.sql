@@ -2,7 +2,7 @@
 -- SELECT con subcolsultas y JOINS
 ------------------------------------------------------------------------------------------------
 /*
-1 caro
+1
 Listar nombre, código de asset, número de serie, el año de instalación, nombre del espacio,
 de todos los componentes
 del facility 1
@@ -18,10 +18,10 @@ FROM COMPONENTS
     JOIN SPACES ON COMPONENTS.SPACEID = SPACES.ID
 WHERE
     COMPONENTS.FACILITYID = 1 AND
-    UPPER (SPACES.NAME) LIKE '%AULA%' AND
+    UPPER(SPACES.NAME) LIKE '%AULA%' AND
     COMPONENTS.EXTERNALOBJECT NOT IN('Tuberia', 'Muro', 'Techo', 'Suelo');
 /*
-2edu
+2
 Nombre, área bruta y volumen de los espacios con mayor área que la media de áreas del facility 1.
 */
 SELECT
@@ -43,7 +43,7 @@ GROUP BY
     SPACES.GROSSAREA,
     SPACES.VOLUME;
 /*
-3jaz
+3
 Nombre y fecha de instalación (yyyy-mm-dd) de los componentes del espacio con mayor área del facility 1
 */
 SELECT
@@ -69,7 +69,7 @@ WHERE
         WHERE
             ROWNUM=1);
 /*
-4felix
+4
 Nombre y código de activo  de los componentes cuyo tipo de componente contenga la palabra 'mesa'
 del facility 1
 */
@@ -81,7 +81,7 @@ FROM
 WHERE
     UPPER(COMPONENT_TYPES.NAME) LIKE '%MESA%';
 /*
-5caro
+5
 Nombre del componente, espacio y planta de los componentes
 de los espacios que sean Aula del facility 1
 */
@@ -96,7 +96,7 @@ WHERE
     COMPONENTS.FACILITYID = 1 AND
     LOWER(COMPONENTS.NAME) LIKE '%aula%';
 /*
-6edu
+6
 Número de componentes y número de espacios por planta (nombre) del facility 1. 
 Todas las plantas.
 */
