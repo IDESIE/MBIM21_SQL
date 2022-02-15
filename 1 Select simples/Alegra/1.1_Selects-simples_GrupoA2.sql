@@ -18,7 +18,7 @@ Datos de la tabla component_types
 */
  SELECT *
 FROM component_types;
-/* 5
+/* 5 FELIX
 Id, nombre de los facilities
 */
 SELECT ID, NAME
