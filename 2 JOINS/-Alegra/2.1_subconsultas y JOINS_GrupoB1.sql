@@ -113,7 +113,13 @@ Componentes    Tipo   Espacio
 1   Mesa-profesor           Aula 3
 21  Mesa-cristal-redonda    Aula 12
 */
-
+select count(components.id), component_types.name, spaces.name
+from components
+    join spaces on components.spaceid = spaces.id
+    join component_types on components.typeid = component_types.id
+where components.facilityid = 1
+group by spaces.name,component_types.name
+order by spaces.name asc, 1 desc;
 /*
 8
 Mostrar el nombre de las Aulas y una etiqueda «Sillas» que indique
@@ -130,7 +136,7 @@ Aula 2  BAJO
 Aula 3  MEDIO
 */
 select 
-    spaces.name as Aulas ,count(components.name),
+    spaces.name as Aulas, count(components.name),
     case 
         when count(components.name) < 6 then 'Bajo'
         when count(components.name) > 6 and count(components.name) <=15 then 'Medio'
