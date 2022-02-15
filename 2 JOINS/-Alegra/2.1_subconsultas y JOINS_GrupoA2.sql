@@ -8,34 +8,99 @@ de todos los componentes
 del facility 1
 que estén en un aula y no sean tuberias, muros, techos, suelos.
 */
-
+SELECT
+    COMPONENTS.NAME,
+    COMPONENTS.ASSETIDENTIFIER,
+    COMPONENTS.SERIALNUMBER,
+    TO_CHAR (COMPONENTS.INSTALLATEDON,'YYYY-MM-DD'),
+    SPACES.NAME
+FROM COMPONENTS
+    JOIN SPACES ON COMPONENTS.SPACEID = SPACES.ID
+WHERE
+    COMPONENTS.FACILITYID = 1 AND
+    UPPER (SPACES.NAME) LIKE '%AULA%' AND
+    COMPONENTS.EXTERNALOBJECT NOT IN('Tuberia', 'Muro', 'Techo', 'Suelo');
 /*
 2
 Nombre, área bruta y volumen de los espacios con mayor área que la media de áreas del facility 1.
 */
-
+SELECT
+    SPACES.NAME,
+    SPACES.GROSSAREA,
+    SPACES.VOLUME
+FROM
+    SPACES JOIN FLOORS ON SPACES.FLOORID = FLOORS.ID
+WHERE
+    FACILITYID=1 AND
+    SPACES.GROSSAREA>(SELECT
+    AVG(GROSSAREA)
+FROM
+    SPACES JOIN FLOORS ON SPACES.FLOORID = FLOORS.ID
+WHERE
+    FACILITYID=1)
+GROUP BY 
+    SPACES.NAME,
+    SPACES.GROSSAREA,
+    SPACES.VOLUME;
 /*
 3
 Nombre y fecha de instalación (yyyy-mm-dd) de los componentes del espacio con mayor área del facility 1
 */
-
+SELECT
+    COMPONENTS.NAME,
+    TO_CHAR(COMPONENTS.INSTALLATEDON,'YYYY-MM-DD')
+FROM
+    COMPONENTS JOIN SPACES ON COMPONENTS.SPACEID = SPACES.ID
+WHERE
+    FACILITYID=1 AND
+    SPACES.NAME =
+        (SELECT
+            NAME
+        FROM
+            (SELECT
+                SPACES.NAME,
+                SPACES.GROSSAREA
+            FROM
+                SPACES JOIN FLOORS ON SPACES.FLOORID = FLOORS.ID
+            WHERE
+                FACILITYID=1 AND
+                GROSSAREA IS NOT NULL
+            ORDER BY SPACES.GROSSAREA DESC)
+        WHERE
+            ROWNUM=1);
 /*
 4
 Nombre y código de activo  de los componentes cuyo tipo de componente contenga la palabra 'mesa'
 del facility 1
 */
-
+SELECT
+    COMPONENTS.NAME,
+    COMPONENTS.ASSETIDENTIFIER
+FROM
+    COMPONENTS JOIN COMPONENT_TYPES ON COMPONENTS.TYPEID=COMPONENT_TYPES.ID
+WHERE
+    UPPER(COMPONENT_TYPES.NAME) LIKE '%MESA%';
 /*
 5
 Nombre del componente, espacio y planta de los componentes
 de los espacios que sean Aula del facility 1
 */
-
+SELECT
+    COMPONENTS.NAME,
+    SPACES.NAME,
+    FLOORS.NAME
+FROM
+    COMPONENTS JOIN SPACES ON COMPONENTS.SPACEID = SPACES.ID
+    JOIN FLOORS ON SPACES.FLOORID = FLOORS.ID
+WHERE
+    COMPONENTS.FACILITYID = 1 AND
+    LOWER(COMPONENTS.NAME) LIKE '%aula%';
 /*
 6
 Número de componentes y número de espacios por planta (nombre) del facility 1. 
 Todas las plantas.
 */
+
 
 /*
 7
@@ -66,7 +131,19 @@ Aula 1  BAJO
 Aula 2  BAJO
 Aula 3  MEDIO
 */
-
+SELECT
+    SPACES.NAME, COUNT (COMPONENTS.NAME),
+    CASE
+        WHEN COUNT (COMPONENTS.NAME) < 6 THEN 'BAJO'
+        WHEN COUNT (COMPONENTS.NAME) > 15 THEN 'ALTO'
+        ELSE 'MEDIO'
+    END SILLAS
+FROM
+    SPACES JOIN COMPONENTS ON COMPONENTS.SPACEID = SPACES.ID
+WHERE
+    UPPER (SPACES.NAME) LIKE '%AULA%' AND
+    UPPER (COMPONENTS.NAME) LIKE '%SILLA%'
+GROUP BY SPACES.NAME;
 /*
 9
 Listar el nombre de los tres espacios con mayor área del facility 1
@@ -87,7 +164,6 @@ WHERE
 ORDER BY 3 DESC)
 WHERE
  ROWNUM <4;
-EFSFSA  
 /*
 10
 Tomando en cuenta los cuatro primeros caracteres del nombre de los espacios
@@ -100,7 +176,16 @@ Aula    18
 Aseo    4
 Hall    2
 */
-
+SELECT
+    SUBSTR (SPACES.NAME,1,4)ESPACIO, COUNT (*)OCURRENCIAS
+FROM
+    SPACES JOIN FLOORS ON SPACES.FLOORID = FLOORS.ID
+WHERE
+    FACILITYID = 1
+GROUP BY 
+    SUBSTR (SPACES.NAME,1,4)
+HAVING COUNT (*) > 1
+ORDER BY 2 DESC;
 /*
 11
 Nombre y área del espacio que mayor área bruta tiene del facility 1.
@@ -125,6 +210,35 @@ Sillas 16
 Mesas 3
 */
 
+Select
+    'components' "Etiqueta",
+    count (components.id) "Numero componentes"
+from 
+    spaces join components on spaces.id = components.spaceid
+Where facilityid=1 and lower(spaces.name)='aula 03'
+Union
+Select
+    'Mesas',
+    count (components.id)
+from 
+    spaces join components on spaces.id = components.spaceid
+Where 
+    facilityid=1 and 
+    lower(spaces.name)='aula 03' and 
+    lower(components.name)='%silla%'
+Union        
+Select
+    components.id, 
+    components.name
+from 
+    spaces 
+    join components on spaces.id = components.spaceid
+Where 
+    facilityid=1 and 
+    (lower(compoenents.name) like '%mesa%' or
+    lower(components.name) like '%escritorio%');
+
+
 /*
 14
 Nombre del espacio, y número de grifos del espacio con más grifos del facility 1.
@@ -135,13 +249,53 @@ Nombre del espacio, y número de grifos del espacio con más grifos del facility
 Cuál es el mes en el que más componentes se instalaron del facility 1.
 */
 
+SELECT
+    "Número de componentes" , Mes
+FROM
+    (select 
+        count(components.name) as "Número de componentes", 
+        to_char(INSTALLATEDON,'month')as Mes 
+    from 
+        components 
+    group by 
+        to_char(INSTALLATEDON,'month') 
+    order by 
+        count(name) desc)
+where ROWNUM = 1;
+
 /* 16
 Nombre del día en el que más componentes se instalaron del facility 1.
 Ejemplo: Jueves
 */
+select dia 
+    from
+(select max(numcomp) maximo
+from
+(Select count(id) numcomp, to_char(installatedon,'Day') dia
+from components
+where facilityid = 1
+group by to_char(installatedon,'Day')
+)) tabmax
+join
+(    Select count(id) numcomp, to_char(installatedon,'Day') dia
+    from components
+    where facilityid = 1
+    group by to_char(installatedon,'Day')
+) tabnum on tabmax.maximo = tabnum.numcomp
+;
 
-/*17
+/*17 
 Listar los nombres de componentes que están fuera de garantía del facility 1.
 */
+SELECT
+    COMPONENTS.NAME
+FROM
+    COMPONENT_TYPES JOIN COMPONENTS ON COMPONENT_TYPES.ID = COMPONENTS.TYPEID
+WHERE
+    COMPONENTS.FACILITYID = 1 AND
+    COMPONENTS.WARRANTYSTARTON IS NOT NULL AND
+    COMPONENT_TYPES.WARRANTYDURATIONPARTS IS NOT NULL AND
+    ADD_MONTHS (COMPONENTS.WARRANTYSTARTON, COMPONENT_TYPES.WARRANTYDURATIONPARTS * 12) < SYSDATE
+ORDER BY 1 DESC;
 
 ------------------------------------------------------------------------------------------------

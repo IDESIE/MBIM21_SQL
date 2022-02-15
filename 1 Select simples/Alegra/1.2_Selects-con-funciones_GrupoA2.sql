@@ -90,8 +90,9 @@ where
 Mostrar el porcentaje de componentes que tienen fecha de inicio de garantía
 del facility 1.
 */
-
-
+SELECT ROUND (COUNT(WARRANTYSTARTON)/COUNT(*)*100,2)
+FROM COMPONENTS
+WHERE FACILITYID=1;
 /* 9
 Listar las cuatro primeras letras del nombre de los espacios sin repetir
 del facility 1. 
@@ -128,6 +129,15 @@ Año Componentes
 2021 344
 2020 2938
 */
+SELECT
+    TO_CHAR (INSTALLATEDON,'YYYY'),
+    COUNT(ID)
+FROM
+    COMPONENTS
+WHERE
+    FACILITYID=1
+GROUP BY TO_CHAR (INSTALLATEDON,'YYYY')
+ORDER BY 1 DESC;
 
 /* 12
 Nombre del día de instalación y número de componentes del facility 1.
