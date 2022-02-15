@@ -8,18 +8,17 @@ de todos los componentes
 del facility 1
 que estén en un aula y no sean tuberias, muros, techos, suelos.
 */
-SELECT
-components.name,
-COMPONENTS.ASSETIDENTIFIER,
-COMPONENTS.SERIALNUMBER,
-COMPONENTS.INSTALLATEDON,
-SPACES.NAME
-FRrtj<  M COMPONENTS
- JOIN SPACES ON COMPONENTS.SPACEID = SPACES.ID
-WHERE
-COMPONENTS.FACILITYID = 1
-AND SPACES.NAME LIKE '%Aula%'
-AND COMPONENTS.EXTERNALOBJECT NOT IN('Tuberia', 'Muro', 'Techo', 'Suelo');  
+select components.name, components.assetidentifier, serialnumber, installatedon, spaces.name
+from components
+    left join spaces on components.spaceid = spaces.id
+where facilityid = 1
+    and lower(spaces.name) like '%aula%'
+    and lower(components.name) not like '%tube%'
+    and lower(components.name) not like '%muro%'
+    and lower(components.name) not like '%techo%'
+    and lower(components.name) not like '%suelo%'
+order by 1 desc
+;
 
 /*
 2
