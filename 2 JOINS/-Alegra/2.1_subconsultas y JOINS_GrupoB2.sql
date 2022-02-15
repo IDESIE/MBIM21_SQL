@@ -8,16 +8,62 @@ de todos los componentes
 del facility 1
 que estén en un aula y no sean tuberias, muros, techos, suelos.
 */
+Select
+    Components.name,
+    Components.assetidentifier,
+    Components.serialnumber,
+    Components.installatedon,
+Spaces.name
+From components
+ join spaces on components.spaceid = spaces.id
+Where
+Components.facilityid = 1
+And spaces.name like '%Aula%'
+And components.externalobject not in('Tuberia', 'Muro', 'Techo', 'Suelo');
 
 /*
 2
 Nombre, área bruta y volumen de los espacios con mayor área que la media de áreas del facility 1.
 */
+Select
+    spaces.name,
+    spaces.grossarea,
+    spaces.volume
+From
+    spaces join floors on spaces.floorid = floors.id
+Where
+    facilityid=1 and
+    spaces.grossarea>(select
+    avg(grossarea)
+From
+    spaces join floors on spaces.floorid = floors.id
+Where
+    facilityid=1)
+Group by 
+    spaces.name,
+    spaces.grossarea,
+    spaces.volume;
 
 /*
 3
 Nombre y fecha de instalación (yyyy-mm-dd) de los componentes del espacio con mayor área del facility 1
 */
+select 
+    rownum, fila, nombre, área, facilityid
+from (
+select 
+    rownum fila,
+    components.name nombre,
+    components.area área,
+    components.facilityid
+from
+    components
+where
+    components.facilityid = 1
+    order by 3 desc)
+where
+    rownum < 4;
+
 
 /*
 4
@@ -40,12 +86,83 @@ where
 Nombre del componente, espacio y planta de los componentes
 de los espacios que sean Aula del facility 1
 */
+SELECT components.name NombreComponente,
+spaces.name NombreEspacio,
+floors.name NombrePlanta
+FROM components
+JOIN spaces ON components.spaceid = spaces.id
+JOIN floors ON  spaces.floorid=floors.id
+WHERE UPPER(components.name) LIKE '%AULA%';
 
 /*
 6
 Número de componentes y número de espacios por planta (nombre) del facility 1. 
 Todas las plantas.
 */
+SELECT 
+Count(*) 
+FROM spaces
+JOIN floors ON  spaces.floorid=floors.id
+Where floors.facilityid=1 
+UNION
+Select
+Count (*) 
+FROM spaces
+JOIN floors ON  spaces.floorid=floors.id
+Where floors.facilityid=1 And  floors.id=1
+UNION
+Select
+Count (*) 
+FROM spaces
+JOIN floors ON  spaces.floorid=floors.id
+Where floors.facilityid=1 And  floors.id=2
+UNION
+Select
+Count (*) 
+FROM spaces
+JOIN floors ON  spaces.floorid=floors.id
+Where floors.facilityid=1 And  floors.id=3
+UNION
+Select
+Count (*) 
+FROM spaces
+JOIN floors ON  spaces.floorid=floors.id
+Where floors.facilityid=1 And  floors.id=4
+Union
+Select
+Count(spaceid) EspaciosPorPlanta
+FROM components
+JOIN spaces ON components.spaceid = spaces.id
+JOIN floors ON  spaces.floorid=floors.id
+Where floors.facilityid=1 
+UNION
+Select
+Count (spaceid) 
+FROM components
+JOIN spaces ON components.spaceid = spaces.id
+JOIN floors ON  spaces.floorid=floors.id
+Where floors.facilityid=1 And  floors.id=1
+UNION
+Select
+Count (spaceid) 
+FROM components
+JOIN spaces ON components.spaceid = spaces.id
+JOIN floors ON  spaces.floorid=floors.id
+Where floors.facilityid=1 And  floors.id=2
+UNION
+Select
+Count (spaceid) 
+FROM components
+JOIN spaces ON components.spaceid = spaces.id
+JOIN floors ON  spaces.floorid=floors.id
+Where floors.facilityid=1 And  floors.id=3
+UNION
+Select
+Count (spaceid) 
+FROM components
+JOIN spaces ON components.spaceid = spaces.id
+JOIN floors ON  spaces.floorid=floors.id
+Where floors.facilityid=1 And  floors.id=4;
 
 /*
 7
@@ -76,7 +193,17 @@ Aula 1  BAJO
 Aula 2  BAJO
 Aula 3  MEDIO
 */
-
+select 
+    spaces.name as Aulas ,count(components.name),
+    case 
+        when count(components.name) < 6 then 'Bajo'
+        when count(components.name) > 15 then 'Alto'
+        when count(components.name) > 6 and count(components.name) <=15 then 'Medio'
+    end Sillas
+    from spaces 
+    join components on components.spaceid = spaces.id
+    where spaces.name like 'Aula%' and components.name like 'Silla%'
+    group by spaces.name
 /*
 9
 Listar el nombre de los tres espacios con mayor área del facility 1
@@ -110,12 +237,12 @@ Aula    18
 Aseo    4
 Hall    2
 */
-Select substr(spaces.name,1,4), count(*)
+Select substr (spaces.name,1,4), count(*)
 from spaces join floors on spaces.floorid = floors.id
-Where facilityid=1
-group by substr(spaces.name,1,4)
-having count(*)>1
-order by COUNT(*) desc;
+where facilityid = 1
+group by substr (spaces.name,1,4) 
+having count (*) > 1
+order by 2 desc;
 
 /*
 11
@@ -176,7 +303,19 @@ Nombre del espacio, y número de grifos del espacio con más grifos del facility
 15
 Cuál es el mes en el que más componentes se instalaron del facility 1.
 */
-
+SELECT
+    "Número de componentes" , Mes
+FROM
+    (select 
+        count(components.name) as "Número de componentes", 
+        to_char(INSTALLATEDON,'Month')as Mes 
+    from 
+        components 
+    group by 
+        to_char(INSTALLATEDON,'Month') 
+    order by 
+        count(name) desc)
+where ROWNUM = 1;
 /* 16
 Nombre del día en el que más componentes se instalaron del facility 1.
 Ejemplo: Jueves
@@ -196,5 +335,22 @@ Select Count(id) numcomp, to_char(installatedon,'Day')dia
 /*17
 Listar los nombres de componentes que están fuera de garantía del facility 1.
 */
-
+select
+    dia
+from
+(select max(numcomp) maximo
+from
+(Select count(id) numcomp, to_char(installatedon,'Day') dia
+from components
+where facilityid = 1
+group by to_char(installatedon,'Day')
+)) tabmax
+join
+(
+    Select count(id) numcomp, to_char(installatedon,'Day') dia
+    from components
+    where facilityid = 1
+    group by to_char(installatedon,'Day')
+) tabnum on tabmax.maximo = tabnum.numcomp
+;
 ------------------------------------------------------------------------------------------------
