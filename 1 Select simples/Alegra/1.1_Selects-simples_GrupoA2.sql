@@ -9,7 +9,7 @@ desc floors;
 Describir la tabla spaces
 */
 DESC SPACES;
-/* 3
+/* 3 FÉLIX
 Datos de la tabla components
 */
 select * from components;
@@ -37,7 +37,7 @@ SELECT
     grossarea,
     volume
 FROM spaces;
-/* 8
+/* 8 FÉLIX
 Nombre, vida útil de los tipos de componentes del facility 1
 */
 SELECT
@@ -60,7 +60,7 @@ Nombre, número de modelo del tipo de componente con id = 60
 SELECT NAME, MODELNUMBER
 FROM component_types
 WHERE ID = 60;
-/* 11
+/* 11 FÉLIX
 Nombre y fecha de instalación de los componentes del espacio 60 ordenados descendentemente por la fecha de instalación
 */
 SELECT
@@ -104,7 +104,7 @@ from components
 where FACILITYID = 1
 ORDER BY ASSETIDENTIFIER DESC;
 
-/* 16
+/* 16 FÉLIX
 Códigos de activo de los componentes del espacio con id 21
 ordenados por código de activo descendentemente.
 */
@@ -167,7 +167,7 @@ FROM COMPONENTS
 WHERE  FACILITY = 1
  AND SPACEID IS NULL
 ORDER BY ASSETIDENTIFIER DESC;
-/* 21
+/* 21 FÉLIX
 Nombre, código de activo, número de serie de los componentes
 que tengan número de serie del facility 1
 */
@@ -229,7 +229,7 @@ select name, to_char (installatedon,'yy-mm-dd'),
 from components
 where facilityid = 1
 and warrantystarton is not null;
-/* 27
+/* 27 FÉLIX
 Lista de nombres de espacio que su id no es 4, 9, ni 19
 del floorid 1
 */

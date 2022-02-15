@@ -91,6 +91,7 @@ Mostrar el porcentaje de componentes que tienen fecha de inicio de garantía
 del facility 1.
 */
 
+
 /* 9
 Listar las cuatro primeras letras del nombre de los espacios sin repetir
 del facility 1. 
