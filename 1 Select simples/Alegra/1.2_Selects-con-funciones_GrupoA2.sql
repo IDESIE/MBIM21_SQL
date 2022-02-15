@@ -21,7 +21,7 @@ Día en palabras de cuando se instalaron los componentes
 del facility 1
 */
 
-/* 3 JAZ
+/* 3 FELIX
 De los espacios, obtener la suma de áreas, cuál es el mínimo, el máximo y la media de áreas
 del floorid 1. Redondeado a dos dígitos.
 */
