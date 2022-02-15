@@ -243,6 +243,22 @@ order by 2 desc;
 11 
 Nombre y área del espacio que mayor área bruta tiene del facility 1.
 */
+        Select
+    Spaces.name, max(grossarea)
+From
+    spaces join components on spaces.id = components.spaceid
+WHERE
+Facilityid = 1
+Group by
+    Spaces.name
+Having
+    Max(grossarea) = (
+        Select
+         Max(grossarea)
+    From
+        spaces join components on spaces.id = components.spaceid
+    Where
+        Facilityid = 1);
 
 /*
 12 
