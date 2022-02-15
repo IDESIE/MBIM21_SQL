@@ -99,7 +99,13 @@ where
 Número de componentes y número de espacios por planta (nombre) del facility 1. 
 Todas las plantas.
 */
-
+select count(components.id), count(distinct spaces.id), floors.name
+from components
+    right join spaces on components.spaceid = spaces.id
+    right join floors on spaces.floorid = floors.id
+where components.facilityid = 1 
+group by floors.name
+;
 /*
 7
 Número de componentes por tipo de componente en cada espacio
@@ -285,7 +291,20 @@ where
 14
 Nombre del espacio, y número de grifos del espacio con más grifos del facility 1.
 */
-
+select spaces.name, count(components.name)
+from components
+left join spaces on components.spaceid = spaces.id
+where facilityid = 1
+    and lower(components.name) like '%grifo%'
+group by spaces.name
+having count(*) = (
+    select max(count(*))
+    from components
+        left join spaces on components.spaceid = spaces.id
+    where facilityid = 1
+        and lower(components.name) like '%grifo%'
+    group by spaces.name)
+    ;
 /*
 15
 Cuál es el mes en el que más componentes se instalaron del facility 1.
