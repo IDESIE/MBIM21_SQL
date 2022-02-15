@@ -2,7 +2,7 @@
 -- SELECT con subcolsultas y JOINS
 ------------------------------------------------------------------------------------------------
 /*
-1
+1 caro
 Listar nombre, código de asset, número de serie, el año de instalación, nombre del espacio,
 de todos los componentes
 del facility 1
@@ -21,7 +21,7 @@ WHERE
     UPPER (SPACES.NAME) LIKE '%AULA%' AND
     COMPONENTS.EXTERNALOBJECT NOT IN('Tuberia', 'Muro', 'Techo', 'Suelo');
 /*
-2
+2edu
 Nombre, área bruta y volumen de los espacios con mayor área que la media de áreas del facility 1.
 */
 SELECT
@@ -43,7 +43,7 @@ GROUP BY
     SPACES.GROSSAREA,
     SPACES.VOLUME;
 /*
-3
+3jaz
 Nombre y fecha de instalación (yyyy-mm-dd) de los componentes del espacio con mayor área del facility 1
 */
 SELECT
@@ -69,7 +69,7 @@ WHERE
         WHERE
             ROWNUM=1);
 /*
-4
+4felix
 Nombre y código de activo  de los componentes cuyo tipo de componente contenga la palabra 'mesa'
 del facility 1
 */
@@ -81,7 +81,7 @@ FROM
 WHERE
     UPPER(COMPONENT_TYPES.NAME) LIKE '%MESA%';
 /*
-5
+5caro
 Nombre del componente, espacio y planta de los componentes
 de los espacios que sean Aula del facility 1
 */
@@ -96,7 +96,7 @@ WHERE
     COMPONENTS.FACILITYID = 1 AND
     LOWER(COMPONENTS.NAME) LIKE '%aula%';
 /*
-6
+6edu
 Número de componentes y número de espacios por planta (nombre) del facility 1. 
 Todas las plantas.
 */
@@ -287,12 +287,19 @@ join
 /*17 
 Listar los nombres de componentes que están fuera de garantía del facility 1.
 */
-SELECT 
-components.name,
-to_char(components.WARRANTYSTARTON,'yyyy-mm-dd')
-FROM components
-JOIN facilities ON facilities.id=components.facilityid
-WHERE facilities.id=1
-AND components.WARRANTYSTARTON<'2022-02-14';
+NAME,
+COMPONENTS.WARRANTYSTARTON,
+COMPONENT_TYPES.WARRANTYSDURATIONPARTS,
+ADD_MONTHS(COMPONENTS.WARRANTYSTARTON, COMPONENT_TYPES.WARRANTYSDURATIONPARTS * 12)
+FROM 
+COMPONENT_TYPES JOIN COMPONENTS
+ ON COMPONENT_TYPES.ID = COMPONENTS.TYPEID
+WHERE
+COMPONENTS.FACILITYID = 1 AND
+COMPONENTS.WARRANTYSTARTON IS NOT NULL AND
+COMPONENT_TYPES.WARRANTYSTARTON IS NOT NULL AND
+ADD_MONTHS(COMPONENTS.WARRANTYSTARTON, COMPONENT_TYPES.WARRANTYSDURATIONPARTS * 12) < SYSDATE
+ODER BY 2 DESC, 3 DESC;
+
 
 ------------------------------------------------------------------------------------------------
