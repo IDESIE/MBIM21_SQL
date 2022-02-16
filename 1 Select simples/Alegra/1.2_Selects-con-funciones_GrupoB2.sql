@@ -23,7 +23,7 @@ select name,
 to_char(installatedon,'Day')
 from components
 where facilityid=1;
-/* 3
+/* 3 Filipe Fernandes
 De los espacios, obtener la suma de áreas, cuál es el mínimo, el máximo y la media de áreas
 del floorid 1. Redondeado a dos dígitos.
 */
@@ -61,7 +61,7 @@ trunc((avg(grossarea)+max(grossarea))/2,0) Mediaalta
 from spaces
 where floorid = 1;
 
-/* 6
+/* 6 Filipe Fernandes
 Cuántos componentes hay, cuántos tienen fecha inicio de garantia, cuántos tienen espacio, y en cuántos espacios hay componentes
 en el facility 1.
 */
@@ -93,7 +93,7 @@ select  round(count(warrantystarton)/count(*)*100,4)
 from components
 where facilityid=1 ;
 
-/* 9
+/* 9 Filipe Fernandes
 Listar las cuatro primeras letras del nombre de los espacios sin repetir
 del facility 1. 
 En orden ascendente.
@@ -144,7 +144,7 @@ from components
 where facilityid = 1
 group by to_char(installatedon,'yyyy')
 ORDER BY to_char(installatedon,'yyyy')desc;
-/* 12
+/* 12 Filipe Fernandes
 Nombre del día de instalación y número de componentes del facility 1.
 ordenado de lunes a domingo
 Ejemplo:
@@ -194,7 +194,7 @@ rtrim(to_char(installatedon,'Day'))= 'Jueves'
 order by to_char(installatedon,'Day');
 
 
-/*15
+/*15 Filipe Fernandes
 Listar el id de planta concatenado con un guión
 seguido del id de espacio concatenado con un guión
 y seguido del nombre del espacio.
