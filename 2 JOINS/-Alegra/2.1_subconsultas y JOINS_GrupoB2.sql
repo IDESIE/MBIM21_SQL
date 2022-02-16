@@ -2,7 +2,7 @@
 -- SELECT con subcolsultas y JOINS
 ------------------------------------------------------------------------------------------------
 /*
-1
+1 Paul Bedon
 Listar nombre, código de asset, número de serie, el año de instalación, nombre del espacio,
 de todos los componentes
 del facility 1
@@ -20,7 +20,7 @@ where facilityid = 1
 order by 1 desc;
 
 /*
-2
+2 Marta Tello
 Nombre, área bruta y volumen de los espacios con mayor área que la media de áreas del facility 1.
 */
 select spaces.name, grossarea, volume
@@ -50,7 +50,7 @@ and spaceid in (
         );
 
 /*
-4 
+4 Marta Tello
 Nombre y código de activo  de los componentes cuyo tipo de componente contenga la palabra 'mesa'
 del facility 1
 */
@@ -65,7 +65,7 @@ where
     and lower(component_types.name) like '%mesa%';
 
 /*
-5
+5 Paul Bedon
 Nombre del componente, espacio y planta de los componentes
 de los espacios que sean Aula del facility 1
 */
@@ -90,7 +90,7 @@ where components.facilityid = 1
 group by floors.name;
 
 /*
-7
+7 Paul Bedon
 Número de componentes por tipo de componente en cada espacio
 de los componentes que sean mesas del facility 1
 ordenados de forma ascendente por el espacio y descentente por el número de componentes.
@@ -111,7 +111,7 @@ group by spaces.name,component_types.name
 order by spaces.name asc, 1 desc;
 
 /*
-8
+8 Marta Tello
 Mostrar el nombre de las Aulas y una etiqueda «Sillas» que indique
 'BAJO' si el número de sillas es menor a 6
 'ALTO' si el número de sillas es mayor a 15
@@ -158,7 +158,7 @@ where
     rownum <4;
 
 /*
-10
+10 Marta Tello
 Tomando en cuenta los cuatro primeros caracteres del nombre de los espacios
 del facility 1
 listar los que se repiten e indicar el número.
@@ -177,7 +177,7 @@ having count (*) > 1
 order by 2 desc;
 
 /*
-11
+11 Paul Bedon
 Nombre y área del espacio que mayor área bruta tiene del facility 1.
 */
 select
@@ -197,7 +197,7 @@ having
         where
     facilityid = 1);
 
-/*
+/* Marta Tello
 12 Filipe Fernandes
 Número de componentes instalados entre el 1 de mayo de 2010 y 31 de agosto de 2010
 y que sean grifos, lavabos del facility 1
@@ -211,7 +211,7 @@ where facilityid = 1
         or lower(components.name)  like '%lavabo%')
 order by 1 desc;
 /*
-13
+13 Paul Bedon
 Un listado en el que se indique en líneas separadas
 una etiqueta que describa el valor, y el valor:
 el número de componentes en Aula 03 del facility 1, 
@@ -251,7 +251,7 @@ Where
     lower(components.name) like '%escritorio%');
 
 /*
-14
+14 Marta Tello
 Nombre del espacio, y número de grifos del espacio con más grifos del facility 1.
 */
 select spaces.name, count(components.name)
@@ -284,7 +284,7 @@ FROM
     order by 
         count(name) desc)
 where ROWNUM = 1;
-/* 16
+/* 16 Marta Tello
 Nombre del día en el que más componentes se instalaron del facility 1.
 Ejemplo: Jueves
 */
@@ -300,7 +300,7 @@ Select Count(id) numcomp, to_char(installatedon,'Day')dia
                     group by to_char(installatedon,'Day')
                     ));
 
-/*17
+/*17 Paul Bedon
 Listar los nombres de componentes que están fuera de garantía del facility 1.
 */
 select  components.name
