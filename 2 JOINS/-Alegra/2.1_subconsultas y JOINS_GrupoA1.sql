@@ -172,7 +172,16 @@ Componentes    Tipo   Espacio
 1   Mesa-profesor           Aula 3
 21  Mesa-cristal-redonda    Aula 12
 */
-
+SELECT COUNT(COMPONENTS.ID), 
+ COMPONENT_TYPES.NAME, 
+ SPACES.NAME
+FROM COMPONENTS
+ JOIN SPACES ON COMPONENTS.SPACEID = SPACES.ID
+ JOIN COMPONENT_TYPES ON COMPONENTS.TYPEID = COMPONENT_TYPES.ID
+WHERE COMPONENTS.FACILITYID = 1
+GROUP BY SPACES.NAME,
+ COMPONENT_TYPES.NAME
+ORDER BY SPACES.NAME ASC, 1 DESC;
 /*
 8 
 Mostrar el nombre de las Aulas y una etiqueda «Sillas» que indique
@@ -265,7 +274,14 @@ Having
 Número de componentes instalados entre el 1 de mayo de 2010 y 31 de agosto de 2010
 y que sean grifos, lavabos del facility 1
 */
-
+select count(*)
+from components
+    left join spaces on components.spaceid = spaces.id
+where facilityid = 1
+    and to_char(components.installatedon,'yyyy-mm-dd') between '2010-05-01' and '2020-08-31'
+    and (lower(components.name)  like '%grifo%'
+        or lower(components.name)  like '%lavabo%')
+order by 1 desc;
 /*
 13 
 Un listado en el que se indique en líneas separadas
@@ -308,7 +324,19 @@ where
 14 
 Nombre del espacio, y número de grifos del espacio con más grifos del facility 1.
 */
-
+SELECT SPACES.NAME, COUNT(COMPONENTS.NAME)
+	FROM COMPONENTS
+	LEFT JOIN SPACES ON COMPONENTS.SPACEID = SPACES.ID
+	WHERE FACILITYID = 1
+	    AND LOWER(COMPONENTS.NAME) LIKE '%GRIFO%'
+	GROUP BY SPACES.NAME
+	HAVING COUNT(*) = (
+	    SELECT MAX(COUNT(*))
+	    FROM COMPONENTS
+	        LEFT JOIN SPACES ON COMPONENTS.SPACEID = SPACES.ID
+	    WHERE FACILITYID = 1
+	        AND LOWER(COMPONENTS.NAME) LIKE '%GRIFO%'
+	    GROUP BY SPACES.NAME);
 /*
 15 
 Cuál es el mes en el que más componentes se instalaron del facility 1.
