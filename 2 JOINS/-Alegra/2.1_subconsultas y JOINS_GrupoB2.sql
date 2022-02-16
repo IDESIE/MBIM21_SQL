@@ -34,7 +34,7 @@ where facilityid = 1
         where facilityid = 1);
 
 /*
-3
+3 Filipe Fernandes
 Nombre y fecha de instalación (yyyy-mm-dd) de los componentes del espacio con mayor área del facility 1
 */
 select name, to_char(installatedon,'yyyy-mm-dd') installatedon
@@ -50,7 +50,7 @@ and spaceid in (
         );
 
 /*
-4
+4 
 Nombre y código de activo  de los componentes cuyo tipo de componente contenga la palabra 'mesa'
 del facility 1
 */
@@ -78,7 +78,7 @@ JOIN floors ON  spaces.floorid=floors.id
 WHERE UPPER(components.name) LIKE '%AULA%';
 
 /*
-6
+6 Filipe Fernandes
 Número de componentes y número de espacios por planta (nombre) del facility 1. 
 Todas las plantas.
 */
@@ -137,7 +137,7 @@ select
     where spaces.name like 'Aula%' and components.name like 'Silla%'
     group by spaces.name
 /*
-9
+9 Filipe Fernandes
 Listar el nombre de los tres espacios con mayor área del facility 1
 */
 Select
@@ -198,7 +198,7 @@ having
     facilityid = 1);
 
 /*
-12
+12 Filipe Fernandes
 Número de componentes instalados entre el 1 de mayo de 2010 y 31 de agosto de 2010
 y que sean grifos, lavabos del facility 1
 */
@@ -268,7 +268,7 @@ having count(*) = (
         and lower(components.name) like '%grifo%'
     group by spaces.name);
 /*
-15
+15 Filipe Fernandes
 Cuál es el mes en el que más componentes se instalaron del facility 1.
 */
 SELECT
