@@ -2,7 +2,7 @@
 -- SELECT con subcolsultas y JOINS
 ------------------------------------------------------------------------------------------------
 /*
-1
+1 AGUSTINA
 Listar nombre, código de asset, número de serie, el año de instalación, nombre del espacio,
 de todos los componentes
 del facility 1
@@ -21,7 +21,7 @@ order by 1 desc
 ;
 
 /*
-2
+2 JESUS
 Nombre, área bruta y volumen de los espacios con mayor área que la media de áreas del facility 1.
 */
  SELECT
@@ -44,7 +44,7 @@ GROUP BY
     SPACES.VOLUME;
     
 /*
-3
+3 OMAR
 Nombre y fecha de instalación (yyyy-mm-dd) de los componentes del espacio con mayor área del facility 1
 */
 select 
@@ -63,7 +63,7 @@ where
 where
     rownum < 4;
 /*
-4
+4 KATHERIN
 Nombre y código de activo  de los componentes cuyo tipo de componente contenga la palabra 'mesa'
 del facility 1
 */
@@ -77,7 +77,7 @@ where
     components.facilityid = 1
     and upper(component_types.name) like '%MESA%';
 /*
-5
+5 OMAR
 Nombre del componente, espacio y planta de los componentes
 de los espacios que sean Aula del facility 1
 */
@@ -94,7 +94,7 @@ from
 where
     upper(components.name) like '%AULA%';
 /*
-6
+6 AGUSTINA
 Número de componentes y número de espacios por planta (nombre) del facility 1. 
 Todas las plantas.
 */
@@ -106,7 +106,7 @@ where components.facilityid = 1
 group by floors.name
 ;
 /*
-7
+7 JESUS
 Número de componentes por tipo de componente en cada espacio
 de los componentes que sean mesas del facility 1
 ordenados de forma ascendente por el espacio y descentente por el número de componentes.
@@ -126,7 +126,7 @@ where components.facilityid = 1
 group by spaces.name,component_types.name
 order by spaces.name asc, 1 desc;
 /*
-8
+8 KATHERIN
 Mostrar el nombre de las Aulas y una etiqueda «Sillas» que indique
 'BAJO' si el número de sillas es menor a 6
 'ALTO' si el número de sillas es mayor a 15
@@ -155,7 +155,7 @@ where
 group by 
     spaces.name;
 /*
-9
+9 KATHERIN
 Listar el nombre de los tres espacios con mayor área del facility 1
 */
 select
@@ -175,7 +175,7 @@ order by 3 desc)
 where
     rownum <4;
 /*
-10
+10 OMAR
 Tomando en cuenta los cuatro primeros caracteres del nombre de los espacios
 del facility 1
 listar los que se repiten e indicar el número.
@@ -199,7 +199,7 @@ group by
 having count (*) > 1
 order by 2 desc;
 /*
-11
+11 AGUS
 Nombre y área del espacio que mayor área bruta tiene del facility 1.
 */
 select
@@ -220,7 +220,7 @@ where
  facilityid = 1
  );
 /*
-12
+12 JESUS
 Número de componentes instalados entre el 1 de mayo de 2010 y 31 de agosto de 2010
 y que sean grifos, lavabos del facility 1
 */
@@ -234,7 +234,7 @@ where facilityid = 1
 order by 1 desc
 ;
 /*
-13
+13 KATHERIN
 Un listado en el que se indique en líneas separadas
 una etiqueta que describa el valor, y el valor:
 el número de componentes en Aula 03 del facility 1, 
@@ -295,7 +295,7 @@ where
     )
 ;
 /*
-14
+14 AGUSTINA
 Nombre del espacio, y número de grifos del espacio con más grifos del facility 1.
 */
 select spaces.name, count(components.name)
@@ -313,7 +313,7 @@ having count(*) = (
     group by spaces.name)
     ;
 /*
-15
+15 OMAR
 Cuál es el mes en el que más componentes se instalaron del facility 1.
 */
 select
@@ -330,7 +330,7 @@ from
         count(name) desc)
 where 
     rownum = 1;
-/* 16
+/* 16 OMAR
 Nombre del día en el que más componentes se instalaron del facility 1.
 Ejemplo: Jueves
 */
@@ -352,7 +352,7 @@ join
     group by to_char(installatedon,'Day')
 ) tabnum on tabmax.maximo = tabnum.numcomp
 ;
-/*17
+/*17 JESUS
 Listar los nombres de componentes que están fuera de garantía del facility 1.
 */
 
